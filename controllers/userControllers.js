@@ -83,9 +83,9 @@ module.exports = {
             let phoneCheck = await Models.Users.findOne({
                 "phone": obj.phone,
                 "countryCode": obj.countryCode,
-                "isDeleted": {
-                    $ne: true
-                }
+                // "isDeleted": {
+                //     $ne: true
+                // }
             });
 
 
