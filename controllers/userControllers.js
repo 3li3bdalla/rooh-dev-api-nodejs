@@ -2365,6 +2365,7 @@ module.exports = {
                     // console.log("userData", userData);
                     if (userData) {
 
+                        console.log('followCheck',  followCheck);
                         dataToSend.isFollowed = (followCheck == 1) ? true : false;
                         if (checkTeamStatus && checkTeamStatus.length > 0) {
                             dataToSend.contractId = checkTeamStatus[0]._id;
