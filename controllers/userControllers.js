@@ -1238,6 +1238,9 @@ module.exports = {
                                     deviceToken: obj.deviceToken ? obj.deviceToken : ""
                                 }
                             };
+
+                            sendResponse.sendSuccessData(Models.Users.findOne(criteria), 200, req.headers.language, RESPONSE_MESSAGES.STATUS_MSG.SUCCESS.DEFAULT, res)
+
                             Models.Users.findOneAndUpdate(criteria, DataToSet, {
                                     new: true,
                                     lean: true
