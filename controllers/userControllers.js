@@ -1253,8 +1253,6 @@ module.exports = {
                                     }
                                 }])
                                 .then(response => {
-                                                                sendResponse.sendSuccessData(response, 200, req.headers.language, RESPONSE_MESSAGES.STATUS_MSG.SUCCESS.DEFAULT, res)
-
                                     //console.log("response ----------- ",response)
                                     /*console.log("afdsadfsfdsf", obj);
                                     let data = await mirrorFlyAPI.register({
