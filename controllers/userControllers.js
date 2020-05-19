@@ -2417,9 +2417,9 @@ module.exports = {
                             dataToSend.isFavorite = false;
                         }
                     }
-                    dataToSend.TSETKEY = response[0][0];
+                    // dataToSend.TSETKEY = response[0][0];
                     dataToSend.acceptMessages = is.undefined(dataToSend) || dataToSend.acceptMessages == "DISABLED" ? "DISABLED" : "ENABLED";
-                    
+
                     dataToSend.followingCount = followingCount;
                     dataToSend.followedCount = followedCount;
                     dataToSend.favoriteCount = favoriteCount;
@@ -2433,6 +2433,8 @@ module.exports = {
                         dataToSend.feedbackCount = 0;
                         dataToSend.feedbackRating = 0;
                     }
+                    dataToSend = response[0][0];
+
                     return sendResponse.sendSuccessData(dataToSend, 200, req.headers.language, RESPONSE_MESSAGES.STATUS_MSG.SUCCESS.DEFAULT, res);
                 })
                 .catch(err => {
