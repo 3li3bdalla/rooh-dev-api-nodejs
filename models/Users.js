@@ -150,7 +150,7 @@ let Userschema = new Schema({
         type: Boolean,
         default: true,
         get(value) {
-            return this.allowChat === 'yes';
+            return this.allowChat === "yes";
         }
     },
     allowChat: {
