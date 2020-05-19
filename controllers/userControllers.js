@@ -2350,6 +2350,7 @@ module.exports = {
                     (obj.role == "FACILITY") ? getFacilityProfessionalServicesList(id, req) : Promise.resolve([]),
                 ])
                 .then(async response => {
+                    res.send(response).end();
                     // let facilityServices = response[0][0].facility.services;
                     // let professionalServices = response[2];
                     // console.log("response----", response);
@@ -2358,7 +2359,7 @@ module.exports = {
 
                     let dataToSend = {}
                     dataToSend = response[0][0];
-                    dataToSend.isOpenChat = response[0].isOpenChat === false ? false : true;
+                    // dataToSend.isOpenChat = response[0].isOpenChat === false ? false : true;
                     if (obj.role == "FACILITY") {
                         dataToSend.facilityProfessionals = response[1];
                         //dataToSend.facilityProfessionalServicesList = response[2];
