@@ -1183,7 +1183,7 @@ module.exports = {
                     }, {
                         new: true
                     }).then(finalResult => {
-                        return sendResponse.sendSuccessData(finalResult.isOpenChat, 200, req.headers.language, RESPONSE_MESSAGES.STATUS_MSG.SUCCESS.DEFAULT, res);
+                        return sendResponse.sendSuccessData(finalResult, 200, req.headers.language, RESPONSE_MESSAGES.STATUS_MSG.SUCCESS.DEFAULT, res);
                     }).catch(err => {
                         return sendResponse.sendErrorMessageData(400, req.headers.language, RESPONSE_MESSAGES.STATUS_MSG.ERROR.DEFAULT, err, res);
                     });
