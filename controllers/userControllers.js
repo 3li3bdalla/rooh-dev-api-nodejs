@@ -154,7 +154,9 @@ module.exports = {
                 return sendResponse.sendErrorMessageData(400, req.headers.language, RESPONSE_MESSAGES.STATUS_MSG.ERROR.PHONE_ALREADY_EXIST, {}, res);
             }
         } catch (err) {
-            console.log(err);
+
+            console.log(err.message);
+            console.log('error in server');
             return sendResponse.sendErrorMessage(500, req.headers.language, RESPONSE_MESSAGES.STATUS_MSG.ERROR.APP_ERROR, res);
         }
     },
