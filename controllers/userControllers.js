@@ -1230,7 +1230,7 @@ module.exports = {
                                     "mirrorflyPassword": randomstring,
                                     "mirrorFlyToken": data.data,
                                     "mirrorFlyToken": data.data,
-                                    isOpenChat: false,
+                                    "user.isOpenChat": false,
                                     // "isOpenChat": obj.isOpenChat === false ? false : true,
                                     //"mirrorFlyTokenConsult": dataNew.data,
                                     "mirrorFlyDeviceToken": obj.mirrorFlyDeviceToken,
