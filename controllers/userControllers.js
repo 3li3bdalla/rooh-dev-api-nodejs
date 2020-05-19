@@ -157,7 +157,7 @@ module.exports = {
             }
         } catch (err) {
 
-            console.log(err.message);
+            // console.log(err.message);
             // console.log('error in server');
             return sendResponse.sendErrorMessage(500, req.headers.language, RESPONSE_MESSAGES.STATUS_MSG.ERROR.APP_ERROR, res);
         }
@@ -1169,10 +1169,10 @@ module.exports = {
 
 
     updateChatStatus: (req, res) => {
-        if (is.undefined(req.body.isOpenChat) || is.empty(req.body.isOpenChat)) {
+        if (is.undefined(req.body.acceptMessages) || is.empty(req.body.acceptMessages)) {
             return res.status(400).json({
                 status: 0,
-                message: "isOpenChat is required"
+                message: "acceptMessages is required"
             });
         }
 
@@ -1187,7 +1187,7 @@ module.exports = {
                 } else {
                     Models.Users.findOneAndUpdate(criteria, {
                         $set: {
-                            isOpenChat: req.body.isOpenChat,
+                            acceptMessages: req.body.acceptMessages,
                         }
                     }).then(finalResult => {
                         return sendResponse.sendSuccessData(finalResult, 200, req.headers.language, RESPONSE_MESSAGES.STATUS_MSG.SUCCESS.DEFAULT, res);
