@@ -89,6 +89,7 @@ module.exports = {
             });
 
             if (phoneCheck == null) {
+                // console.log('user is not found');
                 Models.UsersTemp.findOne({
                     "phone": obj.phone,
                     "countryCode": obj.countryCode
@@ -183,7 +184,7 @@ module.exports = {
                     message: "OTP is required"
                 });
             }
-            console.log("obj..................", obj)
+            // console.log("obj..................", obj)
             if (!is.undefined(obj.merge) && !is.empty(obj.merge) && obj.merge == true) {
                 if (is.undefined(obj.facebookId) || is.empty(obj.facebookId)) {
                     return res.status(400).json({
@@ -395,7 +396,7 @@ module.exports = {
 
                             //SENT OTP
                             //let paymentDetails = await sendOTP(payload);
-                            console.log("obj**------------------------", obj)
+                            // console.log("obj**------------------------", obj)
                             if (process.env.ENABLE_OTP == "1") {
                                 if (obj.countryCode && obj.phone) {
                                     obj.message = otpval + RESPONSE_MESSAGES.STATUS_MSG.SUCCESS.REGISTRATION_OTP.message[req.headers.language];
