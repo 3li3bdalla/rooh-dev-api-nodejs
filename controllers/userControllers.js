@@ -80,15 +80,13 @@ module.exports = {
                 });
             }
 
-            let phoneCheck = null;
-
-            // await Models.Users.findOne({
-            //     phone: obj.phone,
-            //     countryCode: obj.countryCode,
-            //     isDeleted: {
-            //         $ne: true
-            //     }
-            // })
+            let phoneCheck = await Models.Users.findOne({
+                phone: obj.phone,
+                countryCode: obj.countryCode,
+                isDeleted: {
+                    $ne: true
+                }
+            });
 
             if (phoneCheck == null) {
                 Models.UsersTemp.findOne({
