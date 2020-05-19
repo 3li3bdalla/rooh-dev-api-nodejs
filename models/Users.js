@@ -148,7 +148,14 @@ let Userschema = new Schema({
     },
     isChatOpen: {
         type: Boolean,
-        default: true
+        default: true,
+        get(value) {
+            return this.allowChat === 'yes';
+        }
+    },
+    allowChat: {
+        enum: ["yes", "no"],
+        default: "yes"
     },
     location: {
         type: [Number],
