@@ -2291,8 +2291,12 @@ module.exports = {
     getUserDetailsById: async (req, res) => {
         try {
 
-            const user = await getProfileData(id, req);
-            res.send(user);
+
+            const p = await new Promise.resolve(getProfileData(id, req));
+            p.then((result) => {
+                res.send(user);
+            });
+
 
             let obj = req.body;
             let err = [];
