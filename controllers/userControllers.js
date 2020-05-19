@@ -2435,7 +2435,7 @@ module.exports = {
                     }
 
                     res.send(response[0][0]).status(200).end();
-                    return;
+                    // return;
                     return sendResponse.sendSuccessData(dataToSend, 200, req.headers.language, RESPONSE_MESSAGES.STATUS_MSG.SUCCESS.DEFAULT, res);
                 })
                 .catch(err => {
