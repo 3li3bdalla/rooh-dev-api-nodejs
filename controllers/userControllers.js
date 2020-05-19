@@ -2362,7 +2362,7 @@ module.exports = {
                         dataToSend.facilityProfessionals = response[1];
                         //dataToSend.facilityProfessionalServicesList = response[2];
                     }
-                    console.log("userData", userData);
+                    // console.log("userData", userData);
                     if (userData) {
 
                         dataToSend.isFollowed = (followCheck == 1) ? true : false;
