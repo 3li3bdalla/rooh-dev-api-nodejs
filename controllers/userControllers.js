@@ -2363,8 +2363,9 @@ module.exports = {
                         dataToSend.facilityProfessionals = response[1];
                         //dataToSend.facilityProfessionalServicesList = response[2];
                     }
-                    console.log("response", response);
-                    console.log("dataToSend", dataToSend);
+                    if (dataToSend == 'undefined')
+                        let dataToSend = {}
+                    
                     if (userData) {
 
                         // console.log('followCheck',  followCheck);
