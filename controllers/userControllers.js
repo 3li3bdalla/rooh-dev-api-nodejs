@@ -2356,16 +2356,18 @@ module.exports = {
                     // var servicesResult = await removeDuplicate(facilityServices,professionalServices );
                     // response[0][0].facility.services = servicesResult;
 
+
                     let dataToSend = {}
                     dataToSend = response[0][0];
                     if (obj.role == "FACILITY") {
                         dataToSend.facilityProfessionals = response[1];
                         //dataToSend.facilityProfessionalServicesList = response[2];
                     }
-                    // console.log("userData", userData);
+                    console.log("response", response);
+                    console.log("dataToSend", dataToSend);
                     if (userData) {
 
-                        console.log('followCheck',  followCheck);
+                        // console.log('followCheck',  followCheck);
                         dataToSend.isFollowed = (followCheck == 1) ? true : false;
                         if (checkTeamStatus && checkTeamStatus.length > 0) {
                             dataToSend.contractId = checkTeamStatus[0]._id;
