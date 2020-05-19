@@ -1,0 +1,2834 @@
+{
+  "/user/appointment": {
+    "post": {
+      "x-swagger-router-controller": "middleware-name1",
+      "operationId": "post",
+      "tags": [
+        "User Appointment APIs"
+      ],
+      "description": "book an appointment for user",
+      "parameters": [
+        {
+          "name": "authorization",
+          "in": "header",
+          "required": true,
+          "description": "authorization token",
+          "type": "string",
+          "value": ""
+        },
+        {
+            "name": "language",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "enum": [
+                "en",
+                "ar"
+              ]
+        },
+        {
+          "name": "timezone",
+          "in": "header",
+          "required": true,
+          "type": "string",
+          "enum": [
+                "Asia/Kolkata"
+              ]
+        },
+        {
+          "name": "body",
+          "in": "body",
+          "required": true,
+          "description": "see example below",
+          "schema": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "required": true,
+                "description": "appointment type -> ONLINE/ONSITE/HOME"
+              },
+              "doctor": {
+                "type": "string",
+                "required": true
+              },
+              "scheduledService": {
+                "type": "object",
+                "description": "scheduled service object"
+              },
+              "homeService": {
+                "type": "object",
+                "description": "home service object"
+              },
+              "appointmentId": {
+                "type": "string"
+              },
+              "updatedDate": {
+                "type": "string"
+              },
+              "userType": {
+                "type": "string"
+              }
+            },
+            "example": {
+              "homeService": {
+                "address": "Sector 29, Chandigarh",
+                "location": ["long", "lat"],
+                "weekly": [true, true, false, true, true, true , false],
+                "weeklyRepeat": true,
+                "weekStartDate":"YYYY-MM-DD",
+                "type": "EVERYDAY/CUSTOM/WEEKLY",
+                "endTime": "12:00 PM",
+                "startTime": "10:00 AM",
+                "description": "",
+                "everyDayOrCustom": ["YYYY-MM-DD"]
+              },
+              "scheduledService": {
+                "date": "YYYY-MM-DD",
+                "slots": ["10:00 AM", "10:30 AM"],
+                "clinicHospital": ""
+              },
+              "doctor": "string",
+              "type": "required -> ",
+              "appointmentId": "required in edit appointment",
+              "updatedDate": "required in edit appointment",
+              "userType": "required in edit appointment [0 - user, 1 - doctor]"
+            }
+          }
+        }
+      ],
+      "responses": {}
+    },
+    "get": {
+      "x-swagger-router-controller": "middleware-name1",
+      "operationId": "get",
+      "tags": [
+        "User Appointment APIs"
+      ],
+      "description": "list booked appointments of user",
+      "parameters": [
+        {
+          "name": "authorization",
+          "in": "header",
+          "required": true,
+          "description": "authorization token",
+          "type": "string",
+          "value": ""
+        },
+        {
+            "name": "language",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "enum": [
+                "en",
+                "ar"
+              ]
+        },
+        {
+          "name": "timezone",
+          "in": "header",
+          "required": true,
+          "type": "string",
+          "enum": [
+                "Asia/Kolkata"
+              ]
+        },{
+          "name": "bookingType",
+          "in": "query",
+          "description": "[OPTIONAL] - [ONLINE, ONSITE, HOME]",
+          "type": "string"
+        }, {
+          "name": "startDate",
+          "in": "query",
+          "description": "[OPTIONAL]",
+          "type": "string"
+        }, {
+          "name": "endDate",
+          "in": "query",
+          "description": "[OPTIONAL]",
+          "type": "string"
+        }, {
+          "name": "userId",
+          "in": "query",
+          "description": "[OPTIONAL] - [professionals/doctor id]",
+          "type": "string"
+        }, {
+          "name": "lastId",
+          "in": "query",
+          "description": "lastId is required for pagination only",
+          "type": "string",
+          "value":""
+        }, {
+            "name": "count",
+            "in": "query",
+            "description": "count is required for pagination only",
+            "type": "Number",
+            "value":""
+        }
+      ],
+      "responses": {}
+    }
+  },
+  "/user/appointmentDetails": {
+      "get": {
+          "x-swagger-router-controller": "middleware-name1",
+          "operationId": "appointmentDetails",
+          "tags": [
+                "User Appointment APIs"
+          ],
+          "description": "",
+          "parameters": [
+              {
+                  "name": "authorization",
+                  "in": "header",
+                  "description": "authorization is required",
+                  "required": true,
+                  "type": "string",
+                  "value": ""
+              },
+        {
+            "name": "language",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "enum": [
+                "en",
+                "ar"
+              ]
+        },
+        {
+          "name": "timezone",
+          "in": "header",
+          "required": true,
+          "type": "string",
+          "enum": [
+                "Asia/Kolkata"
+              ]
+        },{
+                "name": "appointmentId",
+                "in": "query",
+                "description": "appointmentId is required",
+                "required": true,
+                "type": "string",
+                "value":""
+              }
+          ],
+          "responses": {}
+      }
+  },
+  "/user/receivedAppointment": {
+      "get": {
+          "x-swagger-router-controller": "middleware-name1",
+          "operationId": "receivedAppointment",
+          "tags": [
+                "User Appointment APIs"
+          ],
+          "description": "",
+          "parameters": [
+              {
+                  "name": "authorization",
+                  "in": "header",
+                  "description": "authorization is required",
+                  "required": true,
+                  "type": "string",
+                  "value": ""
+              },
+        {
+            "name": "language",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "enum": [
+                "en",
+                "ar"
+              ]
+        },
+        {
+          "name": "timezone",
+          "in": "header",
+          "required": true,
+          "type": "string",
+          "enum": [
+                "Asia/Kolkata"
+              ]
+        },{
+                "name": "appointmentType",
+                "in": "query",
+                "description": "[OPTIONAL] - [ 1 - Today, 2 - AllUpcoming, 3 - AllAppointments ]",
+                "type": "string"
+              }, {
+                "name": "bookingType",
+                "in": "query",
+                "description": "[OPTIONAL] - [ONLINE, ONSITE, HOME]",
+                "type": "string"
+              }, {
+                "name": "startDate",
+                "in": "query",
+                "description": "[OPTIONAL]",
+                "type": "string"
+              }, {
+                "name": "endDate",
+                "in": "query",
+                "description": "[OPTIONAL]",
+                "type": "string"
+              }, {
+                "name": "userId",
+                "in": "query",
+                "description": "[OPTIONAL] - [user/beneficiary id]",
+                "type": "string"
+              }, {
+                "name": "lastId",
+                "in": "query",
+                "description": "lastId is required for pagination only",
+                "type": "string",
+                "value":""
+              }, {
+                  "name": "count",
+                  "in": "query",
+                  "description": "count is required for pagination only",
+                  "type": "Number",
+                  "value":""
+              }
+          ],
+          "responses": {}
+      }
+  },
+  "/user/cancelAppointment": {
+      "post": {
+          "x-swagger-router-controller": "middleware-name1",
+          "operationId": "cancelAppointment",
+          "tags": [
+                "User Appointment APIs"
+          ],
+          "description": "",
+          "parameters": [
+              {
+                "name": "authorization",
+                "in": "header",
+                "description": "authorization is required",
+                "required": true,
+                "type": "string",
+                "value": ""
+              },
+            {
+                "name": "language",
+                "in": "header",
+                "required": true,
+                "type": "string",
+                "enum": [
+                    "en",
+                    "ar"
+                  ]
+            },
+            {
+              "name": "timezone",
+              "in": "header",
+              "required": true,
+              "type": "string",
+              "enum": [
+                    "Asia/Kolkata"
+                  ]
+            },{
+              "name": "appointmentId",
+              "in": "formData",
+              "description": "appointmentId is required",
+              "required": true,
+              "type": "string",
+              "value":""
+            },{
+              "name": "reason",
+              "in": "formData",
+              "description": "reason is required",
+              "required": true,
+              "type": "string",
+              "value":""
+            }
+          ],
+          "responses": {}
+      }
+  },
+
+  "/user/confirmAppointment": {
+      "put": {
+          "x-swagger-router-controller": "middleware-name1",
+          "operationId": "confirmAppointment",
+          "tags": [
+                "User Appointment APIs"
+          ],
+          "description": "",
+          "parameters": [
+              {
+                "name": "authorization",
+                "in": "header",
+                "description": "authorization is required",
+                "required": true,
+                "type": "string",
+                "value": ""
+              },
+            {
+                "name": "language",
+                "in": "header",
+                "required": true,
+                "type": "string",
+                "enum": [
+                    "en",
+                    "ar"
+                  ]
+            },
+            {
+              "name": "timezone",
+              "in": "header",
+              "required": true,
+              "type": "string",
+              "enum": [
+                    "Asia/Kolkata"
+                  ]
+            },{
+              "name": "appointmentId",
+              "in": "formData",
+              "description": "appointmentId is required",
+              "required": true,
+              "type": "string",
+              "value":""
+            },{
+              "name": "userType",
+              "in": "formData",
+              "description": "userType is required [0 - user, 1 - doctor]",
+              "required": true,
+              "type": "string",
+              "value":""
+            }
+          ],
+          "responses": {}
+      }
+  },
+
+"/user/updateAppointment": {
+      "put": {
+          "x-swagger-router-controller": "middleware-name1",
+          "operationId": "updateAppointment",
+          "tags": [
+                "User Appointment APIs"
+          ],
+          "description": "",
+          "parameters": [
+              {
+                "name": "authorization",
+                "in": "header",
+                "description": "authorization is required",
+                "required": true,
+                "type": "string",
+                "value": ""
+              },
+              {
+                  "name": "language",
+                  "in": "header",
+                  "required": true,
+                  "type": "string",
+                  "enum": [
+                      "en",
+                      "ar"
+                    ]
+              },
+              {
+                "name": "timezone",
+                "in": "header",
+                "required": true,
+                "type": "string",
+                "enum": [
+                      "Asia/Kolkata"
+                    ]
+              },{
+                "name": "appointmentId",
+                "in": "formData",
+                "description": "appointmentId is required",
+                "required": true,
+                "type": "string",
+                "value":""
+              },{
+                "name": "userType",
+                "in": "formData",
+                "description": "userType is required [0 - user, 1 - doctor]",
+                "required": true,
+                "type": "string",
+                "value":""
+              },{
+                "name": "newDate",
+                "in": "formData",
+                "description": "newDate is required",
+                "required": true,
+                "type": "string",
+                "value":""
+              },{
+                "name": "newStartTime",
+                "in": "formData",
+                "description": "newStartTime is required",
+                "required": true,
+                "type": "string",
+                "value":""
+              },{
+                "name": "newEndTime",
+                "in": "formData",
+                "description": "newEndTime is OPTIONAL",
+                "required": true,
+                "type": "string",
+                "value":""
+              },{
+                "name": "appointmentType",
+                "in": "formData",
+                "description": "appointmentType is required",
+                "required": true,
+                "type": "string",
+                "value":""
+              },{
+                "name": "appointmentSubType",
+                "in": "formData",
+                "description": "appointmentSubType is OPTIONAL [WEEKLY, EVERYDAY, CUSTOM]",
+                "type": "string",
+                "value":""
+              }
+          ],
+          "responses": {}
+      }
+  },
+
+  "/user/bookedProfessionalsList": {
+      "get": {
+          "x-swagger-router-controller": "middleware-name1",
+          "operationId": "bookedProfessionalsList",
+          "tags": [
+                "User Appointment APIs"
+          ],
+          "description": "",
+          "parameters": [
+              {
+                  "name": "authorization",
+                  "in": "header",
+                  "description": "authorization is required",
+                  "required": true,
+                  "type": "string",
+                  "value": ""
+              },
+        {
+            "name": "language",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "enum": [
+                "en",
+                "ar"
+              ]
+        },
+        {
+          "name": "timezone",
+          "in": "header",
+          "required": true,
+          "type": "string",
+          "enum": [
+                "Asia/Kolkata"
+              ]
+        }
+          ],
+          "responses": {}
+      }
+  },
+  "/user/getConsultantPriceList": {
+    "get": {
+      "x-swagger-router-controller": "middleware-name1",
+      "operationId": "getConsultantPriceList",
+      "tags": [
+        "User Price List"
+      ],
+      "description": "",
+      "parameters": [
+        {
+          "name": "authorization",
+          "in": "header",
+          "description": "authorization is required",
+          "required": true,
+          "type": "string",
+          "value": ""
+        },
+        {
+            "name": "language",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "enum": [
+                "en",
+                "ar"
+              ]
+        },
+        {
+          "name": "timezone",
+          "in": "header",
+          "required": true,
+          "type": "string",
+          "enum": [
+                "Asia/Kolkata"
+              ]
+        },
+        {
+          "name": "doctorId",
+          "in": "query",
+          "description": "doctor/professional id is required",
+          "required": true,
+          "type": "string",
+          "value":""
+        }
+      ],
+      "responses": {}
+    }
+  },
+  "/user/getImage": {
+    "get": {
+      "x-swagger-router-controller": "middleware-name1",
+      "operationId": "getImage",
+      "tags": [
+        "Get Image"
+      ],
+      "description": "",
+      "parameters": [
+        {
+          "name": "authorization",
+          "in": "header",
+          "description": "authorization is required",
+          "required": true,
+          "type": "string",
+          "value": ""
+        },
+        {
+            "name": "language",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "enum": [
+                "en",
+                "ar"
+              ]
+        },
+        {
+          "name": "timezone",
+          "in": "header",
+          "required": true,
+          "type": "string",
+          "enum": [
+                "Asia/Kolkata"
+              ]
+        },
+        {
+          "name": "type",
+          "in": "query",
+          "description": "type is required",
+          "type": "string",
+          "value":""
+        },
+        {
+          "name": "name",
+          "in": "query",
+          "description": "name is required",
+          "type": "string",
+          "value":""
+        },
+        {
+          "name": "type",
+          "in": "query",
+          "description": "type is required",
+          "type": "string",
+          "value":""
+        }
+      ],
+      "responses": {}
+    }
+  },
+  "/user/uploadFile": {
+    "post": {
+      "x-swagger-router-controller": "middleware-name1",
+      "operationId": "uploadFile",
+      "tags": [
+        "Upload File"
+      ],
+      "description": "",
+      "parameters": [
+        {
+          "name": "authorization",
+          "in": "header",
+          "description": "authorization is required",
+          "required": true,
+          "type": "string",
+          "value": ""
+        },
+        {
+            "name": "language",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "enum": [
+                "en",
+                "ar"
+              ]
+        },
+        {
+          "name": "timezone",
+          "in": "header",
+          "required": true,
+          "type": "string",
+          "enum": [
+                "Asia/Kolkata"
+              ]
+        },
+        {
+          "name": "type",
+          "in": "formData",
+          "description": "type is required",
+          "type": "string",
+          "value":""
+        },
+        {
+          "name": "image",
+          "in": "formData",
+          "description": "image is required",
+          "type": "file",
+          "value":""
+        }
+      ],
+      "responses": {}
+    }
+  },
+  "/user/getCommonService": {
+    "get": {
+      "x-swagger-router-controller": "middleware-name1",
+      "operationId": "get",
+      "tags": [
+        "Get Common Service Types"
+      ],
+      "description": "Create E-report for user",
+      "parameters": [
+        {
+          "name": "authorization",
+          "in": "header",
+          "required": true,
+          "description": "authorization token",
+          "type": "string",
+          "value": ""
+        },
+        {
+            "name": "language",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "enum": [
+                "en",
+                "ar"
+              ]
+        },
+        {
+          "name": "timezone",
+          "in": "header",
+          "required": true,
+          "type": "string",
+          "enum": [
+                "Asia/Kolkata"
+              ]
+        },
+        {
+          "name": "type",
+          "in": "query",
+          "required": true,
+          "description": "diagnosis/lab/radiology",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "limit",
+          "in": "query",
+          "required": false,
+          "description": "limit",
+          "type": "number",
+          "value": ""
+        },
+        {
+          "name": "lastId",
+          "in": "query",
+          "required": false,
+          "description": "lastId",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "search",
+          "in": "query",
+          "required": false,
+          "description": "search",
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "responses": {}
+    }
+  },
+  "/user/createEreport": {
+    "post": {
+      "x-swagger-router-controller": "middleware-name1",
+      "operationId": "post",
+      "tags": [
+        "Create Report APIs"
+      ],
+      "description": "Create E-report for user",
+      "parameters": [
+        {
+          "name": "authorization",
+          "in": "header",
+          "required": true,
+          "description": "authorization token",
+          "type": "string",
+          "value": ""
+        },
+        {
+            "name": "language",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "enum": [
+                "en",
+                "ar"
+              ]
+        },
+        {
+          "name": "timezone",
+          "in": "header",
+          "required": true,
+          "type": "string",
+          "enum": [
+                "Asia/Kolkata"
+              ]
+        },
+        {
+          "name": "appointmentId",
+          "in": "formData",
+          "required": true,
+          "description": "appointmentId",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "allergies",
+          "in": "formData",
+          "required": true,
+          "description": "allergies",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "chiefComplaint",
+          "in": "formData",
+          "required": true,
+          "description": "chiefComplaint",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "diagnostics",
+          "in": "formData",
+          "required": true,
+          "description": "diagnostics in array of string",
+          "type": "string",
+          "value": "",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "history",
+          "in": "formData",
+          "required": true,
+          "description": "history",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "examinationDiagnosticsResult",
+          "in": "formData",
+          "required": true,
+          "description": "examinationDiagnosticsResult",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "managementPlanRecommendation",
+          "in": "formData",
+          "required": true,
+          "description": "managementPlanRecommendation",
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "responses": {}
+    }
+  },
+  "/user/ereportUpdate": {
+    "post": {
+      "x-swagger-router-controller": "middleware-name1",
+      "operationId": "post",
+      "tags": [
+        "Report APIs"
+      ],
+      "description": "ereportUpdate",
+      "parameters": [
+        {
+          "name": "authorization",
+          "in": "header",
+          "required": true,
+          "description": "authorization token",
+          "type": "string",
+          "value": ""
+        },
+        {
+            "name": "language",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "enum": [
+                "en",
+                "ar"
+              ]
+        },
+        {
+          "name": "timezone",
+          "in": "header",
+          "required": true,
+          "type": "string",
+          "enum": [
+                "Asia/Kolkata"
+              ]
+        },
+        {
+          "name": "appointmentId",
+          "in": "formData",
+          "required": false,
+          "description": "appointmentId",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "dependentId",
+          "in": "formData",
+          "description": "dependentId [OPTIONAL]",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "allergies",
+          "in": "formData",
+          "required": false,
+          "description": "allergies",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "chiefComplaint",
+          "in": "formData",
+          "required": false,
+          "description": "chiefComplaint",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "diagnostics",
+          "in": "formData",
+          "required": false,
+          "description": "diagnostics in array of string",
+          "type": "array",
+          "value": "",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "history",
+          "in": "formData",
+          "required": false,
+          "description": "history",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "examinationDiagnosticsResult",
+          "in": "formData",
+          "required": false,
+          "description": "examinationDiagnosticsResult",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "managementPlanRecommendation",
+          "in": "formData",
+          "required": false,
+          "description": "managementPlanRecommendation",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "reportId",
+          "in": "formData",
+          "required": false,
+          "description": "reportId",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "tests",
+          "in": "formData",
+          "required": false,
+          "description": "test in array",
+          "type": "Array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "testComments",
+          "in": "formData",
+          "required": false,
+          "description": "testComments ",
+          "type": "string"
+        },
+        {
+          "name": "medications",
+          "in": "formData",
+          "required": false,
+          "description": "medications in array [{ name: 'test',dose: '2',frequency: '2',duration: '6 hours' }]",
+          "type": "Array",
+          "items": {
+
+          }
+        },
+        {
+          "name": "medicationsComments",
+          "in": "formData",
+          "required": false,
+          "description": "medicationsComments ",
+          "type": "string"
+        },
+        {
+          "name": "followUpDate",
+          "in": "formData",
+          "required": false,
+          "description": "followUpDate ",
+          "type": "string"
+        },
+        {
+          "name": "startTime",
+          "in": "formData",
+          "required": false,
+          "description": "startTime ",
+          "type": "string"
+        },
+        {
+          "name": "endTime",
+          "in": "formData",
+          "required": false,
+          "description": "endTime ",
+          "type": "string"
+        },
+        {
+          "name": "slots",
+          "in": "formData",
+          "required": false,
+          "description": "slots in array ",
+          "type": "Array",
+          "items": {
+
+          }
+        },
+        {
+          "name": "referDoctorId",
+          "in": "formData",
+          "required": false,
+          "description": "referDoctorId ",
+          "type": "string"
+        },
+        {
+          "name": "stepwise",
+          "in": "formData",
+          "required": false,
+          "description": "stepwise ",
+          "type": "number",
+          "enum": [1,2,3,4,5,6,7]
+        }
+      ],
+      "responses": {}
+    }
+  },
+  "/user/uploadFiles": {
+    "post": {
+      "x-swagger-router-controller": "middleware-name1",
+      "operationId": "uploadFiles",
+      "tags": [
+        "Upload File"
+      ],
+      "description": "",
+      "parameters": [
+        {
+          "name": "authorization",
+          "in": "header",
+          "description": "authorization is required",
+          "required": true,
+          "type": "string",
+          "value": ""
+        },
+        {
+            "name": "language",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "enum": [
+                "en",
+                "ar"
+              ]
+        },
+        {
+          "name": "timezone",
+          "in": "header",
+          "required": true,
+          "type": "string",
+          "enum": [
+                "Asia/Kolkata"
+              ]
+        },
+        {
+          "name": "type",
+          "in": "formData",
+          "description": "type is required",
+          "type": "string",
+          "value":""
+        },
+        {
+          "name": "image",
+          "in": "formData",
+          "description": "image is in array",
+          "type": "file",
+          "value":""
+        }
+      ],
+      "responses": {}
+    }
+  },
+  "/user/getReports": {
+    "get": {
+      "x-swagger-router-controller": "middleware-name1",
+      "operationId": "getReports",
+      "tags": [
+        "Get Appointment reports"
+      ],
+      "description": "",
+      "parameters": [
+        {
+          "name": "authorization",
+          "in": "header",
+          "description": "authorization is required",
+          "required": true,
+          "type": "string",
+          "value": ""
+        },
+        {
+            "name": "language",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "enum": [
+                "en",
+                "ar"
+              ]
+        },
+        {
+          "name": "timezone",
+          "in": "header",
+          "required": true,
+          "type": "string",
+          "enum": [
+                "Asia/Kolkata"
+              ]
+        },{
+          "name": "appointmentId",
+          "in": "query",
+          "description": "appointmentId",
+          "required": false,
+          "type": "string",
+          "value":""
+        },
+        {
+          "name": "reportId",
+          "in": "query",
+          "description": "reportId ",
+          "required": false,
+          "type": "string",
+          "value":""
+        }
+      ],
+      "responses": {}
+    }
+  },
+  "/user/getProfessionalAndFacilityList": {
+    "get": {
+      "x-swagger-router-controller": "middleware-name1",
+      "operationId": "get",
+      "tags": [
+        "getProfessionalAndFacilityList"
+      ],
+      "description": "Create E-report for user",
+      "parameters": [
+        {
+          "name": "authorization",
+          "in": "header",
+          "required": true,
+          "description": "authorization token",
+          "type": "string",
+          "value": ""
+        },
+        {
+            "name": "language",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "enum": [
+                "en",
+                "ar"
+              ]
+        },
+        {
+          "name": "timezone",
+          "in": "header",
+          "required": true,
+          "type": "string",
+          "enum": [
+                "Asia/Kolkata"
+              ]
+        },
+        {
+          "name": "type",
+          "in": "query",
+          "required": true,
+          "description": "PROFESSIONAL,FACILITY/TEAM",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "limit",
+          "in": "query",
+          "required": false,
+          "description": "limit",
+          "type": "number",
+          "value": ""
+        },
+        {
+          "name": "lastId",
+          "in": "query",
+          "required": false,
+          "description": "lastId",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "search",
+          "in": "query",
+          "required": false,
+          "description": "search",
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "responses": {}
+    }
+  },
+  "/user/createLabReport": {
+    "post": {
+      "x-swagger-router-controller": "middleware-name1",
+      "operationId": "post",
+      "tags": [
+        "Report APIs for Labs"
+      ],
+      "description": "Create Lab Report",
+      "parameters": [
+        {
+          "name": "authorization",
+          "in": "header",
+          "required": true,
+          "description": "authorization token",
+          "type": "string",
+          "value": ""
+        },
+        {
+            "name": "language",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "enum": [
+                "en",
+                "ar"
+              ]
+        },
+        {
+          "name": "timezone",
+          "in": "header",
+          "required": true,
+          "type": "string",
+          "enum": [
+                "Asia/Kolkata"
+              ]
+        },
+        {
+          "name": "appointmentId",
+          "in": "formData",
+          "required": false,
+          "description": "appointmentId",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "dependentId",
+          "in": "formData",
+          "description": "dependentId [OPTIONAL]",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "allergies",
+          "in": "formData",
+          "required": false,
+          "description": "allergies",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "testType",
+          "in": "formData",
+          "required": false,
+          "description": "testType in array of string",
+          "type": "array",
+          "value": "",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "technic",
+          "in": "formData",
+          "required": false,
+          "description": "technic",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "results",
+          "in": "formData",
+          "required": false,
+          "description": "results",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "conclusion",
+          "in": "formData",
+          "required": false,
+          "description": "conclusion",
+          "type": "string",
+          "value": ""
+        }, {
+          "name": "folderId",
+          "in": "formData",
+          "required": false,
+          "description": "folderId",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "attachments",
+          "in": "formData",
+          "description": "",
+          "type": "array",
+          "value": "",
+          "items": {
+            "type": "object",
+            "value": "{original' : '', 'thumbnail' : '', 'fileName': '', 'type': ''}"
+          }
+        }
+      ],
+      "responses": {}
+    }
+  },
+  "/user/getLabReports": {
+    "get": {
+      "x-swagger-router-controller": "middleware-name1",
+      "operationId": "getLabReports",
+      "tags": [
+        "Get Appointment reports for labs"
+      ],
+      "description": "",
+      "parameters": [
+        {
+          "name": "authorization",
+          "in": "header",
+          "description": "authorization is required",
+          "required": true,
+          "type": "string",
+          "value": ""
+        },
+        {
+            "name": "language",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "enum": [
+                "en",
+                "ar"
+              ]
+        },
+        {
+          "name": "timezone",
+          "in": "header",
+          "required": true,
+          "type": "string",
+          "enum": [
+                "Asia/Kolkata"
+              ]
+        },{
+          "name": "appointmentId",
+          "in": "query",
+          "description": "appointmentId",
+          "required": false,
+          "type": "string",
+          "value":""
+        },
+        {
+          "name": "reportId",
+          "in": "query",
+          "description": "reportId ",
+          "required": false,
+          "type": "string",
+          "value":""
+        }
+      ],
+      "responses": {}
+    }
+  },
+  "/user/addFeedback": {
+    "post": {
+      "x-swagger-router-controller": "middleware-name1",
+      "operationId": "addFeedback",
+      "tags": [
+        "professional's feedback"
+      ],
+      "description": "Give feedback to professional",
+      "parameters": [
+        {
+          "name": "authorization",
+          "in": "header",
+          "required": true,
+          "description": "authorization token",
+          "type": "string",
+          "value": ""
+        },
+        {
+            "name": "language",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "enum": [
+                "en",
+                "ar"
+              ]
+        },
+        {
+          "name": "timezone",
+          "in": "header",
+          "required": true,
+          "type": "string",
+          "enum": [
+                "Asia/Kolkata"
+              ]
+        },
+        {
+          "name": "userId",
+          "in": "formData",
+          "required": true,
+          "description": "PROFESSIONAL/FACILITY id is required",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "appointmentId",
+          "in": "formData",
+          "description": "appointmentId is required",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "rating",
+          "in": "formData",
+          "required": true,
+          "description": "rating",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "feedback",
+          "in": "formData",
+          "required": false,
+          "description": "feedback",
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "responses": {}
+    }
+  },
+  "/user/feedbacksList": {
+    "get": {
+      "x-swagger-router-controller": "middleware-name1",
+      "operationId": "professionalFeedbacksList",
+      "tags": [
+        "professional's feedback"
+      ],
+      "description": "professional's feedbacks list",
+      "parameters": [
+        {
+          "name": "authorization",
+          "in": "header",
+          "required": true,
+          "description": "authorization token",
+          "type": "string",
+          "value": ""
+        },
+        {
+            "name": "language",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "enum": [
+                "en",
+                "ar"
+              ]
+        },
+        {
+          "name": "timezone",
+          "in": "header",
+          "required": true,
+          "type": "string",
+          "enum": [
+                "Asia/Kolkata"
+              ]
+        },
+        {
+          "name": "userId",
+          "in": "query",
+          "required": true,
+          "description": "PROFESSIONAL/FACILITY id is required",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "lastId",
+          "in": "query",
+          "description": "lastId is required for pagination only",
+          "type": "string",
+          "value":""
+        }, {
+            "name": "count",
+            "in": "query",
+            "description": "count is required for pagination only",
+            "type": "Number",
+            "value":""
+        }
+      ],
+      "responses": {}
+    }
+  },
+  "/user/getMedicalReportsDiagnostics": {
+    "get": {
+      "x-swagger-router-controller": "middleware-name1",
+      "operationId": "getMedicalReportsDiagnostics",
+      "tags": [
+        "Get Medical Reports"
+      ],
+      "description": "",
+      "parameters": [
+        {
+          "name": "authorization",
+          "in": "header",
+          "description": "authorization is required",
+          "required": true,
+          "type": "string",
+          "value": ""
+        },{
+            "name": "language",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "enum": [
+                "en",
+                "ar"
+              ]
+        },
+        {
+          "name": "timezone",
+          "in": "header",
+          "required": true,
+          "type": "string",
+          "enum": [
+                "Asia/Kolkata"
+              ]
+        }
+      ],
+      "responses": {}
+    }
+  },
+  "/user/getMedicalReports": {
+    "get": {
+      "x-swagger-router-controller": "middleware-name1",
+      "operationId": "getMedicalReports",
+      "tags": [
+        "Get Medical Reports"
+      ],
+      "description": "",
+      "parameters": [
+        {
+          "name": "authorization",
+          "in": "header",
+          "description": "authorization is required",
+          "required": true,
+          "type": "string",
+          "value": ""
+        },{
+            "name": "language",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "enum": [
+                "en",
+                "ar"
+              ]
+        },
+        {
+          "name": "timezone",
+          "in": "header",
+          "required": true,
+          "type": "string",
+          "enum": [
+                "Asia/Kolkata"
+              ]
+        },{
+          "name": "folderId",
+          "in": "query",
+          "description": "folderId",
+          "required": true,
+          "type": "string",
+          "value":""
+        },
+        {
+          "name": "type",
+          "in": "query",
+          "description": "type RECEIVED: 1,SCANED: 2 ",
+          "required": true,
+          "type": "string",
+          "value":""
+        },
+        {
+          "name": "limit",
+          "in": "query",
+          "description": "limit",
+          "required": true,
+          "type": "number",
+          "value":""
+        },
+        {
+          "name": "lastId",
+          "in": "query",
+          "description": "lastId",
+          "required": false,
+          "type": "string",
+          "value":""
+        },
+        {
+          "name": "dependentId",
+          "in": "query",
+          "description": "dependentId [OPTIONAL]",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "diagnosticsId",
+          "in": "query",
+          "description": "OPTIONAL [diagnosticsId to filter data by diagnostics]",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "userId",
+          "in": "query",
+          "description": "OPTIONAL [required only to get other user's reports]",
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "responses": {}
+    }
+  },
+  "/user/medicationListForAddMedication": {
+    "get": {
+      "x-swagger-router-controller": "middleware-name1",
+      "operationId": "medicationListForAddMedication",
+      "tags": [
+        "Get Medical Reports"
+      ],
+      "description": "",
+      "parameters": [
+        {
+          "name": "authorization",
+          "in": "header",
+          "description": "authorization is required",
+          "required": true,
+          "type": "string",
+          "value": ""
+        },{
+            "name": "language",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "enum": [
+                "en",
+                "ar"
+              ]
+        },
+        {
+          "name": "timezone",
+          "in": "header",
+          "required": true,
+          "type": "string",
+          "enum": [
+                "Asia/Kolkata"
+              ]
+        },
+        {
+          "name": "limit",
+          "in": "query",
+          "description": "limit",
+          "required": true,
+          "type": "number",
+          "value":""
+        },
+        {
+          "name": "lastId",
+          "in": "query",
+          "description": "lastId",
+          "required": false,
+          "type": "string",
+          "value":""
+        }
+      ],
+      "responses": {}
+    }
+  },
+  
+  "/user/makePayment": {
+    "post": {
+      "x-swagger-router-controller": "middleware-name1",
+      "operationId": "makePayment",
+      "tags": [
+        "payment method"
+      ],
+      "description": "",
+      "parameters": [
+        {
+          "name": "authorization",
+          "in": "header",
+          "required": true,
+          "description": "authorization token",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "language",
+          "in": "header",
+          "required": true,
+          "type": "string",
+          "enum": [
+            "en",
+            "ar"
+          ]
+        },
+        {
+          "name": "timezone",
+          "in": "header",
+          "required": true,
+          "type": "string",
+          "enum": [
+                "Asia/Kolkata"
+              ]
+        },
+        {
+          "name": "type",
+          "in": "formData",
+          "required": true,
+          "description": "type is required [1 - Appointment, 2 - Wallet, 3 - Course, 4 - Instant Consultation]",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "consultType",
+          "in": "formData",
+          "required": true,
+          "description": "[OPTIONAL] [1 - Audio Call, 2 - Video Call, 3 - Chat]  [required only for type=1(ONLINE Appointment) and type=4] ",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "id",
+          "in": "formData",
+          "description": "[OPTIONAL]  [if type=1, then appointmentId, if 3 then courseId, if 4 then professionalId]",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "paymentMode",
+          "in": "formData",
+          "required": true,
+          "description": "paymentMode is required [eg Credit Card,Debit Card, Paypal, Wallet, etc ]",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "amount",
+          "in": "formData",
+          "required": true,
+          "description": "amount is required",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "currency",
+          "in": "formData",
+          "required": true,
+          "description": "currency is required [SAR]",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "paymentBrand",
+          "in": "formData",
+          "required": true,
+          "description": "paymentBrand is required [VISA]",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "cardNumber",
+          "in": "formData",
+          "required": true,
+          "description": "cardNumber is required [4200000000000000]",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "cardHolderName",
+          "in": "formData",
+          "required": true,
+          "description": "cardHolderName is required [Jane Jones]",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "expiryMonth",
+          "in": "formData",
+          "required": true,
+          "description": "expiryMonth is required [05]",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "expiryYear",
+          "in": "formData",
+          "required": true,
+          "description": "expiryYear is required [2020]",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "cvv",
+          "in": "formData",
+          "required": true,
+          "description": "cvv is required [123]",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "recurringType",
+          "in": "formData",
+          "description": "recurringType - OPTIONAL ['INITIAL' in case of making initial recurring payment]",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "createRegistration",
+          "in": "formData",
+          "description": "createRegistration - OPTIONAL ['true' for recurring payment as well as for saving a card, it'll return a registrationId which is required for saving card and recurring payment]",
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "responses": {}
+    }
+  },
+
+
+  "/user/makeRecurringPayment": {
+    "post": {
+      "x-swagger-router-controller": "middleware-name1",
+      "operationId": "makeRecurringPayment",
+      "tags": [
+        "payment method"
+      ],
+      "description": "",
+      "parameters": [
+        {
+          "name": "authorization",
+          "in": "header",
+          "required": true,
+          "description": "authorization token",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "language",
+          "in": "header",
+          "required": true,
+          "type": "string",
+          "enum": [
+            "en",
+            "ar"
+          ]
+        },
+        {
+          "name": "timezone",
+          "in": "header",
+          "required": true,
+          "type": "string",
+          "enum": [
+                "Asia/Kolkata"
+              ]
+        },
+        {
+          "name": "amount",
+          "in": "formData",
+          "required": true,
+          "description": "amount is required",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "currency",
+          "in": "formData",
+          "required": true,
+          "description": "currency is required [SAR]",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "registrationId",
+          "in": "formData",
+          "required": true,
+          "description": "registrationId is required",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "consultType",
+          "in": "formData",
+          "required": true,
+          "description": "registrationId is required [1 - Audio Call, 2 - Video Call, 3 - Chat]",
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "responses": {}
+    }
+  },
+
+  "/user/getCheckoutId": {
+    "get": {
+      "x-swagger-router-controller": "middleware-name1",
+      "operationId": "getCheckoutId",
+      "tags": [
+        "payment method"
+      ],
+      "description": "Check merchantTransactionId",
+      "parameters": [
+        {
+          "name": "authorization",
+          "in": "header",
+          "required": true,
+          "description": "authorization token",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "language",
+          "in": "header",
+          "required": true,
+          "type": "string",
+          "enum": [
+            "en",
+            "ar"
+          ]
+        },
+        {
+          "name": "timezone",
+          "in": "header",
+          "required": true,
+          "type": "string",
+          "enum": [
+                "Asia/Kolkata"
+              ]
+        },
+        {
+          "name": "amount",
+          "in": "query",
+          "required": true,
+          "description": "amount is required",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "currency",
+          "in": "query",
+          "required": true,
+          "description": "currency is required [SAR]",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "recurringType",
+          "in": "query",
+          "description": "recurringType - OPTIONAL ['INITIAL' in case of making initial recurring payment]",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "createRegistration",
+          "in": "query",
+          "description": "createRegistration - OPTIONAL ['true' for recurring payment as well as for saving a card, it'll return a registrationId which is required for saving card and recurring payment]",
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "responses": {}
+    }
+  },
+
+
+
+  "/user/checkPaymentStatus": {
+    "post": {
+      "x-swagger-router-controller": "middleware-name1",
+      "operationId": "checkPaymentStatus",
+      "tags": [
+        "payment method"
+      ],
+      "description": "Check Payment Status",
+      "parameters": [
+        {
+          "name": "authorization",
+          "in": "header",
+          "required": true,
+          "description": "authorization token",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "language",
+          "in": "header",
+          "required": true,
+          "type": "string",
+          "enum": [
+            "en",
+            "ar"
+          ]
+        },
+        {
+          "name": "timezone",
+          "in": "header",
+          "required": true,
+          "type": "string",
+          "enum": [
+                "Asia/Kolkata"
+              ]
+        },
+        {
+          "name": "checkoutId",
+          "in": "formData",
+          "required": true,
+          "description": "checkoutId is required",
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "responses": {}
+    }
+  },
+
+
+
+  "/user/manageWallet": {
+    "post": {
+      "x-swagger-router-controller": "middleware-name1",
+      "operationId": "manageWallet",
+      "tags": [
+        "payment method"
+      ],
+      "description": "Add/Remove amount in wallet",
+      "parameters": [
+        {
+          "name": "authorization",
+          "in": "header",
+          "required": true,
+          "description": "authorization token",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "language",
+          "in": "header",
+          "required": true,
+          "type": "string",
+          "enum": [
+            "en",
+            "ar"
+          ]
+        },
+        {
+          "name": "timezone",
+          "in": "header",
+          "required": true,
+          "type": "string",
+          "enum": [
+                "Asia/Kolkata"
+              ]
+        },
+        {
+          "name": "action",
+          "in": "formData",
+          "required": true,
+          "description": "action is required [0 - subtract amount, 1 - add amount]",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "amount",
+          "in": "formData",
+          "required": true,
+          "description": "amount is required",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "type",
+          "in": "formData",
+          "description": "[OPTIONAL] [1 - Appointment, 3 - Course, 4 - Instant Consultation]",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "consultType",
+          "in": "formData",
+          "description": "[OPTIONAL] [1 - Audio Call, 2 - Video Call, 3 - Chat]  [required only for type=1(ONLINE Appointment) and type=4] ",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "id",
+          "in": "formData",
+          "description": "[OPTIONAL] [if type=1, then appointmentId, if 3 then courseId, if 4 then professionalId]",
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "responses": {}
+    }
+  },
+
+  "/user/callPayment": {
+    "post": {
+      "x-swagger-router-controller": "middleware-name1",
+      "operationId": "callPayment",
+      "tags": [
+        "payment method"
+      ],
+      "description": "recurring payment",
+      "parameters": [
+        {
+          "name": "authorization",
+          "in": "header",
+          "required": true,
+          "description": "authorization token",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "language",
+          "in": "header",
+          "required": true,
+          "type": "string",
+          "enum": [
+            "en",
+            "ar"
+          ]
+        },
+        {
+          "name": "timezone",
+          "in": "header",
+          "required": true,
+          "type": "string",
+          "enum": [
+                "Asia/Kolkata"
+              ]
+        },
+        {
+          "name": "paymentMode",
+          "in": "formData",
+          "required": true,
+          "description": "paymentMode is required [wallet, card]",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "duration",
+          "in": "formData",
+          "required": true,
+          "description": "duration is required",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "sessionCost",
+          "in": "formData",
+          "required": true,
+          "description": "sessionCost is required",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "currency",
+          "in": "formData",
+          "required": true,
+          "description": "currency is required",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "type",
+          "in": "formData",
+          "description": "[OPTIONAL] [1 - Appointment, 4 - Instant Consultation]",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "consultType",
+          "in": "formData",
+          "description": "[OPTIONAL] [1 - Audio Call, 2 - Video Call, 3 - Chat]",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "id",
+          "in": "formData",
+          "description": "[OPTIONAL] [if type=1, then appointmentId, if 4 then professionalId]",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "transactionId",
+          "in": "formData",
+          "description": "[OPTIONAL] required if paymentMode is credit card, to capture previously holded payment",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "isRecurring",
+          "in": "formData",
+          "required": true,
+          "description": "isRecurring is required [0 - initial payment capture,  1 - recurring payment capture]",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "action",
+          "in": "formData",
+          "description": " wallet payment action is OPTIONAL [this parameter will be used in webview only by Sandeep only in case of paymentMode='wallet'. 0 - subtract, 1 - add] ",
+          "type": "string",
+          "value": "0"
+        }
+      ],
+      "responses": {}
+    }
+  },
+
+    "/user/removeCard": {
+    "post": {
+      "x-swagger-router-controller": "middleware-name1",
+      "operationId": "removeCard",
+      "tags": [
+        "payment method"
+      ],
+      "description": "recurring payment",
+      "parameters": [
+        {
+          "name": "authorization",
+          "in": "header",
+          "required": true,
+          "description": "authorization token",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "language",
+          "in": "header",
+          "required": true,
+          "type": "string",
+          "enum": [
+            "en",
+            "ar"
+          ]
+        },
+        {
+          "name": "timezone",
+          "in": "header",
+          "required": true,
+          "type": "string",
+          "enum": [
+                "Asia/Kolkata"
+              ]
+        },
+        {
+          "name": "registrationId",
+          "in": "formData",
+          "required": true,
+          "description": "registrationId is required",
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "responses": {}
+    }
+  },
+
+"/user/getTransactionsListWithFilters": {
+    "get": {
+      "x-swagger-router-controller": "middleware-name1",
+      "operationId": "getTransactionsListWithFilters",
+      "tags": [
+        "payment method"
+      ],
+      "description": "get Transactions List",
+      "parameters": [
+        {
+          "name": "authorization",
+          "in": "header",
+          "required": true,
+          "description": "authorization token",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "language",
+          "in": "header",
+          "required": true,
+          "type": "string",
+          "enum": [
+            "en",
+            "ar"
+          ]
+        },
+        {
+          "name": "timezone",
+          "in": "header",
+          "required": true,
+          "type": "string",
+          "enum": [
+                "Asia/Kolkata"
+              ]
+        },
+        {
+          "name": "type",
+          "in": "query",
+          "required": true,
+          "description": "amount is required [ 0 - All, 1 - Appointment, 2 - Wallet, 3 - Course, 4 - Instant Consultation]",
+          "type": "string",
+          "value": "0"
+        },
+        {
+          "name": "userType",
+          "in": "query",
+          "description": "userType is required [ 0 - All, 1 - User, 2 - Professional]",
+          "type": "string",
+          "value": "0"
+        },
+        {
+          "name": "startDate",
+          "in": "query",
+          "description": "[OPTIONAL]",
+          "type": "string"
+        },
+        {
+          "name": "endDate",
+          "in": "query",
+          "description": "[OPTIONAL]",
+          "type": "string"
+        },
+        {
+          "name": "lastId",
+          "in": "query",
+          "description": "lastId is required for pagination only",
+          "type": "string",
+          "value":""
+        }, {
+            "name": "count",
+            "in": "query",
+            "description": "count is required for pagination only",
+            "type": "Number",
+            "value":""
+        }
+      ],
+      "responses": {}
+    }
+  },
+  "/user/getTransactionsList": {
+    "get": {
+      "x-swagger-router-controller": "middleware-name1",
+      "operationId": "getTransactionsList",
+      "tags": [
+        "payment method"
+      ],
+      "description": "get Transactions List",
+      "parameters": [
+        {
+          "name": "authorization",
+          "in": "header",
+          "required": true,
+          "description": "authorization token",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "language",
+          "in": "header",
+          "required": true,
+          "type": "string",
+          "enum": [
+            "en",
+            "ar"
+          ]
+        },
+        {
+          "name": "timezone",
+          "in": "header",
+          "required": true,
+          "type": "string",
+          "enum": [
+                "Asia/Kolkata"
+              ]
+        },
+        {
+          "name": "type",
+          "in": "query",
+          "required": true,
+          "description": "amount is required [ 0 - All, 1 - Appointment, 2 - Wallet, 3 - Course, 4 - Instant Consultation]",
+          "type": "string",
+          "value": "0"
+        },
+        {
+          "name": "userType",
+          "in": "query",
+          "description": "userType is required [ 0 - All, 1 - User, 2 - Professional]",
+          "type": "string",
+          "value": "0"
+        },
+        {
+          "name": "startDate",
+          "in": "query",
+          "description": "[OPTIONAL]",
+          "type": "string"
+        },
+        {
+          "name": "endDate",
+          "in": "query",
+          "description": "[OPTIONAL]",
+          "type": "string"
+        },
+        {
+          "name": "lastId",
+          "in": "query",
+          "description": "lastId is required for pagination only",
+          "type": "string",
+          "value":""
+        }, {
+            "name": "count",
+            "in": "query",
+            "description": "count is required for pagination only",
+            "type": "Number",
+            "value":""
+        }
+      ],
+      "responses": {}
+    }
+  },
+"/user/getTransactionsListMonthWise": {
+    "get": {
+      "x-swagger-router-controller": "middleware-name1",
+      "operationId": "getTransactionsListMonthWise",
+      "tags": [
+        "payment method"
+      ],
+      "description": "get Transactions List",
+      "parameters": [
+        {
+          "name": "authorization",
+          "in": "header",
+          "required": true,
+          "description": "authorization token",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "language",
+          "in": "header",
+          "required": true,
+          "type": "string",
+          "enum": [
+            "en",
+            "ar"
+          ]
+        },
+        {
+          "name": "timezone",
+          "in": "header",
+          "required": true,
+          "type": "string",
+          "enum": [
+                "Asia/Kolkata"
+              ]
+        }
+      ],
+      "responses": {}
+    }
+  },
+  "/user/transactionSearchByMerchantTransactionId": {
+    "post": {
+      "x-swagger-router-controller": "middleware-name1",
+      "operationId": "transactionSearchByMerchantTransactionId",
+      "tags": [
+        "payment method"
+      ],
+      "description": "Check merchantTransactionId",
+      "parameters": [
+        {
+          "name": "authorization",
+          "in": "header",
+          "required": true,
+          "description": "authorization token",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "language",
+          "in": "header",
+          "required": true,
+          "type": "string",
+          "enum": [
+            "en",
+            "ar"
+          ]
+        },
+        {
+          "name": "timezone",
+          "in": "header",
+          "required": true,
+          "type": "string",
+          "enum": [
+                "Asia/Kolkata"
+              ]
+        },
+        {
+          "name": "merchantTransactionId",
+          "in": "formData",
+          "required": true,
+          "description": "merchantTransactionId is required",
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "responses": {}
+    }
+  },
+  "/user/addCSFContract": {
+    "post": {
+      "x-swagger-router-controller": "middleware-name1",
+      "operationId": "addCSFContract",
+      "tags": [
+        "user"
+      ],
+      "description": "",
+      "parameters": [
+        {
+          "name": "authorization",
+          "in": "header",
+          "description": "authorization token",
+          "required": true,
+          "value": ""
+        },
+        {
+          "name": "language",
+          "in": "header",
+          "required": true,
+          "type": "string",
+          "enum": [
+            "en",
+            "ar"
+          ]
+        },
+        {
+          "name": "timezone",
+          "in": "header",
+          "required": true,
+          "type": "string",
+          "enum": [
+                "Asia/Kolkata"
+              ]
+        },
+        {
+          "name": "templateId",
+          "in": "formData",
+          "description": "templateId",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "idNumber",
+          "in": "formData",
+          "description": "idNumber is required",
+          "required": true,
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "registrationNumber",
+          "in": "formData",
+          "description": "registrationNumber is required",
+          "required": true,
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "representativeName",
+          "in": "formData",
+          "description": "representativeName is required",
+          "required": true,
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "commercialRegistration",
+          "in": "formData",
+          "description": "commercialRegistration is required",
+          "required": true,
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "procurationNumber",
+          "in": "formData",
+          "description": "procurationNumber is required",
+          "required": true,
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "postalCode",
+          "in": "formData",
+          "description": "postalCode is required",
+          "required": true,
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "bankName",
+          "in": "formData",
+          "description": "bankName is required",
+          "required": true,
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "iban",
+          "in": "formData",
+          "description": "IBAN is required",
+          "required": true,
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "swiftCode",
+          "in": "formData",
+          "description": "swiftCode is required",
+          "required": true,
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "bankCity",
+          "in": "formData",
+          "description": "bankCity is required [city id]",
+          "required": true,
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "bankCountry",
+          "in": "formData",
+          "description": "bankCountry is required [country id]",
+          "required": true,
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "currency",
+          "in": "formData",
+          "description": "currency is required",
+          "required": true,
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "teamSignature",
+          "in": "formData",
+          "description": "teamSignature is required {original: '', thumbnail: ''}",
+          "required": false,
+          "type": "object",
+          "value": ""
+        }
+      ],
+      "responses": {}
+    }
+  },
+  "/user/createInstantConsultationAppointment": {
+    "post": {
+      "x-swagger-router-controller": "middleware-name1",
+      "operationId": "createInstantConsultationAppointment",
+      "tags": [
+        "User Appointment APIs"
+      ],
+      "description": "create instant consultation appointment",
+      "parameters": [
+        {
+          "name": "authorization",
+          "in": "header",
+          "required": true,
+          "description": "authorization token",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "language",
+          "in": "header",
+          "required": true,
+          "type": "string",
+          "enum": [
+            "en",
+            "ar"
+          ]
+        },
+        {
+          "name": "timezone",
+          "in": "header",
+          "required": true,
+          "type": "string",
+          "enum": [
+                "Asia/Kolkata"
+              ]
+        },
+        {
+          "name": "doctor",
+          "in": "formData",
+          "required": true,
+          "description": "doctor is required",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "duration",
+          "in": "formData",
+          "required": true,
+          "description": "duration is required",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "userRole",
+          "in": "formData",
+          "required": true,
+          "description": "userRole is required",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "consultationType",
+          "in": "formData",
+          "required": true,
+          "description": "consultationType is required [AUDIO, VIDEO, CHAT]",
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "responses": {}
+    }
+  },
+  "/user/getCSFContract": {
+    "get": {
+      "x-swagger-router-controller": "middleware-name1",
+      "operationId": "getCSFContract",
+      "tags": [
+        "getCSFContract"
+      ],
+      "description": "",
+      "parameters": [
+        {
+          "name": "authorization",
+          "in": "header",
+          "description": "authorization is required",
+          "required": true,
+          "type": "string",
+          "value": ""
+        },{
+            "name": "language",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "enum": [
+                "en",
+                "ar"
+              ]
+        },
+        {
+          "name": "timezone",
+          "in": "header",
+          "required": true,
+          "type": "string",
+          "enum": [
+                "Asia/Kolkata"
+              ]
+        }
+      ],
+      "responses": {}
+    }
+  }
+}

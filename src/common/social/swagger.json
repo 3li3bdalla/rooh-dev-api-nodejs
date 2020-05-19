@@ -1,0 +1,1155 @@
+{
+    "/common/homeData": {
+            "get": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "homeData",
+                "tags": [
+                    "Common Social APIs"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization token",
+                        "required": true,
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/common/createPost": {
+            "post": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "createPost",
+                "tags": [
+                    "Common Social APIs"
+                ],
+                "description": "API to create Speakout Posts and Explore posts",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "description": "see example below",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "postText": {
+                                    "required": true,
+                                    "description": "Post text is required",
+                                    "type": "string"
+                                },
+                                "type": {
+                                    "required": true,
+                                    "description": "Post type is required - [1-speakouts, 2-explore]",
+                                    "type": "string"
+                                },
+                                "imageUrl": {
+                                    "type": "array",
+                                    "collectionFormat": "multi",
+                                    "items": {
+                                        "type": "object"
+                                    }
+                                },
+                                "taggedUsers": {
+                                    "type": "array",
+                                    "collectionFormat": "multi",
+                                    "items": {
+                                        "type": "object"
+                                    }
+                                },
+                                "tags": {
+                                    "description": "post tags",
+                                    "type": "string"
+                                }
+
+                            },
+                            "example": {
+                                "postText": "",
+                                "type": "",
+                                "imageUrl": [
+                                    {
+                                        "original" : "",
+                                        "thumbnail" : "",
+                                        "type": "",
+                                        "fileName": ""
+
+                                    }
+                                ],
+                                "taggedUsers": [
+                                    {
+                                        "userId" : "",
+                                        "name" : ""
+                                    }
+                                ],
+                                "tags": "#tag1,#tag2,#tag3"
+                            }
+                        }
+                    }
+                ],
+                "responses": {}
+            }
+        },
+
+        "/common/deletePost": {
+            "put": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "deletePost",
+                "tags": [
+                    "Common Social APIs"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization token",
+                        "required": true,
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },
+                    {
+                        "name": "postId",
+                        "in": "formData",
+                        "description": "Post Id is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/common/getTagsByUser": {
+            "get": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "getTagsByUser",
+                "tags": [
+                    "Common Social APIs"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization token",
+                        "required": true,
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/common/getPostsByTag": {
+            "get": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "getPostsByTag",
+                "tags": [
+                    "Common Social APIs"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization token",
+                        "required": true,
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },
+                    {
+                        "name": "tag",
+                        "in": "query",
+                        "description": "Tag name is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/common/listSpeakouts": {
+            "get": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "listSpeakouts",
+                "tags": [
+                    "Common Social APIs"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization token",
+                        "required": true,
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },
+                    {
+                        "name": "type",
+                        "in": "query",
+                        "description": "Type is required - {NEW - [1 - My Speakouts, 2 - General Speakouts]}<br> {OLD - [1 - user's own list, 2 - followings list]}",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    }, {
+                        "name": "lastId",
+                        "in": "query",
+                        "description": "lastId is required for pagination only",
+                        "type": "string",
+                        "value":""
+                    }, {
+                        "name": "count",
+                        "in": "query",
+                        "description": "count is required for pagination only",
+                        "type": "Number",
+                        "value":""
+                    }, {
+                        "name": "otherUserId",
+                        "in": "query",
+                        "description": "otherUserId is required getting other user post last and working for type 1",
+                        "type": "string",
+                        "value":""
+                    }, {
+                        "name": "keyword",
+                        "in": "query",
+                        "description": "OPTIONAL - [search speakouts by postText]",
+                        "type": "string",
+                        "value":""
+                    }
+
+                ],
+                "responses": {}
+            }
+        },
+        "/common/listExplorePosts": {
+            "get": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "listExplorePosts",
+                "tags": [
+                    "Common Social APIs"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization token",
+                        "required": true,
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },
+                    {
+                        "name": "lastId",
+                        "in": "query",
+                        "description": "lastId is required for pagination only",
+                        "type": "string",
+                        "value":""
+                    }, {
+                        "name": "count",
+                        "in": "query",
+                        "description": "count is required for pagination only",
+                        "type": "Number",
+                        "value":""
+                    },
+                    {
+                        "name": "otherUserId",
+                        "in": "query",
+                        "description": "otherUserId is required for getting the post for other user",
+                        "type": "string",
+                        "value":""
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/common/followUnfollowUser": {
+            "post": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "followUnfollowUser",
+                "tags": [
+                    "Common Social APIs"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization token",
+                        "required": true,
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },
+                    {
+                        "name": "userId",
+                        "in": "formData",
+                        "description": "Followed userId is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "action",
+                        "in": "formData",
+                        "description": "action is required - [1-follow,2-unfollow]",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/common/followList": {
+            "get": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "followList",
+                "tags": [
+                    "Common Social APIs"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization token",
+                        "required": true,
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },
+                    {
+                        "name": "type",
+                        "in": "query",
+                        "description": "type is required [1- followings list, 2- followers list] ",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "searchUser",
+                        "in": "query",
+                        "description": "Enter name - Optional",
+                        "type": "string",
+                        "value": ""
+                    }, {
+                        "name": "lastId",
+                        "in": "query",
+                        "description": "lastId is required for pagination only",
+                        "type": "string",
+                        "value":""
+                    }, {
+                        "name": "count",
+                        "in": "query",
+                        "description": "count is required for pagination only",
+                        "type": "string",
+                        "value":""
+                    },
+                    {
+                        "name": "otherUserId",
+                        "in": "query",
+                        "description": "otherUserId is required for other user post following and follower list",
+                        "type": "string",
+                        "value":""
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/common/postComment": {
+            "post": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "postComment",
+                "tags": [
+                    "Common Social APIs"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },
+                    {
+                        "name": "comment",
+                        "in": "formData",
+                        "description": "Comment is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "postId",
+                        "in": "formData",
+                        "description": "postId is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "commentId",
+                        "in": "formData",
+                        "description": "Optional",
+                        "type": "string",
+                        "value": ""
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/common/deleteComment": {
+            "put": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "deleteComment",
+                "tags": [
+                    "Common Social APIs"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization token",
+                        "required": true,
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },
+                    {
+                        "name": "commentId",
+                        "in": "formData",
+                        "description": "comment Id is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/common/likeUnlike": {
+            "post": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "likeUnlike",
+                "tags": [
+                    "Common Social APIs"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },
+                    {
+                        "name": "action",
+                        "in": "formData",
+                        "description": "action is required [1-like, 2-unlike]",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "type",
+                        "in": "formData",
+                        "description": "type is required [1- post, 2- comment/reply]",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "id",
+                        "in": "formData",
+                        "description": "id is required [Post id or comment id] ",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "userId",
+                        "in": "formData",
+                        "description": "userId is required [userId who is liking post/comment]",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/common/sharePost": {
+            "post": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "sharePost",
+                "tags": [
+                    "Common Social APIs"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },
+                    {
+                        "name": "postId",
+                        "in": "formData",
+                        "description": "postId is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/common/postDetails": {
+            "get": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "postDetails",
+                "tags": [
+                    "Common Social APIs"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },
+                    {
+                        "name": "postId",
+                        "in": "query",
+                        "description": "postId is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/common/viewPost": {
+            "put": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "viewPost",
+                "tags": [
+                    "Common Social APIs"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },
+                    {
+                        "name": "postId",
+                        "in": "formData",
+                        "description": "postId is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/common/reportPost": {
+            "post": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "reportPost",
+                "tags": [
+                    "Common Social APIs"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },
+                    {
+                        "name": "postId",
+                        "in": "formData",
+                        "description": "Post id is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "reportText",
+                        "in": "formData",
+                        "description": "reportText is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/common/addRemoveContact": {
+            "post": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "addRemoveContact",
+                "tags": [
+                    "Common Social APIs"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },
+                    {
+                        "name": "userId",
+                        "in": "formData",
+                        "description": "User Id is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "action",
+                        "in": "formData",
+                        "description": "action is required - [1-Add new contact,2-Delete/Reject contact, 3 - Accept contact]",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/common/contactsList": {
+            "get": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "contactsList",
+                "tags": [
+                    "Common Social APIs"
+                ],
+                "description": "followById - senderId | followedId - receiverId",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization token",
+                        "required": true,
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },
+                    {
+                        "name": "searchUser",
+                        "in": "query",
+                        "description": "Enter name - Optional",
+                        "type": "string",
+                        "value": ""
+                    }, {
+                        "name": "lastId",
+                        "in": "query",
+                        "description": "lastId is required for pagination only",
+                        "type": "string",
+                        "value":""
+                    }, {
+                        "name": "count",
+                        "in": "query",
+                        "description": "count is required for pagination only",
+                        "type": "string",
+                        "value":""
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/common/addRemoveFavourite": {
+            "put": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "addRemoveFavourite",
+                "tags": [
+                    "Common Social APIs"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },
+                    {
+                        "name": "userId",
+                        "in": "formData",
+                        "description": "User Id is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "action",
+                        "in": "formData",
+                        "description": "action is required - [1-Add favorite,2 - Remove favorite]",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "role",
+                        "in": "formData",
+                        "description": "role is required - [1-Professional ,2 - Facility]",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/common/getFavouritesList": {
+            "get": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "getFavouritesList",
+                "tags": [
+                    "Common Social APIs"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization token",
+                        "required": true,
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },
+                    {
+                        "name": "type",
+                        "in": "query",
+                        "description": "type is required - [1-Favorite Professionals, 2- Favorite Facilities]",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },{
+                        "name": "lastId",
+                        "in": "query",
+                        "description": "lastId is required for pagination only",
+                        "type": "string",
+                        "value":""
+                    }, {
+                        "name": "count",
+                        "in": "query",
+                        "description": "count is required for pagination only",
+                        "type": "Number",
+                        "value":""
+                    }
+                    
+                ],
+                "responses": {}
+            }
+        },
+        "/common/getFavouritesLikeList": {
+            "get": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "getFavouritesLikeList",
+                "tags": [
+                    "Common Social APIs"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization token",
+                        "required": true,
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },
+                    {
+                        "name": "userId",
+                        "in": "query",
+                        "description": "userId is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },{
+                        "name": "lastId",
+                        "in": "query",
+                        "description": "lastId is required for pagination only",
+                        "type": "string",
+                        "value":""
+                    }, {
+                        "name": "count",
+                        "in": "query",
+                        "description": "count is required for pagination only",
+                        "type": "Number",
+                        "value":""
+                    }, {
+                        "name": "keyword",
+                        "in": "query",
+                        "description": "OPTIONAL [keyword is required to search user]",
+                        "type": "Number",
+                        "value":""
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/common/addRemoveRescuer": {
+            "put": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "addRemoveRescuer",
+                "tags": [
+                    "Common Social APIs"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },
+                    {
+                        "name": "contactId",
+                        "in": "formData",
+                        "description": "contact Id is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "action",
+                        "in": "formData",
+                        "description": "action is required - [1-Add Rescuer,2- Remove Rescuer]",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/common/getMyRescuer": {
+            "get": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "getMyRescuer",
+                "tags": [
+                    "Common Social APIs"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization token",
+                        "required": true,
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    }
+                ],
+                "responses": {}
+            }
+        },
+    "/common/changePassword": {
+        "put": {
+            "x-swagger-router-controller": "middleware-name1",
+            "operationId": "changePassword",
+            "tags": [
+                "change password"
+            ],
+            "description": "",
+            "parameters": [
+                {
+                    "name": "authorization",
+                    "in": "header",
+                    "description": "authorization is required",
+                    "required": true,
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "language",
+                    "in": "header",
+                    "required": true,
+                    "type": "string",
+                    "enum": [
+                        "en",
+                        "ar"
+                    ]
+                },
+                {
+                    "name": "oldPassword",
+                    "in": "formData",
+                    "description": "oldPassword is required",
+                    "required": true,
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "newPassword",
+                    "in": "formData",
+                    "description": "newPassword is required",
+                    "required": true,
+                    "type": "string",
+                    "value": ""
+                }
+            ],
+            "responses": {}
+        }
+    }
+
+}

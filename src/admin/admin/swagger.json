@@ -1,0 +1,117 @@
+{
+  "/admin/login": {
+  "post": {
+    "x-swagger-router-controller": "middleware-name1",
+    "operationId": "post",
+    "tags": [
+      "Admin Login"
+    ],
+    "description": "Admin Login",
+    "parameters": [
+      {
+          "name": "language",
+          "in": "header",
+          "required": true,
+          "type": "string",
+          "enum": [
+              "en",
+              "ar"
+            ]
+      },
+      {
+        "name": "email",
+        "in": "formData",
+        "required": true,
+        "description": "email token",
+        "type": "string",
+        "value": ""
+      },
+      {
+        "name": "password",
+        "in": "formData",
+        "required": true,
+        "description": "password",
+        "type": "string",
+        "value": ""
+      }
+    ],
+    "responses": {}
+  }
+},
+  "/admin/details": {
+    "get": {
+      "x-swagger-router-controller": "middleware-name1",
+      "operationId": "post",
+      "tags": [
+        "Admin details"
+      ],
+      "description": "Admin details",
+      "parameters": [
+        {
+          "name": "authorization",
+          "in": "header",
+          "required": true,
+          "description": "authorization token",
+          "type": "string",
+          "value": ""
+        },
+        {
+            "name": "language",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "enum": [
+                "en",
+                "ar"
+              ]
+        }
+      ],
+      "responses": {}
+    }
+  },
+  "/admin/uploadFiles": {
+    "post": {
+      "x-swagger-router-controller": "middleware-name1",
+      "operationId": "uploadFiles",
+      "tags": [
+        "Upload File"
+      ],
+      "description": "",
+      "parameters": [
+        {
+          "name": "authorization",
+          "in": "header",
+          "description": "authorization is required",
+          "required": true,
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "language",
+          "in": "header",
+          "required": true,
+          "type": "string",
+          "enum": [
+            "en",
+            "ar"
+          ]
+        },
+        {
+          "name": "type",
+          "in": "formData",
+          "description": "type is required",
+          "type": "string",
+          "value":""
+        },
+        {
+          "name": "image",
+          "in": "formData",
+          "description": "image is in array",
+          "type": "file",
+          "value":""
+        }
+      ],
+      "responses": {}
+    }
+  }
+}

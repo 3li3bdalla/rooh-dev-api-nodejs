@@ -1,0 +1,143 @@
+{
+  "/common/createPost": {
+            "post": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "createPost",
+                "tags": [
+                    "Common Social APIs"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "postText",
+                        "in": "formData",
+                        "description": "Post text is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "imageUrl",
+                        "in": "formData",
+                        "description": "Optional",
+                        "type": "object",
+                        "value": "{'original' : '', 'thumbnail' : ''}"
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/common/listSpeakouts": {
+            "get": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "listSpeakouts",
+                "tags": [
+                    "Common Social APIs"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization token",
+                        "required": true,
+                        "value": ""
+                    },
+                    {
+                        "name": "type",
+                        "in": "query",
+                        "description": "Type is required - [1 - user's own list, 2 - followings list]",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/common/followUnfollowUser": {
+            "post": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "followUnfollowUser",
+                "tags": [
+                    "Common Social APIs"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization token",
+                        "required": true,
+                        "value": ""
+                    },
+                    {
+                        "name": "userId",
+                        "in": "formData",
+                        "description": "Followed userId is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "action",
+                        "in": "formData",
+                        "description": "action is required - [1-follow,2-unfollow]",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/common/followingsList": {
+            "get": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "followingsList",
+                "tags": [
+                    "Common Social APIs"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization token",
+                        "required": true,
+                        "value": ""
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/common/followersList": {
+            "get": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "followersList",
+                "tags": [
+                    "Common Social APIs"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization token",
+                        "required": true,
+                        "value": ""
+                    }
+                ],
+                "responses": {}
+            }
+        }
+  
+}

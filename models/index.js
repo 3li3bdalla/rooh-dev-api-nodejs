@@ -1,0 +1,43 @@
+
+
+module.exports = {
+    /*Groups :                    require('./Groups'),
+    Chatroom :                  require('./Chatroom'),*/
+    //Group :                     require('./Group'),
+    //Chat :                      require('./Chat'),
+    Users :                     require('./Users'),
+    UsersTemp :                 require('./UsersTemp'),
+    ServiceCategory :           require('./ServiceCategory'),
+    ProfessionalType :          require('./ProfessionalType'),
+    ProfessionalSpeciality:     require('./ProfessionalSpeciality'),
+    InsuranceCompany :          require('./InsuranceCompany'),
+    Country :                   require('./Country'),
+    ProfessionalFacilities:     require('./ProfessionalFacilities'),
+    Appointment :               require('./Appointment'),
+    Address :                   require('./Address'),
+    Folder :                    require('./Folder'),
+    File :                      require('./Files'),
+    Post :                      require('./Post'),
+    PostComment :               require('./PostComment'),
+    Report :                    require('./Report'),
+    Follow :                    require('./Follow'),
+    Consultation :              require('./Consultation'),
+    PatientAppointmentReport:   require('./PatientAppointmentReport'),
+    CommonServiceType :         require('./CommonServiceType'),
+    //PostTags :                  require('./PostTags'),
+    //TestTable :                 require('./testTable'),
+    PatientLabsReport :         require('./PatientLabsReport'),
+    ApointmentFeedback :        require('./ApointmentFeedback'),
+    Team :                      require('./Teams'),
+    TeamTasks :                 require('./TeamTasks'),
+    Admin :                     require('./Admin'),
+    Notification :              require('./Notification'),
+    Courses :                   require('./Courses'),
+    UserCourses :               require('./UserCourses'),
+    CmeEvents :                 require('./CmeEvents'),
+    PharmacyRequests :          require('./PharmacyRequests'),
+    ScheduledPushNotifications :require('./ScheduledPushNotifications'),
+    Contract:                   require('./ContractTemplate'),
+    Payments:                   require('./Payments')
+};
+

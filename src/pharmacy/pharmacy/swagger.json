@@ -1,0 +1,329 @@
+{ 
+        "/pharmacy/createRequest": {
+            "post": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "createRequest",
+                "tags": [
+                    "Pharmacy"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },
+                    {
+                      "name": "timezone",
+                      "in": "header",
+                      "required": true,
+                      "type": "string",
+                      "enum": [
+                            "Asia/Kolkata"
+                          ]
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "description": "see example below",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "facilityType": {
+                                    "required": true,
+                                    "description": "FacilityType is required",
+                                    "type": "string"
+                                },
+                                "medicationId": {
+                                    "description": "medicationId - OPTIONAL",
+                                    "type": "string"
+                                },
+                                "deliveryType": {
+                                    "required": true,
+                                    "description": "deliveryType is required - [1/2 (1- Home Delivery, 2 - Pickup)]",
+                                    "type": "string"
+                                },
+                                "file": {
+                                    "type": "array",
+                                    "collectionFormat": "multi",
+                                    "items": {
+                                        "type": "object"
+                                    }
+                                },
+                                "address": {
+                                    "required": true,
+                                    "description": "address is required",
+                                    "type": "string"
+                                },
+                                "location": {
+                                    "type": "array",
+                                    "collectionFormat": "multi",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "example": {
+                                "facilityType": "",
+                                "medicationId":"",
+                                "deliveryType": "",
+                                "file": {
+                                    "original" : "",
+                                    "thumbnail" : "",
+                                    "fileName" : ""
+                                },
+                                "address": "",
+                                "location": ["long","lat"]
+                            }
+                        }
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/pharmacy/myList": {
+            "get": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "myList",
+                "tags": [
+                    "Pharmacy"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization token",
+                        "required": true,
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                        ]
+                    },
+                    {
+                      "name": "timezone",
+                      "in": "header",
+                      "required": true,
+                      "type": "string",
+                      "enum": [
+                            "Asia/Kolkata"
+                          ]
+                    },
+                    {
+                        "name": "type",
+                        "in": "query",
+                        "required": true,
+                        "description": "type is required [1/3/4 (1 - requested, 3 - upcoming, 4 - past/completed, 5 -rejected, 6 - completed + rejected )]",
+                        "type": "string",
+                        "value":""
+                    }, 
+                    {
+                        "name": "lastId",
+                        "in": "query",
+                        "description": "lastId is required for pagination only",
+                        "type": "string",
+                        "value":""
+                    }, 
+                    {
+                        "name": "count",
+                        "in": "query",
+                        "description": "count is required for pagination only",
+                        "type": "Number",
+                        "value":""
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/pharmacy/requestList": {
+            "get": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "requestList",
+                "tags": [
+                    "Pharmacy"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization token",
+                        "required": true,
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                        ]
+                    },
+                    {
+                      "name": "timezone",
+                      "in": "header",
+                      "required": true,
+                      "type": "string",
+                      "enum": [
+                            "Asia/Kolkata"
+                          ]
+                    },
+                    {
+                        "name": "type",
+                        "in": "query",
+                        "required": true,
+                        "description": "type is required [1/2/3,4 (1 - new received request, 2 - pending ie acceptance pending on customer end, 3 - open, 4 - delivered)]",
+                        "type": "string",
+                        "value":""
+                    }, 
+                    {
+                        "name": "lastId",
+                        "in": "query",
+                        "description": "lastId is required for pagination only",
+                        "type": "string",
+                        "value":""
+                    }, 
+                    {
+                        "name": "count",
+                        "in": "query",
+                        "description": "count is required for pagination only",
+                        "type": "Number",
+                        "value":""
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/pharmacy/acceptRejectRequest": {
+            "put": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "acceptRejectRequest",
+                "tags": [
+                    "Pharmacy"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization token",
+                        "required": true,
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                        ]
+                    },
+                    {
+                      "name": "timezone",
+                      "in": "header",
+                      "required": true,
+                      "type": "string",
+                      "enum": [
+                            "Asia/Kolkata"
+                          ]
+                    },
+                    {
+                        "name": "requestId",
+                        "in": "formData",
+                        "required": true,
+                        "description": "requestId is required [_id]",
+                        "type": "string",
+                        "value":""
+                    },
+                    {
+                        "name": "type",
+                        "in": "formData",
+                        "required": true,
+                        "description": "type is required [ 1 - if pharmacy is accepting, 2 - if user/beneficiary is accepting, 3 - if pharmacy is rejecting, 4 - if user/beneficiary is rejecting, 5 - mark as complete ]",
+                        "type": "string",
+                        "value":""
+                    },
+                    {
+                        "name": "pharmacyId",
+                        "in": "formData",
+                        "description": "OPTIONAL [required if type - 2 and 4]",
+                        "type": "string",
+                        "value":""
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/pharmacy/requestDetail": {
+            "get": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "requestDetail",
+                "tags": [
+                    "Pharmacy"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization token",
+                        "required": true,
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                        ]
+                    },
+                    {
+                      "name": "timezone",
+                      "in": "header",
+                      "required": true,
+                      "type": "string",
+                      "enum": [
+                            "Asia/Kolkata"
+                          ]
+                    },
+                    {
+                        "name": "requestId",
+                        "in": "query",
+                        "required": true,
+                        "description": "requestId is required",
+                        "type": "string",
+                        "value":""
+                    }
+                ],
+                "responses": {}
+            }
+        }
+}

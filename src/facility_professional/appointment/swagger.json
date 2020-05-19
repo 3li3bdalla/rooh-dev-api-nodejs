@@ -1,0 +1,87 @@
+{
+  "/professional/facility/slots": {
+    "get": {
+      "x-swagger-router-controller": "middleware-name1",
+      "operationId": "get/list professional facilities and avaialable slots",
+      "tags": [
+        "Professional facility APIs"
+      ],
+      "description": "get/list professional facilities and avaialable slots",
+      "parameters": [
+        {
+          "name": "authorization",
+          "in": "header",
+          "required": true,
+          "type": "string",
+          "value": ""
+        }, 
+        {
+            "name": "language",
+            "in": "header",
+            "required": true,                        
+            "type": "string",
+            "enum": [
+                "en",
+                "ar"
+              ]
+        },
+        {
+          "name": "timezone",
+          "in": "header",
+          "required": true,
+          "type": "string",
+          "enum": [
+                "Asia/Kolkata",
+                "Asia/Kolkata"
+              ]
+        },
+        {
+          "name": "type",
+          "in": "query",
+          "description": "appointment is HOME/ONLINE/ONSITE",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "date",
+          "in": "query",
+          "description": "appointment date like 'YYYY-MM-DD'",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "facility",
+          "in": "query",
+          "description": "clinics or hospital id when required slots in case of professional facility",
+          "type": "string"
+        },
+        {
+          "name": "professional",
+          "in": "query",
+          "description": "professional/doctor id",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "lat",
+          "in": "query",
+          "description": "user location lattitude during professional facility list",
+          "type": "number"
+        },
+        {
+          "name": "long",
+          "in": "query",
+          "description": "user location longitute during professional facility list",
+          "type": "number"
+        },
+        {
+          "name": "timeZone",
+          "in": "query",
+          "description": "timeZone",
+          "type": "string"
+        }
+      ],
+      "responses": {}
+    }
+  }
+}

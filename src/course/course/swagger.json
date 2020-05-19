@@ -1,0 +1,238 @@
+{    
+    "/course/listCourses": {
+        "get": {
+            "x-swagger-router-controller": "middleware-name1",
+            "operationId": "listCourses",
+            "tags": [
+                "Courses"
+            ],
+            "description": "",
+            "parameters": [
+                {
+                    "name": "authorization",
+                    "in": "header",
+                    "description": "authorization token",
+                    "required": true,
+                    "value": ""
+                },{
+                    "name": "language",
+                    "in": "header",
+                    "required": true,                        
+                    "type": "string",
+                    "enum": [
+                        "en",
+                        "ar"
+                    ]
+                },{
+                    "name": "category",
+                    "in": "query",
+                    "description": "OPTIONAL - 1,2,3 [1 - Audio, 2 - Video, 3 - Text]",
+                    "type": "string",
+                    "value":""
+                },{
+                    "name": "searchUser",
+                    "in": "query",
+                    "description": "search user by title",
+                    "type": "string",
+                    "value":""
+                },{
+                    "name": "lastId",
+                    "in": "query",
+                    "description": "lastId is required for pagination only",
+                    "type": "string",
+                    "value":""
+                },{
+                    "name": "count",
+                    "in": "query",
+                    "description": "count is required for pagination only",
+                    "type": "Number",
+                    "value":""
+                }
+            ],
+            "responses": {}
+        }
+    },
+    "/course/courseDetail": {
+        "get": {
+            "x-swagger-router-controller": "middleware-name1",
+            "operationId": "courseDetail",
+            "tags": [
+                "Courses"
+            ],
+            "description": "",
+            "parameters": [
+                {
+                    "name": "authorization",
+                    "in": "header",
+                    "description": "authorization token",
+                    "required": true,
+                    "value": ""
+                },
+                {
+                    "name": "language",
+                    "in": "header",
+                    "required": true,                        
+                    "type": "string",
+                    "enum": [
+                        "en",
+                        "ar"
+                    ]
+                },
+                {
+                    "name": "id",
+                    "in": "query",
+                    "description": "id is required - [course id]",
+                    "required": true,
+                    "type": "string",
+                    "value": ""
+                }
+            ],
+            "responses": {}
+        }
+    },
+    "/course/cmeList": {
+        "get": {
+            "x-swagger-router-controller": "middleware-name1",
+            "operationId": "cmeList",
+            "tags": [
+                "Courses"
+            ],
+            "description": "",
+            "parameters": [
+                {
+                    "name": "authorization",
+                    "in": "header",
+                    "description": "authorization token",
+                    "required": true,
+                    "value": ""
+                },
+                {
+                    "name": "language",
+                    "in": "header",
+                    "required": true,                        
+                    "type": "string",
+                    "enum": [
+                        "en",
+                        "ar"
+                    ]
+                },
+                {
+                    "name": "type",
+                    "in": "query",
+                    "description": "type is required - [1 - events list, 2 - event organisers list]",
+                    "required": true,
+                    "type": "string",
+                    "value": ""
+                }, {
+                    "name": "searchUser",
+                    "in": "query",
+                    "description": "search user by title",
+                    "type": "string",
+                    "value":""
+                }, {
+                    "name": "lastId",
+                    "in": "query",
+                    "description": "lastId is required for pagination only",
+                    "type": "string",
+                    "value":""
+                }, {
+                    "name": "count",
+                    "in": "query",
+                    "description": "count is required for pagination only",
+                    "type": "Number",
+                    "value":""
+                }
+            ],
+            "responses": {}
+        }
+    },
+    "/course/buyCourse": {
+        "post": {
+            "x-swagger-router-controller": "middleware-name1",
+            "operationId": "buyCourse",
+            "tags": [
+                "Courses"
+            ],
+            "description": "buy a course",
+            "parameters": [
+                {
+                    "name": "authorization",
+                    "in": "header",
+                    "description": "authorization is required",
+                    "required": true,
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "language",
+                    "in": "header",
+                    "required": true,
+                    "type": "string",
+                    "enum": [
+                        "en",
+                        "ar"
+                      ]
+                },
+                {
+                    "name": "courseId",
+                    "in": "formData",
+                    "required": true,
+                    "description": "courseId is required",
+                    "type": "string",
+                    "value": ""
+                }
+            ],
+            "responses": {}
+        }
+    },
+    "/course/myCourses": {
+        "get": {
+            "x-swagger-router-controller": "middleware-name1",
+            "operationId": "myCourses",
+            "tags": [
+                "Courses"
+            ],
+            "description": "",
+            "parameters": [
+                {
+                    "name": "authorization",
+                    "in": "header",
+                    "description": "authorization token",
+                    "required": true,
+                    "value": ""
+                },
+                {
+                    "name": "language",
+                    "in": "header",
+                    "required": true,                        
+                    "type": "string",
+                    "enum": [
+                        "en",
+                        "ar"
+                    ]
+                },
+                {
+                    "name": "type",
+                    "in": "query",
+                    "description": "type is required - [1 - archived couses list, 2 - completed courses list]",
+                    "required": true,
+                    "type": "string",
+                    "value": ""
+                }, {
+                    "name": "lastId",
+                    "in": "query",
+                    "description": "lastId is required for pagination only",
+                    "type": "string",
+                    "value":""
+                }, {
+                    "name": "count",
+                    "in": "query",
+                    "description": "count is required for pagination only",
+                    "type": "Number",
+                    "value":""
+                }
+            ],
+            "responses": {}
+        }
+    }
+}

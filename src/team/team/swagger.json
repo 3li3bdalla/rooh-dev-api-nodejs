@@ -1,0 +1,907 @@
+{
+    "/team/getEContractTemplates": {
+        "get": {
+            "x-swagger-router-controller": "middleware-name1",
+            "operationId": "getEContractTemplates",
+            "tags": [
+                "Team"
+            ],
+            "description": "",
+            "parameters": [
+                {
+                    "name": "authorization",
+                    "in": "header",
+                    "description": "authorization token",
+                    "required": true,
+                    "value": ""
+                },
+                {
+                    "name": "language",
+                    "in": "header",
+                    "required": true,
+                    "type": "string",
+                    "enum": [
+                        "en",
+                        "ar"
+                      ]
+                }
+            ],
+            "responses": {}
+        }
+    },
+    "/team/getEContractServices": {
+        "get": {
+            "x-swagger-router-controller": "middleware-name1",
+            "operationId": "getEContractServices",
+            "tags": [
+                "Team"
+            ],
+            "description": "",
+            "parameters": [
+                {
+                    "name": "authorization",
+                    "in": "header",
+                    "description": "authorization token",
+                    "required": true,
+                    "value": ""
+                },
+                {
+                    "name": "language",
+                    "in": "header",
+                    "required": true,
+                    "type": "string",
+                    "enum": [
+                        "en",
+                        "ar"
+                      ]
+                }
+            ],
+            "responses": {}
+        }
+    },
+    "/team/viewContract": {
+        "get": {
+            "x-swagger-router-controller": "middleware-name1",
+            "operationId": "viewContract",
+            "tags": [
+                "Team"
+            ],
+            "description": "",
+            "parameters": [
+                {
+                    "name": "authorization",
+                    "in": "header",
+                    "description": "authorization token",
+                    "required": true,
+                    "value": ""
+                },
+                {
+                    "name": "language",
+                    "in": "header",
+                    "required": true,
+                    "type": "string",
+                    "enum": [
+                        "en",
+                        "ar"
+                    ]
+                },
+                {
+                    "name": "type",
+                    "in": "query",
+                    "description": "type is required - [1 - template, 2 - agreement/contract/saved template while hiring]",
+                    "required": true,
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "id",
+                    "in": "query",
+                    "description": "id is required - [templateId if type is '1', getSingleTeamMemberId/contractid/agreementId if type is '2' ]",
+                    "required": true,
+                    "type": "string",
+                    "value": ""
+                }
+            ],
+            "responses": {}
+        }
+    },
+    "/team/hireProfessional": {
+        "post": {
+            "x-swagger-router-controller": "middleware-name1",
+            "operationId": "hireProfessional",
+            "tags": [
+                "Team"
+            ],
+            "description": "",
+            "parameters": [
+                {
+                    "name": "authorization",
+                    "in": "header",
+                    "description": "authorization token",
+                    "required": true,
+                    "value": ""
+                },
+                {
+                    "name": "language",
+                    "in": "header",
+                    "required": true,
+                    "type": "string",
+                    "enum": [
+                        "en",
+                        "ar"
+                      ]
+                },
+                {
+                    "name": "professionalId",
+                    "in": "formData",
+                    "description": "professionalId is required",
+                    "required": true,
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "startDate",
+                    "in": "formData",
+                    "description": "startDate is required",
+                    "required": true,
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "endDate",
+                    "in": "formData",
+                    "description": "endDate is required",
+                    "required": true,
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "startTime",
+                    "in": "formData",
+                    "description": "startTime",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "endTime",
+                    "in": "formData",
+                    "description": "endTime",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "templateId",
+                    "in": "formData",
+                    "description": "templateId",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "workingHours",
+                    "in": "formData",
+                    "description": "workingHours is required",
+                    "required": true,
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "shift",
+                    "in": "formData",
+                    "description": "shift is required",
+                    "required": true,
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "services",
+                    "in": "formData",
+                    "description": "services",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "workingDays",
+                    "in": "formData",
+                    "description": "workingDays is required",
+                    "required": true,
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "description",
+                    "in": "formData",
+                    "description": "description is required",
+                    "required": true,
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "termConditions",
+                    "in": "formData",
+                    "description": "termConditions is required",
+                    "required": true,
+                    "type": "string",
+                    "value": ""
+                }
+            ],
+            "responses": {}
+        }
+    },
+    "/team/approveHiring": {
+        "put": {
+            "x-swagger-router-controller": "middleware-name1",
+            "operationId": "approveHiring",
+            "tags": [
+                "Team"
+            ],
+            "description": "",
+            "parameters": [
+                {
+                    "name": "authorization",
+                    "in": "header",
+                    "description": "authorization token",
+                    "required": true,
+                    "value": ""
+                },
+                {
+                    "name": "language",
+                    "in": "header",
+                    "required": true,
+                    "type": "string",
+                    "enum": [
+                        "en",
+                        "ar"
+                      ]
+                },
+                {
+                    "name": "body",
+                    "in": "body",
+                    "required": true,
+                    "description": "see example below",
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "required": true,
+                                "description": "id is required",
+                                "type": "string"
+                            },
+                            "status": {
+                                "required": true,
+                                "description": "status is required - [1 - Pending requests list, 2 -  requests accepted by professionals list, 3 - Approved team members list]",
+                                "type": "string"
+                            },
+                            "signature": {
+                                "type": "array",
+                                "collectionFormat": "multi",
+                                "items": {
+                                    "type": "object"
+                                }
+                            }
+
+                        },
+                        "example": {
+                            "id": "",
+                            "status": "",
+                            "signature":{
+                                "original" : "",
+                                "thumbnail" : ""
+                            }
+                        }
+                    }
+                }
+            ],
+            "responses": {}
+        }
+    },
+    "/team/cancelContract": {
+        "put": {
+            "x-swagger-router-controller": "middleware-name1",
+            "operationId": "cancelContract",
+            "tags": [
+                "Team"
+            ],
+            "description": "",
+            "parameters": [
+                {
+                    "name": "authorization",
+                    "in": "header",
+                    "description": "authorization token",
+                    "required": true,
+                    "value": ""
+                },
+                {
+                    "name": "language",
+                    "in": "header",
+                    "required": true,
+                    "type": "string",
+                    "enum": [
+                        "en",
+                        "ar"
+                    ]
+                },
+                {
+                    "name": "id",
+                    "in": "query",
+                    "description": "id is required - SingleTeamMemberId/contractid/agreementId",
+                    "required": true,
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "cancelDescription",
+                    "in": "query",
+                    "description": "cancelDescription is required - description on cancellation of contract",
+                    "required": true,
+                    "type": "string",
+                    "value": ""
+                }
+            ],
+            "responses": {}
+        }
+    },
+    
+    "/team/editContract": {
+        "put": {
+            "x-swagger-router-controller": "middleware-name1",
+            "operationId": "editContract",
+            "tags": [
+                "Team"
+            ],
+            "description": "",
+            "parameters": [
+                {
+                    "name": "authorization",
+                    "in": "header",
+                    "description": "authorization token",
+                    "required": true,
+                    "value": ""
+                },
+                {
+                    "name": "language",
+                    "in": "header",
+                    "required": true,
+                    "type": "string",
+                    "enum": [
+                        "en",
+                        "ar"
+                    ]
+                },
+                {
+                    "name": "id",
+                    "in": "formData",
+                    "description": "id is required - SingleTeamMemberId/contractid/agreementId",
+                    "required": true,
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "startDate",
+                    "in": "formData",
+                    "description": "startDate is required",
+                    "required": true,
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "endDate",
+                    "in": "formData",
+                    "description": "endDate is required",
+                    "required": true,
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "startTime",
+                    "in": "formData",
+                    "description": "startTime",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "endTime",
+                    "in": "formData",
+                    "description": "endTime",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "workingHours",
+                    "in": "formData",
+                    "description": "workingHours is required",
+                    "required": true,
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "shift",
+                    "in": "formData",
+                    "description": "shift is required",
+                    "required": true,
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "services",
+                    "in": "formData",
+                    "description": "services",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "workingDays",
+                    "in": "formData",
+                    "description": "workingDays is required",
+                    "required": true,
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "description",
+                    "in": "formData",
+                    "description": "description is required",
+                    "required": true,
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "termConditions",
+                    "in": "formData",
+                    "description": "termConditions is required",
+                    "required": true,
+                    "type": "string",
+                    "value": ""
+                }
+
+            ],
+            "responses": {}
+        }
+    },
+    "/team/getTeam": {
+        "get": {
+            "x-swagger-router-controller": "middleware-name1",
+            "operationId": "getTeam",
+            "tags": [
+                "Team"
+            ],
+            "description": "",
+            "parameters": [
+                {
+                    "name": "authorization",
+                    "in": "header",
+                    "description": "authorization token",
+                    "required": true,
+                    "value": ""
+                },
+                {
+                    "name": "language",
+                    "in": "header",
+                    "required": true,
+                    "type": "string",
+                    "enum": [
+                        "en",
+                        "ar"
+                      ]
+                },
+                {
+                    "name": "status",
+                    "in": "query",
+                    "description": "status is required - [1 - Pending requests list, 2 -  requests accepted by professionals list, 3 - Approved team members list, 4 - Pending and Request accepted (combined) list(status 1 and 2)]",
+                    "required": true,
+                    "type": "string",
+                    "value": ""
+                }, {
+                    "name": "lastId",
+                    "in": "query",
+                    "description": "lastId is required for pagination only",
+                    "type": "string",
+                    "value":""
+                }, {
+                    "name": "count",
+                    "in": "query",
+                    "description": "count is required for pagination only",
+                    "type": "Number",
+                    "value":""
+                }, {
+                    "name": "keyword",
+                    "in": "query",
+                    "description": "OPTIONAL [search team by professional's name]",
+                    "type": "Number",
+                    "value":""
+                }
+            ],
+            "responses": {}
+        }
+    },
+    "/team/getSingleTeamMember": {
+        "get": {
+            "x-swagger-router-controller": "middleware-name1",
+            "operationId": "getSingleTeamMember",
+            "tags": [
+                "Team"
+            ],
+            "description": "",
+            "parameters": [
+                {
+                    "name": "authorization",
+                    "in": "header",
+                    "description": "authorization token",
+                    "required": true,
+                    "value": ""
+                },
+                {
+                    "name": "language",
+                    "in": "header",
+                    "required": true,
+                    "type": "string",
+                    "enum": [
+                        "en",
+                        "ar"
+                      ]
+                },{
+                    "name": "id",
+                    "in": "query",
+                    "description": "id is required - [single hired team id]",
+                    "type": "string",
+                    "value":""
+                }
+            ],
+            "responses": {}
+        }
+    },
+    "/team/createTask": {
+        "post": {
+            "x-swagger-router-controller": "middleware-name1",
+            "operationId": "createTask",
+            "tags": [
+                "Team"
+            ],
+            "description": "",
+            "parameters": [
+                {
+                    "name": "authorization",
+                    "in": "header",
+                    "description": "authorization token",
+                    "required": true,
+                    "value": ""
+                },
+                {
+                    "name": "language",
+                    "in": "header",
+                    "required": true,
+                    "type": "string",
+                    "enum": [
+                        "en",
+                        "ar"
+                      ]
+                },
+                {
+                    "name": "patientId",
+                    "in": "formData",
+                    "description": "patientId is required",
+                    "required": true,
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "facilityId",
+                    "in": "formData",
+                    "description": "facilityId is required",
+                    "required": true,
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "professionalId",
+                    "in": "formData",
+                    "description": "professionalId is required",
+                    "required": true,
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "taskType",
+                    "in": "formData",
+                    "description": "Task type id is required",
+                    "required": true,
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "description",
+                    "in": "formData",
+                    "description": "Task description",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "duration",
+                    "in": "formData",
+                    "description": "duration is required",
+                    "required": true,
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "date",
+                    "in": "formData",
+                    "description": "date is required",
+                    "required": true,
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "time",
+                    "in": "formData",
+                    "description": "time is required",
+                    "required": true,
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "location",
+                    "in": "formData",
+                    "description": "location is required [long,lat]",
+                    "required": true,
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "address",
+                    "in": "formData",
+                    "description": "address is required",
+                    "required": true,
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "fees",
+                    "in": "formData",
+                    "description": "fees is required",
+                    "required": true,
+                    "type": "string",
+                    "value": ""
+                }
+            ],
+            "responses": {}
+        }
+    },
+    "/team/myTasks": {
+        "get": {
+            "x-swagger-router-controller": "middleware-name1",
+            "operationId": "myTasks",
+            "tags": [
+                "Team"
+            ],
+            "description": "",
+            "parameters": [
+                {
+                    "name": "authorization",
+                    "in": "header",
+                    "description": "authorization token",
+                    "required": true,
+                    "value": ""
+                },
+                {
+                    "name": "language",
+                    "in": "header",
+                    "required": true,
+                    "type": "string",
+                    "enum": [
+                        "en",
+                        "ar"
+                      ]
+                },
+                {
+                    "name": "type",
+                    "in": "query",
+                    "description": "type is required - [ 1 - Pending tasks, 2 - accepted tasks, 3 - rejected tasks, 4 - completed tasks, 5 - rejected and completed tasks]",
+                    "required": true,
+                    "type": "string",
+                    "value": ""
+                }, {
+                    "name": "lastId",
+                    "in": "query",
+                    "description": "lastId is required for pagination only",
+                    "type": "string",
+                    "value":""
+                }, {
+                    "name": "count",
+                    "in": "query",
+                    "description": "count is required for pagination only",
+                    "type": "Number",
+                    "value":""
+                }, {
+                    "name": "taskType",
+                    "in": "query",
+                    "description": "OPTIONAL [filter list by taskType]",
+                    "type": "Number",
+                    "value":""
+                }, {
+                    "name": "sortBy",
+                    "in": "query",
+                    "description": "OPTIONAL [0 - min, 1 - max]",
+                    "type": "Number",
+                    "value":""
+                }
+            ],
+            "responses": {}
+        }
+    },
+    "/team/myTeamTasks": {
+        "get": {
+            "x-swagger-router-controller": "middleware-name1",
+            "operationId": "myTeamTasks",
+            "tags": [
+                "Team"
+            ],
+            "description": "",
+            "parameters": [
+                {
+                    "name": "authorization",
+                    "in": "header",
+                    "description": "authorization token",
+                    "required": true,
+                    "value": ""
+                },
+                {
+                    "name": "language",
+                    "in": "header",
+                    "required": true,
+                    "type": "string",
+                    "enum": [
+                        "en",
+                        "ar"
+                      ]
+                },
+                {
+                    "name": "type",
+                    "in": "query",
+                    "description": "type is required - [ 1 - Pending tasks, 2 - accepted tasks, 3 - rejected tasks, 4 - completed tasks, 5 - rejected and completed tasks]",
+                    "required": true,
+                    "type": "string",
+                    "value": ""
+                }, {
+                    "name": "lastId",
+                    "in": "query",
+                    "description": "lastId is required for pagination only",
+                    "type": "string",
+                    "value":""
+                }, {
+                    "name": "count",
+                    "in": "query",
+                    "description": "count is required for pagination only",
+                    "type": "Number",
+                    "value":""
+                }, {
+                    "name": "taskType",
+                    "in": "query",
+                    "description": "OPTIONAL [filter list by taskType]",
+                    "type": "Number",
+                    "value":""
+                }, {
+                    "name": "sortBy",
+                    "in": "query",
+                    "description": "OPTIONAL [0 - min, 1 - max]",
+                    "type": "Number",
+                    "value":""
+                }
+            ],
+            "responses": {}
+        }
+    },
+    "/team/taskTypes": {
+        "get": {
+            "x-swagger-router-controller": "middleware-name1",
+            "operationId": "taskTypes",
+            "tags": [
+                "Team"
+            ],
+            "description": "",
+            "parameters": [
+                {
+                    "name": "authorization",
+                    "in": "header",
+                    "description": "authorization token",
+                    "required": true,
+                    "value": ""
+                },
+                {
+                    "name": "language",
+                    "in": "header",
+                    "required": true,
+                    "type": "string",
+                    "enum": [
+                        "en",
+                        "ar"
+                      ]
+                }
+            ],
+            "responses": {}
+        }
+    },
+    "/team/acceptRejectTask": {
+        "put": {
+            "x-swagger-router-controller": "middleware-name1",
+            "operationId": "acceptRejectTask",
+            "tags": [
+                "Team"
+            ],
+            "description": "",
+            "parameters": [
+                {
+                    "name": "authorization",
+                    "in": "header",
+                    "description": "authorization token",
+                    "required": true,
+                    "value": ""
+                },
+                {
+                    "name": "language",
+                    "in": "header",
+                    "required": true,
+                    "type": "string",
+                    "enum": [
+                        "en",
+                        "ar"
+                      ]
+                },
+                {
+                    "name": "taskId",
+                    "in": "formData",
+                    "description": "taskId is required",
+                    "required": true,
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "action",
+                    "in": "formData",
+                    "description": "action  is required -  [2 - accept, 3 - reject, 4 - complete]",
+                    "required": true,
+                    "type": "string",
+                    "value": ""
+                }
+            ],
+            "responses": {}
+        }
+    },
+    "/team/taskDetails": {
+        "get": {
+            "x-swagger-router-controller": "middleware-name1",
+            "operationId": "taskDetails",
+            "tags": [
+                "Team"
+            ],
+            "description": "",
+            "parameters": [
+                {
+                    "name": "authorization",
+                    "in": "header",
+                    "description": "authorization token",
+                    "required": true,
+                    "value": ""
+                },
+                {
+                    "name": "language",
+                    "in": "header",
+                    "required": true,
+                    "type": "string",
+                    "enum": [
+                        "en",
+                        "ar"
+                      ]
+                },
+                {
+                    "name": "taskId",
+                    "in": "query",
+                    "description": "taskId is required",
+                    "required": true,
+                    "type": "string",
+                    "value": ""
+                }
+            ],
+            "responses": {}
+        }
+    }
+}

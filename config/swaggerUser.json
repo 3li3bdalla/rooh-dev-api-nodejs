@@ -1,0 +1,3936 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "CSF Healthcare",
+        "description": "CSF Healthcare api documentation for users",
+        "version": "1.0"
+    },
+    "produces": [
+        "application/json"
+    ],
+    "host": "192.168.102.76:3002",
+    "basePath": "",
+    "paths": {
+
+        "/auth-api/testEncryption": {
+            "post": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "testEncryption",
+                "tags": [
+                    "1 User Auth APIs"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },
+                    {
+                        "name": "facebookId",
+                        "in": "formData",
+                        "description": "facebookId is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "role",
+                        "in": "formData",
+                        "description": "role is required [USER/PROFESSIONAL]",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/auth-api/registerUser": {
+            "post": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "registerUser",
+                "tags": [
+                    "1 User Auth APIs"
+                ],
+                "description": "Registration step number 1",
+                "parameters": [
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },
+                    {
+                        "name": "name",
+                        "in": "formData",
+                        "required": true,
+                        "description": "Full Name",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "email",
+                        "in": "formData",
+                        "description": "Email (Optional)",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "phone",
+                        "in": "formData",
+                        "required": true,
+                        "description": "Phone number is required",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "password",
+                        "required": true,
+                        "in": "formData",
+                        "description": "Password is required",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "countryCode",
+                        "in": "formData",
+                        "description": "countryCode is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "deviceType",
+                        "in": "formData",
+                        "description": "",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "deviceToken",
+                        "in": "formData",
+                        "description": "",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "role",
+                        "in": "formData",
+                        "description": "role is required - [ USER/PROFESSIONAL/FACILITY]",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    }
+                ],
+                "responses": {}
+            }
+        },
+
+        "/auth-api/verifyOtp": {
+            "post": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "verifyOtp",
+                "tags": [
+                    "1 User Auth APIs"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },
+                    {
+                        "name": "userId",
+                        "in": "formData",
+                        "description": "UserId is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "otp",
+                        "in": "formData",
+                        "description": "otp is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "phone",
+                        "in": "formData",
+                        "description": "phone is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "merge",
+                        "in": "formData",
+                        "description": "(OPTIONAL)",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "facebookId",
+                        "in": "formData",
+                        "description": "(OPTIONAL))",
+                        "type": "string",
+                        "value": ""
+                    }
+                ],
+                "responses": {}
+            }
+        },
+
+        "/auth-api/userLogin": {
+            "post": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "userLogin",
+                "tags": [
+                    "1 User Auth APIs"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },
+                    {
+                        "name": "phone",
+                        "in": "formData",
+                        "description": "phoneNumber is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "countryCode",
+                        "in": "formData",
+                        "description": "countryCode is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "password",
+                        "in": "formData",
+                        "description": "password is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "deviceType",
+                        "in": "formData",
+                        "description": "deviceType is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "deviceToken",
+                        "in": "formData",
+                        "description": "deviceToken is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/auth-api/socialLogin": {
+            "post": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "socialLogin",
+                "tags": [
+                    "1 User Auth APIs"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },
+                    {
+                        "name": "facebookId",
+                        "in": "formData",
+                        "description": "facebookId is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "name",
+                        "in": "formData",
+                        "description": "(OPTIONAL)",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "countryCode",
+                        "in": "formData",
+                        "description": "(OPTIONAL if user is logging in) (REQUIRED if user is getting registered)",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "phone",
+                        "in": "formData",
+                        "description": "(OPTIONAL if user is logging in) (REQUIRED if user is getting registered)",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "role",
+                        "in": "formData",
+                        "description": "(OPTIONAL if user is logging in) (REQUIRED if user is getting registered)",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "deviceType",
+                        "in": "formData",
+                        "description": "",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "deviceToken",
+                        "in": "formData",
+                        "description": "",
+                        "type": "string",
+                        "value": ""
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/auth-api/socialLoginMerge": {
+            "post": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "socialLoginMerge",
+                "tags": [
+                    "1 User Auth APIs"
+                ],
+                "description": "merge by phone number",
+                "parameters": [
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },
+                    {
+                        "name": "userId",
+                        "in": "formData",
+                        "description": "userId is required (userId received from socialLogin API)",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "countryCode",
+                        "in": "formData",
+                        "description": "countryCode is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "phone",
+                        "in": "formData",
+                        "description": "phone is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "facebookId",
+                        "in": "formData",
+                        "description": "facebookId is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "role",
+                        "in": "formData",
+                        "description": "role is required [USER/PROFESSIONAL/FACILITY]",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/auth-api/facebookLoginMerge": {
+            "post": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "facebookLoginMerge",
+                "tags": [
+                    "1 User Auth APIs"
+                ],
+                "description": "merge by facebook id",
+                "parameters": [
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },
+                    {
+                        "name": "facebookId",
+                        "in": "formData",
+                        "description": "facebookId is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "role",
+                        "in": "formData",
+                        "description": "role is required [USER/PROFESSIONAL]",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/auth-api/resendOtp": {
+            "post": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "resendOtp",
+                "tags": [
+                    "1 User Auth APIs"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },
+                    {
+                        "name": "countryCode",
+                        "in": "formData",
+                        "description": "Country Code is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "phone",
+                        "in": "formData",
+                        "description": "Phone is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    }
+                ],
+                "responses": {}
+            }
+        },
+
+        "/auth-api/forgotPassword": {
+            "post": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "forgotPassword",
+                "tags": [
+                    "1 User Auth APIs"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },
+                    {
+                        "name": "countryCode",
+                        "in": "formData",
+                        "description": "Country Code is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "phone",
+                        "in": "formData",
+                        "description": "Phone is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    }
+                ],
+                "responses": {}
+            }
+        },
+
+        "/auth-api/updatePassword": {
+            "post": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "updatePassword",
+                "tags": [
+                    "1 User Auth APIs"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },
+                    {
+                        "name": "phone",
+                        "in": "formData",
+                        "description": "phone is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "countryCode",
+                        "in": "formData",
+                        "description": "countryCode is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "otp",
+                        "in": "formData",
+                        "description": "otp is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "password",
+                        "in": "formData",
+                        "description": "password is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/auth-api/appVersioning": {
+            "get": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "appVersioning",
+                "tags": [
+                    "1 User Auth APIs"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },{
+                        "name": "deviceType",
+                        "in": "query",
+                        "description": "",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },{
+                        "name": "appVersion",
+                        "in": "query",
+                        "description": "",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    }
+                ],
+                "responses": {}
+            }
+        },
+
+        "/api/updateProfile": {
+            "post": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "updateProfile",
+                "tags": [
+                    "2 User APIs"
+                ],
+                "description": "Registration step number 2",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },
+                    {
+                        "name": "email",
+                        "in": "formData",
+                        "required": true,
+                        "description": "Email address ",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "currency",
+                        "in": "formData",
+                        "required": true,
+                        "description": "Currency is required ",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "dob",
+                        "in": "formData",
+                        "required": true,
+                        "description": "dob is required",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "location",
+                        "in": "formData",
+                        "description": "[long,lat]",
+                        "type": "string",
+                        "value": "[0,0]"
+                    },
+                    {
+                        "name": "haveInsurance",
+                        "in": "formData",
+                        "required": true,
+                        "description": "haveInsurance is required",
+                        "type": "boolean",
+                        "value": ""
+                    },
+                    {
+                        "name": "insuranceCompany",
+                        "in": "formData",
+                        "description": "insuranceCompany name is required",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "policyNumber",
+                        "in": "formData",
+                        "description": "policyNumber is required",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "deviceType",
+                        "in": "formData",
+                        "description": "deviceType is required",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "deviceToken",
+                        "in": "formData",
+                        "description": "deviceToken is required",
+                        "type": "string",
+                        "value": ""
+                    }
+                ],
+                "responses": {}
+            }
+        },
+
+        "/api/updateProfessionalProfile?s=1": {
+            "post": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "updateProfile1",
+                "tags": [
+                    "2 User APIs"
+                ],
+                "description": "Registration step number 2",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },
+                    {
+                        "name": "step",
+                        "in": "formData",
+                        "required": true,
+                        "description": "",
+                        "type": "string",
+                        "value": "1"
+                    },
+                    {
+                        "name": "profilePic",
+                        "in": "formData",
+                        "description": "",
+                        "type": "object",
+                        "value": "{'original' : '', 'thumbnail' : '', 'fileName': '', 'type': ''}"
+                    },
+                    {
+                        "name": "originalProfilePic",
+                        "in": "formData",
+                        "description": "Profile Image original",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "thumbnailProfilePic",
+                        "in": "formData",
+                        "description": "Profile Image thumbnail",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "serviceCategory",
+                        "in": "formData",
+                        "required": true,
+                        "description": "Service Category ",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "professionalSpeciality",
+                        "in": "formData",
+                        "required": true,
+                        "description": "Professional Speciality ",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "professionalSubSpeciality",
+                        "in": "formData",
+                        "description": "Professional Sub Speciality [Add multiple ids using double quotes]",
+                        "type": "object",
+                        "value": "[]"
+                    },
+                    {
+                        "name": "professionalType",
+                        "in": "formData",
+                        "required": true,
+                        "description": "Professional Type",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "license",
+                        "in": "formData",
+                        "description": "License number",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "licenseImage",
+                        "in": "formData",
+                        "description": "",
+                        "type": "object",
+                        "value": "{'original' : '', 'thumbnail' : '', 'fileName': '', 'type': ''}"
+                    },
+                    {
+                        "name": "originalLicenseImage",
+                        "in": "formData",
+                        "description": "license Image original",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "thumbnailLicenseImage",
+                        "in": "formData",
+                        "description": "license Image thumbnail",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "location",
+                        "in": "formData",
+                        "description": "[long,lat]",
+                        "type": "string",
+                        "value": "[0,0]"
+                    },
+                    {
+                        "name": "skillDescription",
+                        "in": "formData",
+                        "description": "Skill Description",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "deviceType",
+                        "in": "formData",
+                        "description": "deviceType is required",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "deviceToken",
+                        "in": "formData",
+                        "description": "deviceToken is required",
+                        "type": "string",
+                        "value": ""
+                    }
+                ],
+                "responses": {}
+            }
+        },
+
+        "/api/updateProfessionalProfile?s=2": {
+            "post": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "updateProfile2",
+                "tags": [
+                    "2 User APIs"
+                ],
+                "description": "Registration step number 2",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },
+                    {
+                        "name": "step",
+                        "in": "formData",
+                        "required": true,
+                        "description": "",
+                        "type": "string",
+                        "value": "2"
+                    },
+                    {
+                        "name": "country",
+                        "in": "formData",
+                        "required": true,
+                        "description": "Country",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "city",
+                        "in": "formData",
+                        "required": true,
+                        "description": "City",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "expertise",
+                        "in": "formData",
+                        "description": "expertise",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "image",
+                        "in": "formData",
+                        "description": "Professional Image",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "video",
+                        "in": "formData",
+                        "description": "Professional Video",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "deviceType",
+                        "in": "formData",
+                        "description": "deviceType is required",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "deviceToken",
+                        "in": "formData",
+                        "description": "deviceToken is required",
+                        "type": "string",
+                        "value": ""
+                    }
+                ],
+                "responses": {}
+            }
+        },
+
+        "/api/updateFacilityProfile?s=1": {
+            "post": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "updateFacilityProfile1",
+                "tags": [
+                    "2 User APIs"
+                ],
+                "description": "Registration step number 2",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },
+                    {
+                        "name": "step",
+                        "in": "formData",
+                        "required": true,
+                        "description": "",
+                        "type": "string",
+                        "value": "1"
+                    },
+                    {
+                        "name": "serviceCategory",
+                        "in": "formData",
+                        "description": "Service Category",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "facilityType",
+                        "in": "formData",
+                        "description": "Facility Type - These are speicalities",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "profilePic",
+                        "in": "formData",
+                        "description": "profilePic",
+                        "type": "object",
+                        "value": "{'original' : '', 'thumbnail' : '', fileName: '', type: ''}"
+                    },
+                    {
+                        "name": "originalLogoImage",
+                        "in": "formData",
+                        "description": "Logo Image original",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "thumbnailLogoImage",
+                        "in": "formData",
+                        "description": "Logo Image thumbnail",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "address",
+                        "in": "formData",
+                        "description": "address",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "location",
+                        "in": "formData",
+                        "description": "[long,lat]",
+                        "type": "string",
+                        "value": "[0,0]"
+                    },
+                    {
+                        "name": "registrationNumber",
+                        "in": "formData",
+                        "description": "registration Number",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "originalRegistrationImage",
+                        "in": "formData",
+                        "description": "Registration Image original",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "thumbnailRegistrationImage",
+                        "in": "formData",
+                        "description": "Registration Image thumbnail",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "description",
+                        "in": "formData",
+                        "description": "Description",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "deviceType",
+                        "in": "formData",
+                        "description": "deviceType is required",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "deviceToken",
+                        "in": "formData",
+                        "description": "deviceToken is required",
+                        "type": "string",
+                        "value": ""
+                    }
+                ],
+                "responses": {}
+            }
+        },
+
+        "/api/updateFacilityProfile?s=2": {
+            "post": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "updateFacilityProfile2",
+                "tags": [
+                    "2 User APIs"
+                ],
+                "description": "Registration step number 2",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },
+                    {
+                        "name": "step",
+                        "in": "formData",
+                        "required": true,
+                        "description": "",
+                        "type": "string",
+                        "value": "2"
+                    },
+
+                    {
+                        "name": "isWholeWeekWorking",
+                        "in": "formData",
+                        "description": "isWholeWeekWorking is required",
+                        "required": true,
+                        "type": "boolean",
+                        "value": "false"
+                    },
+
+                    {
+                        "name": "workingHours",
+                        "in": "formData",
+                        "description": "Working hours",
+                        "type": "object",
+                        "value": ""
+                    },
+                    {
+                        "name": "deviceType",
+                        "in": "formData",
+                        "description": "deviceType is required",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "deviceToken",
+                        "in": "formData",
+                        "description": "deviceToken is required",
+                        "type": "string",
+                        "value": ""
+                    }
+                ],
+                "responses": {}
+            }
+        },
+
+        "/api/updateFacilityProfile?s=3": {
+            "post": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "updateFacilityProfile3",
+                "tags": [
+                    "2 User APIs"
+                ],
+                "description": "Registration step number 2",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },
+                    {
+                        "name": "step",
+                        "in": "formData",
+                        "required": true,
+                        "description": "",
+                        "type": "string",
+                        "value": "3"
+                    },
+                    {
+                        "name": "services",
+                        "in": "formData",
+                        "required": true,
+                        "description": "Services - These are subspecialities [Add multiple ids using double quotes]",
+                        "type": "object",
+                        "value": "[]"
+                    },
+                    {
+                        "name": "deviceType",
+                        "in": "formData",
+                        "description": "deviceType is required",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "deviceToken",
+                        "in": "formData",
+                        "description": "deviceToken is required",
+                        "type": "string",
+                        "value": ""
+                    }
+                ],
+                "responses": {}
+            }
+        },
+
+        "/api/updateFacilityProfile?s=4": {
+            "post": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "updateFacilityProfile4",
+                "tags": [
+                    "2 User APIs"
+                ],
+                "description": "Registration step number 2",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },
+                    {
+                        "name": "step",
+                        "in": "formData",
+                        "required": true,
+                        "description": "",
+                        "type": "string",
+                        "value": "4",
+                        "readOnly":true
+                    },
+                    {
+                        "name": "expertise",
+                        "in": "formData",
+                        "description": "expertise",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "video",
+                        "in": "formData",
+                        "description": "Video url",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "image",
+                        "in": "formData",
+                        "description": "Multiple image object [Add multiple images using double quotes]",
+                        "type": "object",
+                        "value": "[]"
+                    }
+                ],
+                "responses": {}
+            }
+        },
+
+        "/api/editUserProfile": {
+            "post": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "editUserProfile",
+                "tags": [
+                    "2 User APIs"
+                ],
+                "description": "Edit/update User/Beneficiary's profile information",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },
+                    {
+                        "name": "role",
+                        "in": "formData",
+                        "required": true,
+                        "description": " ",
+                        "type": "string",
+                        "value": "USER"
+                    },
+                    {
+                        "name": "name",
+                        "in": "formData",
+                        "required": true,
+                        "description": "name is required ",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "email",
+                        "in": "formData",
+                        "description": "Email address ",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "currency",
+                        "in": "formData",
+                        "description": "Currency is required ",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "dob",
+                        "in": "formData",
+                        "description": "",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "insuranceCompany",
+                        "in": "formData",
+                        "description": "",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "policyNumber",
+                        "in": "formData",
+                        "description": "",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "bio",
+                        "in": "formData",
+                        "description": "",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "profilePic",
+                        "in": "formData",
+                        "description": "profilePic",
+                        "type": "object",
+                        "value": "{'original' : '', 'thumbnail' : ''}"
+                    },
+                    {
+                        "name": "coverPic",
+                        "in": "formData",
+                        "description": "coverPic",
+                        "type": "object",
+                        "value": "{'original' : '', 'thumbnail' : ''}"
+                    },
+                    {
+                        "name": "address",
+                        "in": "formData",
+                        "description": "address",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "location",
+                        "in": "formData",
+                        "description": "[long,lat]",
+                        "type": "string",
+                        "value": "[0,0]"
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/api/editProfessionalProfile": {
+            "post": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "editProfessionalProfile",
+                "tags": [
+                    "2 User APIs"
+                ],
+                "description": "Edit/update Professional's profile information",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },
+                    {
+                        "name": "role",
+                        "in": "formData",
+                        "required": true,
+                        "description": " ",
+                        "type": "string",
+                        "value": "PROFESSIONAL"
+                    },
+                    {
+                        "name": "name",
+                        "in": "formData",
+                        "required": true,
+                        "description": "name is required ",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "email",
+                        "in": "formData",
+                        "description": "Email address ",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "serviceCategory",
+                        "in": "formData",
+                        "required": true,
+                        "description": "serviceCategory is required ",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "professionalSpeciality",
+                        "in": "formData",
+                        "description": "professionalSpeciality is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "professionalSubSpeciality",
+                        "in": "formData",
+                        "description": "professionalSubSpeciality is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "professionalType",
+                        "in": "formData",
+                        "description": "professionalType is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "license",
+                        "in": "formData",
+                        "description": "",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "licenseImage",
+                        "in": "formData",
+                        "description": "",
+                        "type": "object",
+                        "value": "{'original' : '', 'thumbnail' : '', 'type': '','fileName': ''}"
+                    },
+                    {
+                        "name": "skillDescription",
+                        "in": "formData",
+                        "description": "",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "country",
+                        "in": "formData",
+                        "description": "",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "city",
+                        "in": "formData",
+                        "description": "",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "expertise",
+                        "in": "formData",
+                        "description": "",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "image",
+                        "in": "formData",
+                        "description": "",
+                        "type": "object",
+                        "value": "{'original' : '', 'thumbnail' : '','type': '','fileName': ''}"
+                    },
+                    {
+                        "name": "video",
+                        "in": "formData",
+                        "description": "",
+                        "type": "object",
+                        "value": "{'original' : '', 'thumbnail' : '','type': '','fileName': ''}"
+                    },
+                    {
+                        "name": "profilePic",
+                        "in": "formData",
+                        "description": "profilePic",
+                        "type": "object",
+                        "value": "{'original' : '', 'thumbnail' : '','type': '','fileName': ''}"
+                    },
+                    {
+                        "name": "coverPic",
+                        "in": "formData",
+                        "description": "coverPic",
+                        "type": "object",
+                        "value": "{'original' : '', 'thumbnail' : '','type': '','fileName': ''}"
+                    },
+
+                    {
+                        "name": "address",
+                        "in": "formData",
+                        "description": "address",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "location",
+                        "in": "formData",
+                        "description": "[long,lat]",
+                        "type": "string",
+                        "value": "[0,0]"
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/api/editFacilityProfile": {
+            "post": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "editFacilityProfile",
+                "tags": [
+                    "2 User APIs"
+                ],
+                "description": "Edit/update Facility's profile information",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },
+                    {
+                        "name": "role",
+                        "in": "formData",
+                        "required": true,
+                        "description": " ",
+                        "type": "string",
+                        "value": "PROFESSIONAL"
+                    },
+                    {
+                        "name": "name",
+                        "in": "formData",
+                        "required": true,
+                        "description": "name is required ",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "email",
+                        "in": "formData",
+                        "description": "Email address ",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "serviceCategory",
+                        "in": "formData",
+                        "required": true,
+                        "description": "serviceCategory is required ",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "facilityType",
+                        "in": "formData",
+                        "description": "facilityType is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "services",
+                        "in": "formData",
+                        "description": "services are required",
+                        "required": false,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "description",
+                        "in": "formData",
+                        "description": "description is required",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "registrationNumber",
+                        "in": "formData",
+                        "description": "",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "registrationImage",
+                        "in": "formData",
+                        "description": "",
+                        "type": "object",
+                        "value": "{'original' : '', 'thumbnail' : '', fileName: '', 'type': ''}"
+                    },
+                    {
+                        "name": "expertise",
+                        "in": "formData",
+                        "description": "",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "image",
+                        "in": "formData",
+                        "description": "",
+                        "type": "object",
+                        "value": "{'original' : '', 'thumbnail' : '', fileName: '', 'type': ''}"
+                    },
+                    {
+                        "name": "video",
+                        "in": "formData",
+                        "description": "",
+                        "type": "object",
+                        "value": "{'original' : '', 'thumbnail' : '', fileName: '', 'type': ''}"
+                    },
+                    {
+                        "name": "profilePic",
+                        "in": "formData",
+                        "description": "profilePic",
+                        "type": "object",
+                        "value": "{'original' : '', 'thumbnail' : '', fileName: '', 'type': ''}"
+                    },
+                    {
+                        "name": "coverPic",
+                        "in": "formData",
+                        "description": "coverPic",
+                        "type": "object",
+                        "value": "{'original' : '', 'thumbnail' : '', fileName: '', 'type': ''}"
+                    },
+                    {
+                        "name": "address",
+                        "in": "formData",
+                        "description": "address",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "location",
+                        "in": "formData",
+                        "description": "[long,lat]",
+                        "type": "string",
+                        "value": "[0,0]"
+                    }
+                ],
+                "responses": {}
+            }
+        },
+
+        "/api/updatePushNotificationDeviceToken": {
+            "put": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "updatePushNotificationDeviceToken",
+                "tags": [
+                    "2 User APIs"
+                ],
+                "description": "Update user's deviceToken ",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },
+                    {
+                        "name": "deviceToken",
+                        "in": "formData",
+                        "required": true,
+                        "description": "deviceToken is required",
+                        "type": "string",
+                        "value": ""
+                    }
+                ],
+                "responses": {}
+            }
+        },
+
+
+        "/api/updateUserRole": {
+            "post": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "updateUserRole",
+                "tags": [
+                    "2 User APIs"
+                ],
+                "description": "Update user's role ",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },
+                    {
+                        "name": "role",
+                        "in": "formData",
+                        "required": true,
+                        "description": "role is required [USER / PROFESSIONAL]",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "type",
+                        "in": "formData",
+                        "description": "type is required [1 - Update user information and add role to 'role' array, 2 - Just update defaultLoginRole]",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "currency",
+                        "in": "formData",
+                        "description": "[OPTIONAL]",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "dob",
+                        "in": "formData",
+                        "description": "[OPTIONAL]",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "haveInsurance",
+                        "in": "formData",
+                        "description": "[OPTIONAL]",
+                        "type": "boolean",
+                        "value": ""
+                    },
+                    {
+                        "name": "insuranceCompany",
+                        "in": "formData",
+                        "description": "[OPTIONAL]",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "policyNumber",
+                        "in": "formData",
+                        "description": "[OPTIONAL]",
+                        "type": "string",
+                        "value": ""
+                    }
+                ],
+                "responses": {}
+            }
+        },
+
+        "/api/usersList": {
+            "get": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "usersList",
+                "tags": [
+                    "2 User APIs"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },
+                    {
+                        "name": "role",
+                        "in": "query",
+                        "description": "role is required [USER/PROFESSIONAL/FACILITY]",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/api/countryList": {
+            "get": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "countryList",
+                "tags": [
+                    "2 User APIs"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },
+                    {
+                        "name": "_id",
+                        "in": "query",
+                        "description": "country _id for country cities",
+                        "type": "string",
+                        "value": ""
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/api/getProfessionalsList": {
+            "post": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "getProfessionalsList",
+                "tags": [
+                    "2 User APIs"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },
+                    {
+                        "name": "id",
+                        "in": "formData",
+                        "description": "Service/Speciality/subspeciality id is required [Service id if type=2, speciality id if type=1 and subspeciality id if type=3]",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "type",
+                        "in": "formData",
+                        "description": "Type is required ['speciality' - 1 or 'service' - 2 or 'subspeciality' - 3]",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "facilityId",
+                        "in": "formData",
+                        "description": "Optional - to get list of professionals of a Facility",
+                        "type": "string",
+                        "value": ""
+                    }, {
+                        "name": "lastId",
+                        "in": "formData",
+                        "description": "DONT USE THIS PARAMETER NOW  - lastId is required for pagination only",
+                        "type": "string",
+                        "value":""
+                    }, {
+                        "name": "skip",
+                        "in": "formData",
+                        "description": "skip is required for pagination only",
+                        "type": "Number",
+                        "value":""
+                    }, {
+                        "name": "count",
+                        "in": "formData",
+                        "description": "count is required for pagination only",
+                        "type": "Number",
+                        "value":""
+                    },{
+                        "name": "keyword",
+                        "in": "formData",
+                        "description": "Search keyword",
+                        "value": ""
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/api/getFacilitysByService": {
+            "post": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "getFacilitysByService",
+                "tags": [
+                    "2 User APIs"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },
+                    {
+                        "name": "serviceCategoryId",
+                        "in": "formData",
+                        "description": "serviceCategoryId is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    }, {
+                        "name": "lastId",
+                        "in": "formData",
+                        "description": "lastId is required for pagination only",
+                        "type": "string",
+                        "value":""
+                    }, {
+                        "name": "count",
+                        "in": "formData",
+                        "description": "count is required for pagination only",
+                        "type": "Number",
+                        "value":""
+                    }
+                ],
+                "responses": {}
+            }
+        },
+
+        "/api/getUserDetailsById": {
+            "post": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "getUserDetailsById",
+                "tags": [
+                    "2 User APIs"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },
+                    {
+                        "name": "userId",
+                        "in": "formData",
+                        "description": "userId is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "role",
+                        "in": "formData",
+                        "description": "role is required - USER / PROFESSIONAL / FACILITY",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/api/getUserRoleAndUnavailabilityById": {
+            "post": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "getUserRoleAndUnavailabilityById",
+                "tags": [
+                    "2 User APIs"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },
+                    {
+                      "name": "timezone",
+                      "in": "header",
+                      "required": true,
+                      "type": "string",
+                      "enum": [
+                            "Asia/Kolkata"
+                          ]
+                    },
+                    {
+                        "name": "userId",
+                        "in": "formData",
+                        "description": "userId is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    }
+                ],
+                "responses": {}
+            }
+        },
+
+        "/api/createProfessionalAccount": {
+            "post": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "createProfessionalAccount",
+                "tags": [
+                    "2 User APIs"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },{
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "description": "see example below",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "facilityId": {
+                                    "required": true,
+                                    "description": "Facility Id is required",
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "required": true,
+                                    "description": "Name is required",
+                                    "type": "string"
+                                },
+                                "countryCode": {
+                                    "required": true,
+                                    "description": "Country Code is required",
+                                    "type": "string"
+                                },
+                                "phone": {
+                                    "required": true,
+                                    "description": "Phone is required",
+                                    "type": "string"
+                                },
+                                "password": {
+                                    "required": true,
+                                    "description": "Password is required",
+                                    "type": "string"
+                                },
+                                "profilePic": {
+                                    "type": "array",
+                                    "collectionFormat": "multi",
+                                    "items": {
+                                        "type": "object"
+                                    }
+                                },
+                                "coverPic": {
+                                    "type": "array",
+                                    "collectionFormat": "multi",
+                                    "items": {
+                                        "type": "object"
+                                    }
+                                },
+                                "location": {
+                                    "required": true,
+                                    "description": "location is required",
+                                    "type": "string"
+                                },
+                                "professionalSpeciality": {
+                                    "required": true,
+                                    "description": "Professional Speciality is required",
+                                    "type": "string"
+                                },
+                                "professionalSubSpeciality": {
+                                    "description": "Professional Sub Speciality is required",
+                                    "type": "string"
+                                },
+                                "professionalType": {
+                                    "required": true,
+                                    "description": "Professional Type is required",
+                                    "type": "string"
+                                },
+                                "serviceCategory": {
+                                    "required": true,
+                                    "description": "Service Category is required",
+                                    "type": "string"
+                                },
+                                "country": {
+                                    "required": true,
+                                    "description": "Country is required",
+                                    "type": "string"
+                                },
+                                "city": {
+                                    "required": true,
+                                    "description": "City is required",
+                                    "type": "string"
+                                },
+                                "license": {
+                                    "required": true,
+                                    "description": "License is required",
+                                    "type": "string"
+                                },
+                                "licenseImage": {
+                                    "type": "array",
+                                    "collectionFormat": "multi",
+                                    "items": {
+                                        "type": "object"
+                                    }
+                                },
+                                "skillDescription": {
+                                    "required": true,
+                                    "description": "Skill Description is required",
+                                    "type": "string"
+                                },
+                                "expertise": {
+                                    "required": true,
+                                    "description": "expertise is required",
+                                    "type": "string"
+                                }
+                            },
+                            "example": {
+                                "facilityId": "",
+                                "name": "",
+                                "countryCode": "",
+                                "phone": "",
+                                "password": "",
+                                "profilePic": [
+                                    {
+                                        "original" : "",
+                                        "thumbnail" : ""
+                                    }
+                                ],
+                                "coverPic": [
+                                    {
+                                        "original" : "",
+                                        "thumbnail" : ""
+                                    }
+                                ],
+                                "location": "[long,lat]",
+                                "professionalSpeciality": "",
+                                "professionalSubSpeciality": "",
+                                "professionalType": "",
+                                "serviceCategory": "",
+                                "country": "",
+                                "city": "",
+                                "license": "",
+                                "licenseImage": [
+                                    {
+                                        "original" : "",
+                                        "thumbnail" : ""
+                                    }
+                                ],
+                                "skillDescription": "",
+                                "expertise": ""
+                            }
+                        }
+                    }
+                ],
+                "responses": {}
+            }
+        },
+
+        "/api/saveAddress": {
+            "post": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "saveAddress",
+                "tags": [
+                    "2 User APIs"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },
+                    {
+                        "name": "location",
+                        "in": "formData",
+                        "description": "location is required - [long,lat]",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "locationName",
+                        "in": "formData",
+                        "description": "locationName is required - [address]",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "houseNumber",
+                        "in": "formData",
+                        "description": "houseNumber is required",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "addressName",
+                        "in": "formData",
+                        "description": "addressName is required",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "isDefault",
+                        "in": "formData",
+                        "description": "isDefault - true/false",
+                        "type": "boolean",
+                        "value": "false"
+                    },
+                    {
+                        "name": "addressId",
+                        "in": "formData",
+                        "description": "OPTIONAL - addressId is required to update address",
+                        "type": "string",
+                        "value": ""
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/api/addressList": {
+            "get": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "addressList",
+                "tags": [
+                    "2 User APIs"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/api/setDefaultAddress": {
+            "post": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "setDefaultAddress",
+                "tags": [
+                    "2 User APIs"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },
+                    {
+                        "name": "addressId",
+                        "in": "formData",
+                        "description": "addressId is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    }
+                ],
+                "responses": {}
+            }
+        },
+
+        "/api/deleteAddress": {
+            "post": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "deleteAddress",
+                "tags": [
+                    "2 User APIs"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },
+                    {
+                        "name": "addressId",
+                        "in": "formData",
+                        "description": "addressId is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/api/createFolder": {
+            "post": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "createFolder",
+                "tags": [
+                    "2 User APIs"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },
+                    {
+                        "name": "folderName",
+                        "in": "formData",
+                        "description": "folderName is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "isPrivate",
+                        "in": "formData",
+                        "description": " Make folder private",
+                        "required": true,
+                        "type": "boolean",
+                        "value": false
+                    },
+                    {
+                        "name": "folderIcon",
+                        "in": "formData",
+                        "description": "folderIcon is optional",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "dependentId",
+                        "in": "formData",
+                        "description": "dependentId is optional",
+                        "type": "string",
+                        "value": ""
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/api/foldersList": {
+            "get": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "foldersList",
+                "tags": [
+                    "2 User APIs"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },
+                    {
+                        "name": "dependentId",
+                        "in": "query",
+                        "description": "dependentId is optional",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "checkFolders",
+                        "in": "query",
+                        "description": "OPTIONAL [0-folders list by access token, 1 - folders list by user Id]",
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "userId",
+                        "in": "query",
+                        "description": "OPTIONAL [userId is required in case of getting other user's folder list ie checkFolders='1']",
+                        "type": "string",
+                        "value": ""
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/api/deleteFolder": {
+            "post": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "deleteFolder",
+                "tags": [
+                    "2 User APIs"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },
+                    {
+                        "name": "folderId",
+                        "in": "formData",
+                        "description": "folderId is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/api/addFileToFolder": {
+            "post": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "addFileToFolder",
+                "tags": [
+                    "2 User APIs"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "description": "see example below",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "folderId": {
+                                    "required": true,
+                                    "description": "Folder Id is required",
+                                    "type": "string"
+                                },
+                                "fileType": {
+                                    "required": true,
+                                    "description": "File type is required - [Documents / Photos / Video / Audio / Links / Custom]",
+                                    "type": "string"
+                                },
+                                "file": {
+                                    "type": "array",
+                                    "collectionFormat": "multi",
+                                    "items": {
+                                        "type": "object"
+                                    }
+                                },
+                                "doctor": {
+                                    "description": "doctor/professional id [Optional - id of doctor in case file is sent by a doctor]",
+                                    "type": "string"
+                                },
+                                "dependentId": {
+                                    "description": "Dependent id in case file upload is for dependent",
+                                    "type": "string"
+                                }
+
+                            },
+                            "example": {
+                                "folderId": "",
+                                "fileType": "",
+                                "file": [
+                                    {
+                                        "fileName": "",
+                                        "original" : "",
+                                        "thumbnail" : ""
+                                    }
+                                ],
+                                "doctor": "",
+                                "dependentId":""
+                            }
+                        }
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/api/getFilesByFolder": {
+            "get": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "getFilesByFolder",
+                "tags": [
+                    "2 User APIs"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },
+                    {
+                        "name": "folderId",
+                        "in": "query",
+                        "description": "folderId is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "folderType",
+                        "in": "query",
+                        "description": "folderType is required only for custom folders",
+                        "type": "string",
+                        "value": ""
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/api/deleteFileFromFolder": {
+            "get": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "deleteFileFromFolder",
+                "tags": [
+                    "2 User APIs"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },
+                    {
+                        "name": "fileId",
+                        "in": "query",
+                        "description": "fileId is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/api/moveFileToFolder": {
+            "put": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "moveFileToFolder",
+                "tags": [
+                    "2 User APIs"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },
+                    {
+                        "name": "fileId",
+                        "in": "formData",
+                        "description": "fileId is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "folderId",
+                        "in": "formData",
+                        "description": "folderId is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "fileType",
+                        "in": "formData",
+                        "description": "fileType is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/api/serviceCategoryList": {
+            "post": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "serviceCategoryList",
+                "tags": [
+                    "2 User APIs"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },
+                    {
+                        "name": "serviceType",
+                        "in": "formData",
+                        "description": "serviceType is required - [1-PROFESSIONAL, 2-FACILITY, 3- USER]",
+                        "type": "string",
+                        "value": ""
+                    }
+                ],
+                "responses": {}
+            }
+        },
+
+        "/api/professionalSpecialityList": {
+            "get": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "professionalSpecialityList",
+                "tags": [
+                    "2 User APIs"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },
+                    {
+                        "name": "serviceCategoryId",
+                        "in": "query",
+                        "description": "serviceCategoryId is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "parentId",
+                        "in": "query",
+                        "description": "(optional)",
+                        "type": "string",
+                        "value": ""
+                    }
+                ],
+                "responses": {}
+            }
+        },
+
+        "/api/insuranceCompanyList": {
+            "get": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "insuranceCompanyList",
+                "tags": [
+                    "2 User APIs"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    }
+                ],
+                "responses": {}
+            }
+        },
+
+        "/api/joinFacility": {
+            "post": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "joinFacility",
+                "tags": [
+                    "2 User APIs"
+                ],
+                "description": "join facility",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "description": "see example below",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "workingHours": {
+                                    "type": "array",
+                                    "collectionFormat": "multi",
+                                    "items": {
+                                        "type": "object"
+                                    }
+                                },
+                                "joiningReferralCode": {
+                                    "required": true,
+                                    "description": "facility unique referral code",
+                                    "type": "string"
+                                },
+                                "isWholeWeekWorking": {
+                                    "type": "boolean"
+                                }
+                            },
+                            "example": {
+                                "workingHours": [
+                                    {
+                                        "working": true,
+                                        "startTime": "12:30 AM",
+                                        "endTime": "05:00 PM"
+                                    }
+                                ],
+                                "joiningReferralCode": "Panchkula3BMgV"
+                            },
+                            "facilityServices": ["serviceId"]
+                        }
+                    }
+                ],
+                "responses": {}
+            }
+        },
+
+        "/api/workingHours": {
+            "put": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "workingHours",
+                "tags": [
+                    "2 User APIs"
+                ],
+                "description": "working hours of professional/facility",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "description": "working hours array like [{'Working':true,'startTime':'12:30 AM','endTime':'05:00 PM'}]",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "role": {
+                                    "type": "string",
+                                    "required": true,
+                                    "description": "role is required [PROFESSIONAL / FACILITY]",
+                                    "value": "PROFESSIONAL"
+                                },
+                                "workingHours": {
+                                    "type": "array",
+                                    "required": true,
+                                    "collectionFormat": "multi",
+                                    "items": {
+                                        "type": "object"
+                                    }
+                                },
+                                "isWholeWeekWorking": {
+                                    "type": "boolean",
+                                    "required": true
+                                }
+                            },
+                            "example": {
+                                "workingHours": [{
+                                    "working":true,
+                                    "startTime": "12:30 AM",
+                                    "endTime": "05:00 PM"
+                                }]
+                            }
+                        }
+                    }
+                ],
+                "responses": {}
+            }
+        },
+
+        "/api/professionalFacilities": {
+            "get": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "professionalFacilities",
+                "tags": [
+                    "2 User APIs"
+                ],
+                "description": "professional facilities",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },
+                    {
+                        "name": "long",
+                        "in": "query",
+                        "required": true,
+                        "description": "professional location longitude",
+                        "type": "number",
+                        "value": 0
+                    },
+                    {
+                        "name": "lat",
+                        "in": "query",
+                        "required": true,
+                        "description": "professional location latitude",
+                        "type": "number",
+                        "value": 0
+                    },
+                    {
+                        "name": "userId",
+                        "in": "query",
+                        "required": true,
+                        "description": "userId is required",
+                        "type": "string",
+                        "value": ""
+                    }
+                ],
+                "responses": {}
+            }
+        },
+
+        "/api/updateProfessionalFacility": {
+            "put": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "updateProfessionalFacility",
+                "tags": [
+                    "2 User APIs"
+                ],
+                "description": "update professional facility",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "description": "see example below",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "workingHours": {
+                                    "type": "array",
+                                    "collectionFormat": "multi",
+                                    "items": {
+                                        "type": "object"
+                                    }
+                                },
+                                "facility": {
+                                    "required": true,
+                                    "description": "facility _id",
+                                    "type": "string"
+                                },
+                                "facilityServices": {
+                                    "required": true,
+                                    "description": "facility _id",
+                                    "type": "array"
+                                }
+                            },
+                            "example": {
+                                "workingHours": [
+                                    {
+                                        "working": true,
+                                        "startTime": "12:30 AM",
+                                        "endTime": "05:00 PM"
+                                    }
+                                ],
+                                "facility": "5d0cc92f759da65f48f1efab"
+                            }
+                        }
+                    }
+                ],
+                "responses": {}
+            }
+        },
+
+        "/api/manageAvailability": {
+            "put": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "manageAvailability",
+                "tags": [
+                    "2 User APIs"
+                ],
+                "description": "manage Availability",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization is required",
+                        "required": true,
+                        "type": "string",
+                        "value": 0
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "description": "see example below",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "notAvailableOn": {
+                                    "type": "object"
+                                },
+                                "homeConsultation": {
+                                    "type": "boolean"
+                                },
+                                "onlineConsultation": {
+                                    "type": "boolean"
+                                },
+                                "instantConsultation": {
+                                    "type": "boolean"
+                                }
+                            },
+                            "example": {
+                                "notAvailableOn": {
+                                        "dates": ["YYYY-MM-DD","2019-07-15", "2019-07-16"],
+                                        "endTime": "12 PM",
+                                        "isAllDay": false,
+                                        "startTime": "10 Am"
+                                },
+                                "homeConsultation": false,
+                                "onlineConsultation": false,
+                                "instantConsultation": false
+                            }
+                        }
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/api/facilityProfessionals": {
+            "get": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "facilityProfessionals",
+                "tags": [
+                    "2 User APIs"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },
+                    {
+                        "name": "serviceCategory",
+                        "in": "query",
+                        "description": "id of service category of professional",
+                        "required": false,
+                        "value": ""
+                    },{
+                        "name": "facility",
+                        "in": "query",
+                        "description": "id of facility",
+                        "required": true,
+                        "value": ""
+                    },{
+                        "name": "lastId",
+                        "in": "query",
+                        "description": "lastId is required for pagination only",
+                        "type": "string",
+                        "value":""
+                    },{
+                        "name": "count",
+                        "in": "query",
+                        "description": "count is required for pagination only",
+                        "type": "Number",
+                        "value":""
+                    },{
+                        "name": "keyword",
+                        "in": "query",
+                        "description": "OPTIONAL [search professinoal by name]",
+                        "type": "Number",
+                        "value":""
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/api/dashboardData": {
+            "get": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "dashboardData",
+                "tags": [
+                    "2 User APIs"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/api/dashboardSearch": {
+            "get": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "dashboardSearch",
+                "tags": [
+                    "2 User APIs"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },{
+                        "name": "keyword",
+                        "in": "query",
+                        "description": "keyword is required",
+                        "required": true,
+                        "value": ""
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/api/dashboardDataCustomCounts": {
+            "get": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "dashboardDataCustomCounts",
+                "tags": [
+                    "2 User APIs"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },{
+                        "name": "type",
+                        "in": "query",
+                        "description": "type is required [1- total revenue and partners total revenue count ,2 - follower's total transactions and total amount]",
+                        "required": true,
+                        "value": ""
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/api/addUserDependent": {
+            "put": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "addUserDependent",
+                "tags": [
+                    "2 User APIs"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },{
+                        "name": "name",
+                        "in": "formData",
+                        "description": "Dependent name is required",
+                        "required": true,
+                        "value": ""
+                    },{
+                        "name": "folders",
+                        "in": "formData",
+                        "description": "[OPTIONAL] - [comma separated eg. Documents,Photos,Videos,Audios,Links,Medications,Requests,Reports,Radiology,Labs]",
+                        "value": ""
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/api/listUserDependents": {
+            "get": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "listUserDependents",
+                "tags": [
+                    "2 User APIs"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },{
+                        "name": "userId",
+                        "in": "query",
+                        "description": "userId [required in case professional wants to get list of dependents of a patient]",
+                        "value": ""
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/api/deleteUserDependent": {
+            "put": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "deleteUserDependent",
+                "tags": [
+                    "2 User APIs"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },{
+                        "name": "dependentId",
+                        "in": "formData",
+                        "description": "Dependent id is required",
+                        "required": true,
+                        "value": ""
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/api/logout": {
+            "put": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "logout",
+                "tags": [
+                    "2 User APIs"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },
+                    {
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    }, 
+                    {
+                        "name": "mirrorFlyToken",
+                        "in": "formData",
+                        "description": "mirrorFlyToken is required",
+                        "required": true,
+                        "type": "string",
+                        "value":""
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/api/getNotifications": {
+            "get": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "getNotifications",
+                "tags": [
+                    "2 User APIs"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },{
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },{
+                        "name": "lastId",
+                        "in": "query",
+                        "description": "lastId is required for pagination only",
+                        "type": "string",
+                        "value":""
+                    }, {
+                        "name": "count",
+                        "in": "query",
+                        "description": "count is required for pagination only",
+                        "type": "Number",
+                        "value":""
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/api/help": {
+            "get": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "help",
+                "tags": [
+                    "2 User APIs"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },{
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/api/partnersAppointment": {
+            "get": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "partnersAppointment",
+                "tags": [
+                    "2 User APIs"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },{
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },{
+                        "name": "lastId",
+                        "in": "query",
+                        "description": "lastId is required for pagination only",
+                        "type": "string",
+                        "value":""
+                    }, {
+                        "name": "count",
+                        "in": "query",
+                        "description": "count is required for pagination only",
+                        "type": "Number",
+                        "value":""
+                    }, {
+                        "name": "bookingType",
+                        "in": "query",
+                        "description": "OPTIONAL ['ONLINE', 'ONSITE', 'HOME']",
+                        "type": "string",
+                        "value":""
+                    }, {
+                        "name": "startDate",
+                        "in": "query",
+                        "description": "OPTIONAL",
+                        "type": "string",
+                        "value":""
+                    }, {
+                        "name": "endDate",
+                        "in": "query",
+                        "description": "OPTIONAL",
+                        "type": "string",
+                        "value":""
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/api/partnersPastTasks": {
+            "get": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "partnersPastTasks",
+                "tags": [
+                    "2 User APIs"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization is required",
+                        "required": true,
+                        "type": "string",
+                        "value": ""
+                    },{
+                        "name": "language",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "en",
+                            "ar"
+                          ]
+                    },{
+                        "name": "lastId",
+                        "in": "query",
+                        "description": "lastId is required for pagination only",
+                        "type": "string",
+                        "value":""
+                    }, {
+                        "name": "count",
+                        "in": "query",
+                        "description": "count is required for pagination only",
+                        "type": "Number",
+                        "value":""
+                    }, {
+                        "name": "taskType",
+                        "in": "query",
+                        "description": "OPTIONAL [filter list by taskType]",
+                        "type": "Number",
+                        "value":""
+                    }, {
+                        "name": "sortBy",
+                        "in": "query",
+                        "description": "OPTIONAL [0 - min, 1 - max]",
+                        "type": "Number",
+                        "value":""
+                    }
+                ],
+                "responses": {}
+            }
+        },
+          "/api/getProfessionalReports": {
+            "get": {
+              "x-swagger-router-controller": "middleware-name1",
+              "operationId": "getProfessionalReports",
+              "tags": [
+                "Get Medical Reports"
+              ],
+              "description": "",
+              "parameters": [
+                {
+                  "name": "authorization",
+                  "in": "header",
+                  "description": "authorization is required",
+                  "required": true,
+                  "type": "string",
+                  "value": ""
+                },{
+                    "name": "language",
+                    "in": "header",
+                    "required": true,
+                    "type": "string",
+                    "enum": [
+                        "en",
+                        "ar"
+                      ]
+                },
+                {
+                  "name": "timezone",
+                  "in": "header",
+                  "required": true,
+                  "type": "string",
+                  "enum": [
+                        "Asia/Kolkata"
+                      ]
+                },
+                {
+                  "name": "limit",
+                  "in": "query",
+                  "required": false,
+                  "description": "limit",
+                  "type": "number",
+                  "value": ""
+                },
+                {
+                  "name": "lastId",
+                  "in": "query",
+                  "required": false,
+                  "description": "lastId",
+                  "type": "string",
+                  "value": ""
+                }
+              ],
+              "responses": {}
+            }
+          },
+          "/api/getPrescriptionsList": {
+            "get": {
+              "x-swagger-router-controller": "middleware-name1",
+              "operationId": "getPrescriptionsList",
+              "tags": [
+                "Get Medical Reports"
+              ],
+              "description": "",
+              "parameters": [
+                {
+                  "name": "authorization",
+                  "in": "header",
+                  "description": "authorization is required",
+                  "required": true,
+                  "type": "string",
+                  "value": ""
+                },{
+                    "name": "language",
+                    "in": "header",
+                    "required": true,
+                    "type": "string",
+                    "enum": [
+                        "en",
+                        "ar"
+                      ]
+                },
+                {
+                  "name": "timezone",
+                  "in": "header",
+                  "required": true,
+                  "type": "string",
+                  "enum": [
+                        "Asia/Kolkata"
+                      ]
+                },
+                {
+                  "name": "limit",
+                  "in": "query",
+                  "required": false,
+                  "description": "limit",
+                  "type": "number",
+                  "value": ""
+                },
+                {
+                  "name": "lastId",
+                  "in": "query",
+                  "required": false,
+                  "description": "lastId",
+                  "type": "string",
+                  "value": ""
+                }
+              ],
+              "responses": {}
+            }
+          }
+    }
+}
