@@ -2407,7 +2407,7 @@ module.exports = {
                         if (checkTeamStatus && checkTeamStatus.length > 0) {
                             dataToSend.contractId = checkTeamStatus[0]._id;
                         }
-                        dataToSend.acceptMessages = is.undefined(dataToSend) || dataToSend.acceptMessages === "DISABLED" ? "DISABLED" : "ENABLED";
+                        dataToSend.acceptMessages = is.undefined(dataToSend) || dataToSend.acceptMessages == "DISABLED" ? "DISABLED" : "ENABLED";
                         dataToSend.isFriend = isFriend;
                         dataToSend.isTeamMember = isTeamMember;
                         dataToSend.isHired = isHired;
