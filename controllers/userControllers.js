@@ -1232,14 +1232,13 @@ module.exports = {
                                     "mirrorflyPassword": randomstring,
                                     "mirrorFlyToken": data.data,
                                     "mirrorFlyToken": data.data,
-                                    "isOpenChat": obj.isOpenChat,
+                                    "isOpenChat": true,
                                     //"mirrorFlyTokenConsult": dataNew.data,
                                     "mirrorFlyDeviceToken": obj.mirrorFlyDeviceToken,
                                     deviceToken: obj.deviceToken ? obj.deviceToken : ""
                                 }
                             };
 
-                            sendResponse.sendSuccessData(Models.Users.findOne(criteria), 200, req.headers.language, RESPONSE_MESSAGES.STATUS_MSG.SUCCESS.DEFAULT, res)
 
                             Models.Users.findOneAndUpdate(criteria, DataToSet, {
                                     new: true,
@@ -1253,6 +1252,8 @@ module.exports = {
                                     }
                                 }])
                                 .then(response => {
+                                                                sendResponse.sendSuccessData(response, 200, req.headers.language, RESPONSE_MESSAGES.STATUS_MSG.SUCCESS.DEFAULT, res)
+
                                     //console.log("response ----------- ",response)
                                     /*console.log("afdsadfsfdsf", obj);
                                     let data = await mirrorFlyAPI.register({
