@@ -152,6 +152,7 @@ module.exports = {
 
                 });
             } else {
+                console.log('user was deleted');
                 return sendResponse.sendErrorMessageData(400, req.headers.language, RESPONSE_MESSAGES.STATUS_MSG.ERROR.PHONE_ALREADY_EXIST, {}, res);
             }
         } catch (err) {
@@ -428,7 +429,7 @@ module.exports = {
 
                                     //SENT OTP
                                     //let paymentDetails = await sendOTP(payload);
-                                    console.log("obj**------------------------", obj)
+                                    // console.log("obj**------------------------", obj)
                                     if (process.env.ENABLE_OTP == "1") {
                                         if (obj.countryCode && obj.phone) {
                                             obj.message = otpval + RESPONSE_MESSAGES.STATUS_MSG.SUCCESS.REGISTRATION_OTP.message[req.headers.language];
