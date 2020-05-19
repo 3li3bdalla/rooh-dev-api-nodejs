@@ -2362,7 +2362,9 @@ module.exports = {
                         dataToSend.facilityProfessionals = response[1];
                         //dataToSend.facilityProfessionalServicesList = response[2];
                     }
+                    console.log("userData", userData);
                     if (userData) {
+
                         dataToSend.isFollowed = (followCheck == 1) ? true : false;
                         if (checkTeamStatus && checkTeamStatus.length > 0) {
                             dataToSend.contractId = checkTeamStatus[0]._id;
