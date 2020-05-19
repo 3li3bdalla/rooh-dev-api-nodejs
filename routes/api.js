@@ -3,12 +3,6 @@ var router = express.Router();
 var user = require('../controllers/userControllers');
 const auth = require('../middleware/auth');
 
-//DESCRYPTION
-if (process.env.ENABLE_ENCRYPTION == "1") {
-  var aesWrapper = require('../Lib/aes-wrapper');
-  var rsaWrapper = require('../Lib/rsa-wrapper');
-}
-//DESCRYPTION
 router.use(auth.validateToken);
 
 router.post('/updateProfile', user.updateProfile);
