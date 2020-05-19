@@ -1168,6 +1168,14 @@ module.exports = {
 
 
     updateChatStatus: (req, res) => {
+        if (is.undefined(req.body.isOpenChat) || is.empty(req.body.isOpenChat)) {
+            return res.status(400).json({
+                status: 0,
+                message: "isOpenChat is required"
+            });
+        }
+
+
         try {
             let criteria = {
                 "_id": ObjectId(userData._id)
@@ -1197,6 +1205,7 @@ module.exports = {
 
 
     updateProfile: async (req, res) => {
+
         try {
             let obj = req.body;
             let err = [];
@@ -1246,7 +1255,6 @@ module.exports = {
                             let DataToSet = {
                                 $set: {
                                     "email": obj.email,
-
                                     "location": typeof obj.location === "string" ? JSON.parse(obj.location) : obj.location,
                                     "address": obj.address,
                                     "jid": obj.jid ? obj.jid : '',
