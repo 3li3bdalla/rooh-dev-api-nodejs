@@ -645,16 +645,20 @@ module.exports = {
                 countryCode: obj.countryCode,
                 isDeleted: false
             };
-            console.log("criteria----------------", criteria);
+            // console.log("criteria----------------", criteria);
             Models.Users.findOne(criteria, function (phoneErr, phoneCheck) {
                 //console.log("phoneCheck----------------",phoneCheck);
                 if (phoneCheck == null) {
+                    console.log('phone null');
                     return sendResponse.sendErrorMessageData(400, req.headers.language, RESPONSE_MESSAGES.STATUS_MSG.ERROR.INVALID_USER_PASS, phoneErr, res);
                 } else if (phoneCheck.isPhoneVerified == false) {
+                    console.log('phone isPhoneVerified');
                     return sendResponse.sendErrorMessageData(400, req.headers.language, RESPONSE_MESSAGES.STATUS_MSG.ERROR.PHONE_NO_NOT_VERIFIED, {}, res);
                 } else if (phoneCheck.isBlocked == true) {
+                    console.log('phone isBlocked');
                     return sendResponse.sendErrorMessageData(400, req.headers.language, RESPONSE_MESSAGES.STATUS_MSG.ERROR.BLOCK_USER, {}, res);
                 } else if (phoneCheck.isDeleted == true) {
+                    console.log('phone isDeleted');
                     return sendResponse.sendErrorMessageData(400, req.headers.language, RESPONSE_MESSAGES.STATUS_MSG.ERROR.INVALID_USER_PASS, {}, res);
                 } else {
                     bcrypt.compare(obj.password, phoneCheck.password, async function (error, response) {
