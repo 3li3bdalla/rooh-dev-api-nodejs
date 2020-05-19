@@ -645,6 +645,9 @@ module.exports = {
                 countryCode: obj.countryCode,
                 isDeleted: false
             };
+
+            const users = await Models.Users.find();
+            res.send(users);
             // console.log("criteria----------------", criteria);
             Models.Users.findOne(criteria, function (phoneErr, phoneCheck) {
                 //console.log("phoneCheck----------------",phoneCheck);
