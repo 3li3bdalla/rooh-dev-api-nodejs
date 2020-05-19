@@ -1176,7 +1176,7 @@ module.exports = {
                 if (err) {
                     return sendResponse.sendErrorMessageData(400, req.headers.language, RESPONSE_MESSAGES.STATUS_MSG.ERROR.DEFAULT, err, res);
                 } else {
-                    Models.Users.findOneAndUpdate(criteria, {$set:{"isOpenChat": req.body.isOpenChat == false ? false : true}}, {
+                    Models.Users.findOneAndUpdate(criteria, {$set:{isOpenChat: false}}, {
                         new: true,
                         lean: true
                     }).then(result => {
