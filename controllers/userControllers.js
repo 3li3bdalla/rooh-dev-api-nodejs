@@ -1217,6 +1217,7 @@ module.exports = {
                             let DataToSet = {
                                 $set: {
                                     "email": obj.email,
+                                    "isOpenChat": false,
                                     "location": typeof obj.location === "string" ? JSON.parse(obj.location) : obj.location,
                                     "address": obj.address,
                                     "jid": obj.jid ? obj.jid : '',
@@ -1230,7 +1231,7 @@ module.exports = {
                                     "mirrorflyPassword": randomstring,
                                     "mirrorFlyToken": data.data,
                                     "mirrorFlyToken": data.data,
-                                    "user.isOpenChat": false,
+
                                     // "isOpenChat": obj.isOpenChat === false ? false : true,
                                     //"mirrorFlyTokenConsult": dataNew.data,
                                     "mirrorFlyDeviceToken": obj.mirrorFlyDeviceToken,
