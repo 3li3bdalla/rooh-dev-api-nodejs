@@ -2407,8 +2407,7 @@ module.exports = {
                         if (checkTeamStatus && checkTeamStatus.length > 0) {
                             dataToSend.contractId = checkTeamStatus[0]._id;
                         }
-                        dataToSend.TSETKEY = response[0];
-                        dataToSend.acceptMessages = is.undefined(dataToSend) || dataToSend.acceptMessages == "DISABLED" ? "DISABLED" : "ENABLED";
+
                         dataToSend.isFriend = isFriend;
                         dataToSend.isTeamMember = isTeamMember;
                         dataToSend.isHired = isHired;
@@ -2418,6 +2417,9 @@ module.exports = {
                             dataToSend.isFavorite = false;
                         }
                     }
+                    dataToSend.TSETKEY = response[0][0];
+                    ToSend.acceptMessages = is.undefined(dataToSend) || dataToSend.acceptMessages == "DISABLED" ? "DISABLED" : "ENABLED";
+                    
                     dataToSend.followingCount = followingCount;
                     dataToSend.followedCount = followedCount;
                     dataToSend.favoriteCount = favoriteCount;
