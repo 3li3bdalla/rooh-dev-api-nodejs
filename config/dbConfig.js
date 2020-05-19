@@ -3,14 +3,14 @@
 let mongoURI = "mongodb://localhost:27017/csfHealthcare"; //localhost
 
 if (process.env.NODE_ENV === "test") { // 18.184.113.27 ip
-    mongoURI = `mongodb://${process.env.mongo_test_user}:${process.env.mongo_test_password}@${process.env.mongo_host}:27017/${process.env.mongo_test_db}`;
+    mongoURI = `mongodb://${process.env.mongo_test_user}:${process.env.mongo_test_password}@$localhost:27017/${process.env.mongo_test_db}`;
 } else if (process.env.NODE_ENV === "dev") {
     mongoURI = `mongodb://${process.env.mongo_dev_user}:${process.env.mongo_dev_password}@localhost:27017/${process.env.mongo_dev_db}`;
 }
 
-mongoURI = "mongodb://localhost:27017/csfHealthcare"; //localhost
+// mongoURI = "mongodb://localhost:27017/csfHealthcare"; //localhost
 
-console.log('mongoURI', mongoURI)
+// console.log('mongoURI', mongoURI)
 
 // var mongo = {
 // 	URI: 'mongodb://localhost:27017/csfHealthcare',
