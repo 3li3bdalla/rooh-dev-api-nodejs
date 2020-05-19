@@ -2364,8 +2364,8 @@ module.exports = {
                         //dataToSend.facilityProfessionalServicesList = response[2];
                     }
                     if (dataToSend == 'undefined')
-                        let dataToSend = {}
-                    
+                        dataToSend = {}
+
                     if (userData) {
 
                         // console.log('followCheck',  followCheck);
