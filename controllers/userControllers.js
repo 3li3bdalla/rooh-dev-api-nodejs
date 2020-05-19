@@ -2391,7 +2391,6 @@ module.exports = {
 
                     let dataToSend = {}
                     dataToSend = response[0][0];
-                    dataToSend.isOpenChat = dataToSend.isOpenChat === false ? false : true;
                     if (obj.role == "FACILITY") {
                         dataToSend.facilityProfessionals = response[1];
                         //dataToSend.facilityProfessionalServicesList = response[2];
@@ -2405,6 +2404,7 @@ module.exports = {
                         if (checkTeamStatus && checkTeamStatus.length > 0) {
                             dataToSend.contractId = checkTeamStatus[0]._id;
                         }
+                        dataToSend.isOpenChat = is.undefined(dataToSend) || dataToSend.isOpenChat === false ? false : true;
                         dataToSend.isFriend = isFriend;
                         dataToSend.isTeamMember = isTeamMember;
                         dataToSend.isHired = isHired;
