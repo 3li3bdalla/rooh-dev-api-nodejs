@@ -152,7 +152,6 @@ module.exports = {
 
                 });
             } else {
-                console.log('user was deleted');
                 return sendResponse.sendErrorMessageData(400, req.headers.language, RESPONSE_MESSAGES.STATUS_MSG.ERROR.PHONE_ALREADY_EXIST, {}, res);
             }
         } catch (err) {
@@ -2356,19 +2355,13 @@ module.exports = {
                     // var servicesResult = await removeDuplicate(facilityServices,professionalServices );
                     // response[0][0].facility.services = servicesResult;
 
-
                     let dataToSend = {}
                     dataToSend = response[0][0];
                     if (obj.role == "FACILITY") {
                         dataToSend.facilityProfessionals = response[1];
                         //dataToSend.facilityProfessionalServicesList = response[2];
                     }
-                    if (dataToSend == 'undefined')
-                        dataToSend = {}
-
                     if (userData) {
-
-                        // console.log('followCheck',  followCheck);
                         dataToSend.isFollowed = (followCheck == 1) ? true : false;
                         if (checkTeamStatus && checkTeamStatus.length > 0) {
                             dataToSend.contractId = checkTeamStatus[0]._id;
