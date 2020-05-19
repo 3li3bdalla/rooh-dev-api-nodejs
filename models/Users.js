@@ -150,9 +150,9 @@ let Userschema = new Schema({
         type: Boolean,
         default: true
     },
-    allowChat: {
-        enum: ["yes", "no"],
-        default: "yes"
+    acceptMessages: {
+        enum: ["ENABLED", "DISABLED"],
+        default: "ENABLED"
     },
     location: {
         type: [Number],
