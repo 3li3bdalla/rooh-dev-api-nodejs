@@ -31,9 +31,11 @@ exports.validateToken = function (req, res, next) {
     }
     if (token) {
         let authToken = token.split(" ")
-        console.log("-------", authToken[1]);
+        // console.log("-------", authToken[1]);
 
         jwt.verify(authToken[1], gRouter.get(Constants.SERVER.JWT_SECRET_KEY).toString(), async function (err, decoded) {
+
+            console.log('error token', err);
             if (err) {
                 if (authToken[1] == Constants.SERVER.GUEST_TOKEN) {
 
