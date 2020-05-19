@@ -2315,11 +2315,10 @@ module.exports = {
                 });
             }
             let id = ObjectId(obj.userId);
-            const p = await new Promise.resolve(getProfileData(id, req));
-            p.then((result) => {
-                res.send(user);
-            });
-
+         
+            const user = await Models.Users.findOne({_id:id});
+            res.send(user);
+            
             let followingCount = await Models.Follow.countDocuments({
                 "followById": id,
                 "type": "1"
