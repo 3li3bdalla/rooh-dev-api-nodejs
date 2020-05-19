@@ -599,7 +599,7 @@ module.exports = {
         }
     },
 
-    userLogin: (req, res) => {
+    userLogin: async (req, res) => {
         try {
             //console.log("1452638444 ............ criteria----------------");
             let obj = req.body,
