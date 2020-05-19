@@ -1177,8 +1177,7 @@ module.exports = {
                     return sendResponse.sendErrorMessageData(400, req.headers.language, RESPONSE_MESSAGES.STATUS_MSG.ERROR.DEFAULT, err, res);
                 } else {
                     Models.Users.findOneAndUpdate(criteria, {$set:{"isOpenChat": false,"name":"Ali Abdalla"}}, {
-                        new: true,
-                        lean: true
+                        new: true
                     }).then(result => {
                         return sendResponse.sendSuccessData(result, 200, req.headers.language, RESPONSE_MESSAGES.STATUS_MSG.SUCCESS.DEFAULT, res);
                     }).catch(err => {
