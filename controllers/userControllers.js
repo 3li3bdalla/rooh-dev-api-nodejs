@@ -645,7 +645,7 @@ module.exports = {
                 countryCode: obj.countryCode,
                 isDeleted: false
             };
-            //console.log("criteria----------------",criteria);
+            console.log("criteria----------------", criteria);
             Models.Users.findOne(criteria, function (phoneErr, phoneCheck) {
                 //console.log("phoneCheck----------------",phoneCheck);
                 if (phoneCheck == null) {
