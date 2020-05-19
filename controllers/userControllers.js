@@ -1182,8 +1182,14 @@ module.exports = {
                             lean: true
                         }).then(result => {
                             return sendResponse.sendSuccessData(result, 200, req.headers.language, RESPONSE_MESSAGES.STATUS_MSG.SUCCESS.DEFAULT, res);
+                        }).catch(err => {
+                                                                return sendResponse.sendErrorMessageData(400, req.headers.language, RESPONSE_MESSAGES.STATUS_MSG.ERROR.DEFAULT, err, res);
+
                         }) ;
                     }
+            }).catch(err => {
+                                    return sendResponse.sendErrorMessageData(400, req.headers.language, RESPONSE_MESSAGES.STATUS_MSG.ERROR.DEFAULT, err, res);
+
             });
 
         } catch (err) {
