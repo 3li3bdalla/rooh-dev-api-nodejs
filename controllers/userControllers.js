@@ -2358,7 +2358,7 @@ module.exports = {
 
                     let dataToSend = {}
                     dataToSend = response[0][0];
-                    dataToSend.isOpenChat = response[0].isOpenChat ==  fa;
+                    dataToSend.isOpenChat = response[0].isOpenChat === false ? false : true;
                     if (obj.role == "FACILITY") {
                         dataToSend.facilityProfessionals = response[1];
                         //dataToSend.facilityProfessionalServicesList = response[2];
