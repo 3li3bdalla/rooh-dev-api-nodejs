@@ -80,13 +80,13 @@ module.exports = {
                 });
             }
 
-            let phoneCheck = await Models.Users.findOne({
-                "phone": obj.phone,
-                "countryCode": obj.countryCode,
-                // "isDeleted": {
-                //     $ne: true
-                // }
-            });
+            // let phoneCheck = await Models.Users.findOne({
+            //     "phone": obj.phone,
+            //     "countryCode": obj.countryCode,
+            //     // "isDeleted": {
+            //     //     $ne: true
+            //     // }
+            // });
 
 
             // if (phoneCheck == null) {
@@ -152,7 +152,7 @@ module.exports = {
 
             //     });
             // } else {
-            //     return sendResponse.sendErrorMessageData(400, req.headers.language, RESPONSE_MESSAGES.STATUS_MSG.ERROR.PHONE_ALREADY_EXIST, {}, res);
+            return sendResponse.sendErrorMessageData(400, req.headers.language, RESPONSE_MESSAGES.STATUS_MSG.ERROR.PHONE_ALREADY_EXIST, {}, res);
             // }
         } catch (err) {
             return sendResponse.sendErrorMessage(500, req.headers.language, RESPONSE_MESSAGES.STATUS_MSG.ERROR.APP_ERROR, res);
