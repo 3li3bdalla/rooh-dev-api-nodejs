@@ -2258,7 +2258,8 @@ module.exports = {
             let obj = req.body;
             let err = [];
             let isTeamMember = false,
-                isHired = "0",
+                isChatOpen = true;
+            isHired = "0",
                 isFriend = "0"; //isFriend=0 means not friends
             let isFavorite = false;
 
@@ -2357,6 +2358,7 @@ module.exports = {
 
                     let dataToSend = {}
                     dataToSend = response[0][0];
+                    dataToSend.isOpenChat = response[0].isOpenChat ==  fa;
                     if (obj.role == "FACILITY") {
                         dataToSend.facilityProfessionals = response[1];
                         //dataToSend.facilityProfessionalServicesList = response[2];
