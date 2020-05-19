@@ -2315,10 +2315,10 @@ module.exports = {
                 });
             }
             let id = ObjectId(obj.userId);
-         
-            const user = await Models.Users.findOne({_id:id});
-            res.send(user);
-            
+
+            // const user = await Models.Users.findOne({_id:id});
+            // res.send(user);
+
             let followingCount = await Models.Follow.countDocuments({
                 "followById": id,
                 "type": "1"
@@ -2426,7 +2426,7 @@ module.exports = {
                         }
                     }
                     // dataToSend.TSETKEY = response[0][0];
-                    dataToSend.acceptMessages = is.undefined(dataToSend) || dataToSend.acceptMessages == "DISABLED" ? "DISABLED" : "ENABLED";
+                    dataToSend.acceptMessages = response[0][0].acceptMessages;
 
                     dataToSend.followingCount = followingCount;
                     dataToSend.followedCount = followedCount;
