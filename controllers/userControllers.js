@@ -80,13 +80,15 @@ module.exports = {
                 });
             }
 
-            let phoneCheck = await Models.Users.findOne({
-                phone: obj.phone,
-                countryCode: obj.countryCode,
-                isDeleted: {
-                    $ne: true
-                }
-            });
+            let phoneCheck = null;
+
+            // await Models.Users.findOne({
+            //     phone: obj.phone,
+            //     countryCode: obj.countryCode,
+            //     isDeleted: {
+            //         $ne: true
+            //     }
+            // })
 
             if (phoneCheck == null) {
                 Models.UsersTemp.findOne({
@@ -155,8 +157,8 @@ module.exports = {
             }
         } catch (err) {
 
-            console.log(err.message);
-            console.log('error in server');
+            // console.log(err.message);
+            // console.log('error in server');
             return sendResponse.sendErrorMessage(500, req.headers.language, RESPONSE_MESSAGES.STATUS_MSG.ERROR.APP_ERROR, res);
         }
     },
