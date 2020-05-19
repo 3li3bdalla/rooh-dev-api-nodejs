@@ -1188,8 +1188,6 @@ module.exports = {
                         $set: {
                             isOpenChat: req.body.isOpenChat,
                         }
-                    }, {
-                        new: true
                     }).then(finalResult => {
                         return sendResponse.sendSuccessData(finalResult, 200, req.headers.language, RESPONSE_MESSAGES.STATUS_MSG.SUCCESS.DEFAULT, res);
                     }).catch(err => {
