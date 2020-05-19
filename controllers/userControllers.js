@@ -599,7 +599,7 @@ module.exports = {
         }
     },
 
-    userLogin: async (req, res) => {
+    userLogin: (req, res) => {
         try {
             //console.log("1452638444 ............ criteria----------------");
             let obj = req.body,
@@ -646,8 +646,7 @@ module.exports = {
                 isDeleted: false
             };
 
-            const users = await Models.Users.find();
-            res.send(users);
+
             // console.log("criteria----------------", criteria);
             Models.Users.findOne(criteria, function (phoneErr, phoneCheck) {
                 //console.log("phoneCheck----------------",phoneCheck);
