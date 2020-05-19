@@ -1185,7 +1185,7 @@ module.exports = {
                 if (err) {
                     return sendResponse.sendErrorMessageData(400, req.headers.language, RESPONSE_MESSAGES.STATUS_MSG.ERROR.DEFAULT, err, res);
                 } else {
-                    Models.Users.updateOne(criteria, {
+                    Models.Users.findOneAndUpdate(criteria, {
                         $set: {
                             acceptMessages: req.body.acceptMessages,
                         }
