@@ -1167,7 +1167,7 @@ module.exports = {
     /*******************************************/
 
 
-    updateChatStatus:  (req, res)  => { 
+    updateChatStatus: (req, res) => {
         try {
             let criteria = {
                 "_id": ObjectId(userData._id)
@@ -1176,13 +1176,17 @@ module.exports = {
                 if (err) {
                     return sendResponse.sendErrorMessageData(400, req.headers.language, RESPONSE_MESSAGES.STATUS_MSG.ERROR.DEFAULT, err, res);
                 } else {
-                    Models.Users.findOneAndUpdate(criteria, {$set:{"isOpenChat": false,"name":"Ali Abdalla"}}, {
+                    Models.Users.updateOne(criteria, {
+                        $set: {
+                            "isOpenChat": false
+                        }
+                    }, {
                         new: true
                     }).then(result => {
                         return sendResponse.sendSuccessData(result, 200, req.headers.language, RESPONSE_MESSAGES.STATUS_MSG.SUCCESS.DEFAULT, res);
                     }).catch(err => {
                         return sendResponse.sendErrorMessageData(400, req.headers.language, RESPONSE_MESSAGES.STATUS_MSG.ERROR.DEFAULT, err, res);
-                    }) ;
+                    });
                 }
             });
 
@@ -1242,7 +1246,7 @@ module.exports = {
                             let DataToSet = {
                                 $set: {
                                     "email": obj.email,
-                                    
+
                                     "location": typeof obj.location === "string" ? JSON.parse(obj.location) : obj.location,
                                     "address": obj.address,
                                     "jid": obj.jid ? obj.jid : '',
