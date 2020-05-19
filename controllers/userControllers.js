@@ -1167,6 +1167,31 @@ module.exports = {
     /*******************************************/
 
 
+    updateChatStatus: async (req, res) {
+        try {
+
+            let criteria = {
+                "_id": ObjectId(userData._id)
+            }
+
+            Models.Users.findOne(criteria, async function (err, result) {
+                            // if (err) {
+                            //     return sendResponse.sendErrorMessageData(400, req.headers.language, RESPONSE_MESSAGES.STATUS_MSG.ERROR.DEFAULT, err, res);
+                            // } else {
+
+                            //     Models.Users.findOneAndUpdate(criteria, {$set:{"isOpenChat": obj.isOpenChat == false ? false : true}}, {
+                            //         new: true,
+                            //         lean: true
+                            //     }).then(result => {
+                            //         return sendResponse.sendSuccessData(result, 200, req.headers.language, RESPONSE_MESSAGES.STATUS_MSG.SUCCESS.DEFAULT, res);
+                            //     }) ;
+                            // }
+            });
+
+        } catch (err) {
+            return sendResponse.sendErrorMessage(500, req.headers.language, RESPONSE_MESSAGES.STATUS_MSG.ERROR.APP_ERROR, res);
+        }
+    },
     updateProfile: async (req, res) => {
         try {
             let obj = req.body;
@@ -1217,7 +1242,7 @@ module.exports = {
                             let DataToSet = {
                                 $set: {
                                     "email": obj.email,
-                                    "isOpenChat": obj.isOpenChat == false ? false : true,
+                                    
                                     "location": typeof obj.location === "string" ? JSON.parse(obj.location) : obj.location,
                                     "address": obj.address,
                                     "jid": obj.jid ? obj.jid : '',
