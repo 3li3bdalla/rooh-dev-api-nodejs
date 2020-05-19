@@ -2316,7 +2316,9 @@ module.exports = {
             }
             let id = ObjectId(obj.userId);
 
-            // const user = await Models.Users.findOne({_id:id});
+            const dbUserData = await Models.Users.findOne({
+                _id: id
+            }); //  extra should be handled latter
             // res.send(user);
 
             let followingCount = await Models.Follow.countDocuments({
@@ -2426,7 +2428,7 @@ module.exports = {
                         }
                     }
                     // dataToSend.TSETKEY = response[0][0];
-                    dataToSend.acceptMessages = response[0][0].acceptMessages;
+                    dataToSend.acceptMessages = dbUserData.acceptMessages;
 
                     dataToSend.followingCount = followingCount;
                     dataToSend.followedCount = followedCount;
