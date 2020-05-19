@@ -1189,6 +1189,8 @@ module.exports = {
                         $set: {
                             acceptMessages: req.body.acceptMessages,
                         }
+                    }, {
+                        new: true
                     }).then(finalResult => {
                         return sendResponse.sendSuccessData(finalResult, 200, req.headers.language, RESPONSE_MESSAGES.STATUS_MSG.SUCCESS.DEFAULT, res);
                     }).catch(err => {
