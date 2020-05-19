@@ -1191,8 +1191,6 @@ module.exports = {
 
                             let randomstring = Math.random().toString(36).slice(-8);
 
-                            //console.log(" 45 6 ----------",result)
-
                             if (obj.deviceType == "IOS") {
                                 obj.deviceToken = obj.mirrorFlyDeviceToken;
                             }
@@ -1214,7 +1212,7 @@ module.exports = {
                             //     deviceToken: obj.deviceToken,
                             //     deviceType: obj.deviceType
                             // })
-                            console.log(data, "data");
+                            // console.log(data, "data");
 
                             let DataToSet = {
                                 $set: {
@@ -1232,7 +1230,7 @@ module.exports = {
                                     "mirrorflyPassword": randomstring,
                                     "mirrorFlyToken": data.data,
                                     "mirrorFlyToken": data.data,
-                                    "isOpenChat": false,
+                                    isOpenChat: false,
                                     // "isOpenChat": obj.isOpenChat === false ? false : true,
                                     //"mirrorFlyTokenConsult": dataNew.data,
                                     "mirrorFlyDeviceToken": obj.mirrorFlyDeviceToken,
@@ -1275,17 +1273,14 @@ module.exports = {
                                     return sendResponse.sendErrorMessageData(400, req.headers.language, RESPONSE_MESSAGES.STATUS_MSG.ERROR.DEFAULT, err, res);
                                 })
                         } else {
-                            console.log("error")
                             return sendResponse.sendErrorMessageData(400, req.headers.language, RESPONSE_MESSAGES.STATUS_MSG.ERROR.PHONE_NO_NOT_VERIFIED, {}, res);
                         }
                     } else {
-                        console.log("error1")
                         return sendResponse.sendErrorMessageData(400, req.headers.language, RESPONSE_MESSAGES.STATUS_MSG.ERROR.NO_USER_EXISTS, {}, res);
                     }
                 }
             });
         } catch (err) {
-            console.log("err", err)
             //return res.status(500).json({status: 0, message: err.message});
             return sendResponse.sendErrorMessage(500, req.headers.language, RESPONSE_MESSAGES.STATUS_MSG.ERROR.APP_ERROR, res);
         }
