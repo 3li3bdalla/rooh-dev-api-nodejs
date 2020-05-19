@@ -151,6 +151,7 @@ let Userschema = new Schema({
         default: true
     },
     acceptMessages: {
+        type: String,
         enum: ["ENABLED", "DISABLED"],
         default: "ENABLED"
     },
