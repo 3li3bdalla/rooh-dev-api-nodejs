@@ -2418,7 +2418,7 @@ module.exports = {
                         }
                     }
                     dataToSend.TSETKEY = response[0][0];
-                    ToSend.acceptMessages = is.undefined(dataToSend) || dataToSend.acceptMessages == "DISABLED" ? "DISABLED" : "ENABLED";
+                    dataToSend.acceptMessages = is.undefined(dataToSend) || dataToSend.acceptMessages == "DISABLED" ? "DISABLED" : "ENABLED";
                     
                     dataToSend.followingCount = followingCount;
                     dataToSend.followedCount = followedCount;
