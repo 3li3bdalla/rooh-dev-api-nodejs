@@ -116,12 +116,13 @@ if (process.env.NODE_APP_INSTANCE == 0 || process.env.NODE_APP_INSTANCE === 0 ||
 // helper midlleware
 app.use(localization);
 
-app.get('test-version', (req, res, next) => {
+app.get('/version', (req, res, next) => {
     res.send({
         version: 1,
         "description": "ali version"
-    });
+    }).end();
 })
+
 app.use('/api', api);
 app.use('/user', user_api);
 app.use('/admin', admin_api);
