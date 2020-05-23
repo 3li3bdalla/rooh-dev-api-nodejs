@@ -6,7 +6,7 @@ const auth = require('../middleware/auth');
 router.use(auth.validateToken);
 
 router.post('/updateProfile', user.updateProfile);
-router.post('/updateChatStatus', user.updateChatStatus);
+router.put('/updateChatStatus', user.updateChatStatus);
 router.post('/updateProfessionalProfile', user.updateProfessionalProfile);
 router.post('/updateFacilityProfile', user.updateFacilityProfile);
 router.get('/usersList', user.usersList);
