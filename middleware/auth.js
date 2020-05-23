@@ -3,6 +3,7 @@ var Constants = require('../config/appConstants');
 var RESPONSE_MESSAGES = require('../config/response-messages')
 var jwt = require("jsonwebtoken");
 var multer = require('multer');
+var is = require('is_js');
 //DESCRYPTION
 if (process.env.ENABLE_ENCRYPTION == "1") {
     var aesWrapper = require('../Lib/aes-wrapper');
@@ -31,10 +32,11 @@ async function decryptData(data) {
 exports.validateToken = function (req, res, next) {
     global.encryptionType = "mobile";
     let token = req.headers['authorization'];
-    let language = "en";
-    if (req.headers['language'] != undefined && req.headers['language'] != "") {
-        language = req.headers['language'];
-    }
+    // let language = "en";
+    // if (!is.undefined(req.headers['language']) && req.headers['language'] != "") {
+    //     language = req.headers['language'];
+    // }
+
     if (token) {
         let authToken = token.split(" ")
         // console.log("-------", authToken[1]);
@@ -95,7 +97,7 @@ exports.validateToken = function (req, res, next) {
                         });
                     } else {
                         global.userData = result;
-                        global.language = language;
+                        global.language = req.headers.language;
                         req.credentials = result;
                         next();
                     }

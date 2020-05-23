@@ -13,6 +13,7 @@ const swaggerDocumentUser = require('./config/swaggerUser.json');
 var Constants = require('./config/appConstants');
 var SocketManager = require('./Lib/SocketManager');
 var Scheduler = require('./Lib/Scheduler');
+const localization = require('./middleware/localization')
 var redis = require("async-redis");
 var redisClient = redis.createClient({
     port: 6379, // replace with your port
@@ -87,8 +88,8 @@ mongoose.connect(mongoURI, {
     useUnifiedTopology: true
 });
 mongoose.connection.on('error', function (err) {
-    console.log(err);
-    console.log('error in connecting, process is exiting ...');
+    // console.log(err);
+    // console.log('error in connecting, process is exiting ...');
     process.exit();
 });
 
@@ -96,7 +97,7 @@ mongoose.connection.on('error', function (err) {
 ObjectId = mongoose.Types.ObjectId;
 
 mongoose.connection.once('open', function () {
-    console.log('Successfully connected to database');
+    // console.log('Successfully connected to database');
 });
 //SWAGGER
 app.use('/documentation', swaggerUi.serve, swaggerUi.setup(swaggerDocumentUser));
@@ -106,12 +107,14 @@ app.use('/common/uploadFile', multipartMiddleware);
 app.post('/common/uploadFile', commonController.uploadFile);
 
 app.get('/scheduler/renewAgreement', Scheduler.renewAgreement)
-console.log(process.env.NODE_APP_INSTANCE, "***once only process.pid ---- ", process.pid)
+// console.log(process.env.NODE_APP_INSTANCE, "***once only process.pid ---- ", process.pid)
 if (process.env.NODE_APP_INSTANCE == 0 || process.env.NODE_APP_INSTANCE === 0 || process.env.NODE_APP_INSTANCE == undefined) {
     console.log("once only process.pid ---- ", process.pid)
     Scheduler.scheduleAppointmentNotifications();
 }
 
+// helper midlleware
+app.use(localization);
 
 app.use('/api', api);
 app.use('/user', user_api);
@@ -136,7 +139,7 @@ app.get('/', function (req, res) {
 // });
 
 app.use(function (err, req, res, next) {
-    console.log("errr----");
+    // console.log("errr----");
     let status = 500,
         json = {
             status: 0,
