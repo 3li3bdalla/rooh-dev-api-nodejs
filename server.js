@@ -18,6 +18,7 @@ var redis = require("async-redis");
 var redisClient = redis.createClient({
     port: 6379, // replace with your port
     host: 'localhost', // replace with your hostanme or IP address
+    // password: 'password',
     // password: '$xpNYF+4j54uh&K8',
 });
 const multipart = require('connect-multiparty');

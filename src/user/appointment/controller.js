@@ -46,8 +46,8 @@ async function createFollowUpAppointment(payload, language, timeZone, res) {
             let message = "";
             let message1 = "";
 
-            message1 = `Sorry, professional not available for ${ RESPONSE_MESSAGES.STATUS_MSG.APPOINTMENT_TYPE[payload.type][language] } consultation`;
-            message = ` تشاور ${ RESPONSE_MESSAGES.STATUS_MSG.APPOINTMENT_TYPE[payload.type][language] } عذرا ، المهنية غير متوفرة ل `
+            message1 = `Sorry, professional not available for ${RESPONSE_MESSAGES.STATUS_MSG.APPOINTMENT_TYPE[payload.type][language]} consultation`;
+            message = ` تشاور ${RESPONSE_MESSAGES.STATUS_MSG.APPOINTMENT_TYPE[payload.type][language]} عذرا ، المهنية غير متوفرة ل `
 
             throw RESPONSE_MESSAGES.STATUS_MSG.ERROR.DEFAULT = {
                 statusCode: 400,
@@ -235,18 +235,18 @@ async function checkAppointments(checkDate, checkSlots, doctorId) {
     let returnObject = {};
     let criteria = {
         $or: [{
-                "scheduledService.date": checkDate
-            },
-            {
-                "homeService.everyDayOrCustom": {
-                    $in: checkDate
-                }
-            },
-            {
-                "selfAppointment.dates": {
-                    $in: checkDate
-                }
+            "scheduledService.date": checkDate
+        },
+        {
+            "homeService.everyDayOrCustom": {
+                $in: checkDate
             }
+        },
+        {
+            "selfAppointment.dates": {
+                $in: checkDate
+            }
+        }
         ],
         "status": "PLACED",
         "doctor": ObjectId(doctorId)
@@ -446,10 +446,7 @@ async function getProfessionalsWorkingHours(doctorId, slots, dates) {
 }
 
 async function saveAppointment(model, payload) {
-
     let appointmentData = [];
-    //let appointmentId = [];
-
     let dateAr = []
     if (payload.type == "HOME") {
         if (payload.homeService && payload.homeService.type == "WEEKLY") {
@@ -466,24 +463,14 @@ async function saveAppointment(model, payload) {
                 payload.homeService.everyDayOrCustom = convertSingleDateToArray;
             }
             let appointment = await Dao.saveData(Models.Appointment, payload);
-            //appointmentId.push(appointment._id);
             appointmentData.push(appointment);
         }
     } else {
         let appointment = await Dao.saveData(Models.Appointment, payload);
-        //appointmentId.push(appointment._id);
         appointmentData.push(appointment);
     }
-    //await Dao.saveData(Models.Appointment, payload);
-    /*let dateArray = [];
-    for(let i=1;i <= week; i++){
-        for(let number of weekNumberArray){
-            dateArray.push(moment().add(i, 'week').day(number).format('YYYY-MM-DD'));
-        }
-    }
-    return dateArray;*/
+
     return appointmentData;
-    //return appointmentId;
 }
 
 function checkTodaySlots(slots, timezone) {
@@ -880,164 +867,164 @@ module.exports = {
                 "_id": ObjectId(query.appointmentId)
             };
             let aggregate = [{
-                    $match: criteria
-                },
-                {
-                    "$lookup": {
-                        from: "users",
-                        foreignField: "_id",
-                        localField: "doctor",
-                        as: 'doctor'
-                    }
-                },
-                {
-                    "$unwind": {
-                        "path": "$doctor",
-                        "preserveNullAndEmptyArrays": true
-                    }
-                },
-                {
-                    "$lookup": {
-                        from: "professionalspecialities",
-                        foreignField: "_id",
-                        localField: "doctor.professional.professionalSpeciality",
-                        as: 'doctor.professional.professionalSpeciality'
-                    }
-                }, {
-                    "$unwind": {
-                        "path": "$doctor.professional.professionalSpeciality",
-                        "preserveNullAndEmptyArrays": true
-                    }
-                },
+                $match: criteria
+            },
+            {
+                "$lookup": {
+                    from: "users",
+                    foreignField: "_id",
+                    localField: "doctor",
+                    as: 'doctor'
+                }
+            },
+            {
+                "$unwind": {
+                    "path": "$doctor",
+                    "preserveNullAndEmptyArrays": true
+                }
+            },
+            {
+                "$lookup": {
+                    from: "professionalspecialities",
+                    foreignField: "_id",
+                    localField: "doctor.professional.professionalSpeciality",
+                    as: 'doctor.professional.professionalSpeciality'
+                }
+            }, {
+                "$unwind": {
+                    "path": "$doctor.professional.professionalSpeciality",
+                    "preserveNullAndEmptyArrays": true
+                }
+            },
 
-                {
-                    "$lookup": {
-                        from: "users",
-                        foreignField: "_id",
-                        localField: "user",
-                        as: 'user'
-                    }
-                },
-                {
-                    "$unwind": {
-                        "path": "$user",
-                        "preserveNullAndEmptyArrays": true
-                    }
-                },
+            {
+                "$lookup": {
+                    from: "users",
+                    foreignField: "_id",
+                    localField: "user",
+                    as: 'user'
+                }
+            },
+            {
+                "$unwind": {
+                    "path": "$user",
+                    "preserveNullAndEmptyArrays": true
+                }
+            },
 
-                {
-                    "$lookup": {
-                        from: "apointmentfeedbacks",
-                        foreignField: "appointmentId",
-                        localField: "_id",
-                        as: 'rating'
-                    }
-                },
-                {
-                    "$unwind": {
-                        "path": "$rating",
-                        "preserveNullAndEmptyArrays": true
-                    }
-                },
+            {
+                "$lookup": {
+                    from: "apointmentfeedbacks",
+                    foreignField: "appointmentId",
+                    localField: "_id",
+                    as: 'rating'
+                }
+            },
+            {
+                "$unwind": {
+                    "path": "$rating",
+                    "preserveNullAndEmptyArrays": true
+                }
+            },
 
-                //RATING
-                {
-                    "$lookup": {
-                        from: "apointmentfeedbacks",
-                        foreignField: "userId",
-                        localField: "doctor._id",
-                        as: 'doctorRating'
-                    }
-                },
-                //RATING
+            //RATING
+            {
+                "$lookup": {
+                    from: "apointmentfeedbacks",
+                    foreignField: "userId",
+                    localField: "doctor._id",
+                    as: 'doctorRating'
+                }
+            },
+            //RATING
 
-                {
-                    $project: {
+            {
+                $project: {
+                    _id: 1,
+                    scheduledService: 1,
+                    homeService: 1,
+                    selfAppointment: 1,
+                    type: 1,
+                    slots: 1,
+                    status: 1,
+                    createdAt: 1,
+                    fileId: 1,
+                    appointmentNumber: 1,
+                    reason: 1,
+                    followUpAppointment: 1,
+                    isAlreadyReportGenerate: 1,
+                    reportType: 1,
+                    createdByRole: 1,
+                    isPushGenerated: 1,
+                    isUserConfirmed: 1,
+                    isUserModified: 1,
+                    isDoctorConfirmed: 1,
+                    isDoctorModified: 1,
+                    consultationType: 1,
+                    utcDateTime: 1,
+                    doctor: {
                         _id: 1,
-                        scheduledService: 1,
-                        homeService: 1,
-                        selfAppointment: 1,
-                        type: 1,
-                        slots: 1,
-                        status: 1,
-                        createdAt: 1,
-                        fileId: 1,
-                        appointmentNumber: 1,
-                        reason: 1,
-                        followUpAppointment: 1,
-                        isAlreadyReportGenerate: 1,
-                        reportType: 1,
-                        createdByRole: 1,
-                        isPushGenerated: 1,
-                        isUserConfirmed: 1,
-                        isUserModified: 1,
-                        isDoctorConfirmed: 1,
-                        isDoctorModified: 1,
-                        consultationType: 1,
-                        utcDateTime: 1,
-                        doctor: {
-                            _id: 1,
-                            profilePic: 1,
-                            coverPic: 1,
-                            name: 1,
-                            professional: {
-                                professionalSpeciality: {
-                                    specialityName: "$doctor.professional.professionalSpeciality.specialityName." + req.headers.language,
-                                    specialist: "$doctor.professional.professionalSpeciality.specialist." + req.headers.language,
-                                    serviceType: 1
-                                }
+                        profilePic: 1,
+                        coverPic: 1,
+                        name: 1,
+                        professional: {
+                            professionalSpeciality: {
+                                specialityName: "$doctor.professional.professionalSpeciality.specialityName." + req.headers.language,
+                                specialist: "$doctor.professional.professionalSpeciality.specialist." + req.headers.language,
+                                serviceType: 1
+                            }
 
-                            },
-                            "feedbackRating": {
-                                "$cond": {
-                                    if: {
-                                        "$gte": [{
-                                            $size: "$doctorRating.rating"
-                                        }, 1]
-                                    },
-                                    then: {
-                                        "$divide": [{
-                                                $sum: "$doctorRating.rating"
-                                            },
-                                            {
-                                                $size: "$doctorRating.rating"
-                                            }
-                                        ]
-                                    },
-                                    else: 0
-                                }
-                            }
                         },
-                        user: {
-                            _id: 1,
-                            profilePic: 1,
-                            coverPic: 1,
-                            name: 1,
-                            defaultLoginRole: 1,
-                            user: {
-                                dob: 1
+                        "feedbackRating": {
+                            "$cond": {
+                                if: {
+                                    "$gte": [{
+                                        $size: "$doctorRating.rating"
+                                    }, 1]
+                                },
+                                then: {
+                                    "$divide": [{
+                                        $sum: "$doctorRating.rating"
+                                    },
+                                    {
+                                        $size: "$doctorRating.rating"
+                                    }
+                                    ]
+                                },
+                                else: 0
                             }
+                        }
+                    },
+                    user: {
+                        _id: 1,
+                        profilePic: 1,
+                        coverPic: 1,
+                        name: 1,
+                        defaultLoginRole: 1,
+                        user: {
+                            dob: 1
+                        }
+                    },
+                    rating: {
+                        "isRating": {
+                            $cond: [{
+                                $not: "$rating.rating"
+                            }, false, true]
                         },
                         rating: {
-                            "isRating": {
-                                $cond: [{
-                                    $not: "$rating.rating"
-                                }, false, true]
-                            },
-                            rating: {
-                                $cond: [{
-                                    $not: "$rating.rating"
-                                }, 0, "$rating.rating"]
-                            },
-                            feedback: {
-                                $cond: [{
-                                    $not: "$rating.feedback"
-                                }, "", "$rating.feedback"]
-                            },
+                            $cond: [{
+                                $not: "$rating.rating"
+                            }, 0, "$rating.rating"]
+                        },
+                        feedback: {
+                            $cond: [{
+                                $not: "$rating.feedback"
+                            }, "", "$rating.feedback"]
+                        },
 
-                        }
                     }
                 }
+            }
             ];
             let appntments = await Models.Appointment.aggregate(aggregate);
             var curDate = moment(new Date()).format('YYYY-MM-DD');
@@ -1054,7 +1041,7 @@ module.exports = {
                         "_id": ObjectId(appntments[0]._id)
                     }, {
                         "isPushGenerated": true
-                    }, function (updateErr, updateCheck) {});
+                    }, function (updateErr, updateCheck) { });
                     appntments[0].isPushGenerated = true;
                 }
             }
@@ -1118,7 +1105,7 @@ module.exports = {
         let searchDate = {}
         try {
             let criteria = {};
-            var decryptColumns = ['fileId', 'appointmentNumber' /*,'houseNumber','addressName'*/ ];
+            var decryptColumns = ['fileId', 'appointmentNumber' /*,'houseNumber','addressName'*/];
             var decryptColumns2 = ['feedback'];
             criteria = {
                 doctor: ObjectId(userData._id),
@@ -1140,72 +1127,72 @@ module.exports = {
             if (query.appointmentType && query.appointmentType == "1") { // today
                 //let checkDate = moment().format('YYYY-MM-DD');
                 criteria.$or = [{
-                        "type": "HOME",
-                        $or: [{
-                                "homeService.type": "EVERYDAY",
-                                "homeService.everyDayOrCustom": {
-                                    $in: [checkDate]
-                                }
-                            },
-                            {
-                                "homeService.type": "CUSTOM",
-                                "homeService.everyDayOrCustom": {
-                                    $in: [checkDate]
-                                }
-                            },
-                            {
-                                "homeService.type": "WEEKLY",
-                                "homeService.weeklyDates.dayWiseDates": {
-                                    $in: [checkDate]
-                                }
-                            }
-                        ]
+                    "type": "HOME",
+                    $or: [{
+                        "homeService.type": "EVERYDAY",
+                        "homeService.everyDayOrCustom": {
+                            $in: [checkDate]
+                        }
                     },
                     {
-                        "type": "ONLINE",
-                        "scheduledService.date": checkDate
+                        "homeService.type": "CUSTOM",
+                        "homeService.everyDayOrCustom": {
+                            $in: [checkDate]
+                        }
                     },
                     {
-                        "type": "ONSITE",
-                        "scheduledService.date": checkDate
+                        "homeService.type": "WEEKLY",
+                        "homeService.weeklyDates.dayWiseDates": {
+                            $in: [checkDate]
+                        }
                     }
+                    ]
+                },
+                {
+                    "type": "ONLINE",
+                    "scheduledService.date": checkDate
+                },
+                {
+                    "type": "ONSITE",
+                    "scheduledService.date": checkDate
+                }
                 ]
             } else if (query.appointmentType && query.appointmentType == "2") { // all upcoming
                 //let checkDate = moment().format('YYYY-MM-DD');
                 criteria.$or = [{
-                        "type": "HOME",
-                        $or: [{
-                                "homeService.type": "EVERYDAY",
-                                "homeService.everyDayOrCustom": {
-                                    $gt: checkDate
-                                }
-                            },
-                            {
-                                "homeService.type": "CUSTOM",
-                                "homeService.everyDayOrCustom": {
-                                    $gt: checkDate
-                                }
-                            },
-                            {
-                                "homeService.type": "WEEKLY",
-                                "homeService.weeklyDates.dayWiseDates": {
-                                    $gt: checkDate
-                                }
-                            }
-                        ]
-                    },
-                    {
-                        "type": "ONLINE",
-                        "scheduledService.date": {
+                    "type": "HOME",
+                    $or: [{
+                        "homeService.type": "EVERYDAY",
+                        "homeService.everyDayOrCustom": {
                             $gt: checkDate
                         }
                     },
                     {
-                        "type": "ONSITE",
-                        "scheduledService.date": {
+                        "homeService.type": "CUSTOM",
+                        "homeService.everyDayOrCustom": {
+                            $gt: checkDate
+                        }
+                    },
+                    {
+                        "homeService.type": "WEEKLY",
+                        "homeService.weeklyDates.dayWiseDates": {
                             $gt: checkDate
                         }
                     }
+                    ]
+                },
+                {
+                    "type": "ONLINE",
+                    "scheduledService.date": {
+                        $gt: checkDate
+                    }
+                },
+                {
+                    "type": "ONSITE",
+                    "scheduledService.date": {
+                        $gt: checkDate
+                    }
+                }
                 ]
             }
             if ((query.startDate && query.startDate != "") && (query.endDate && query.endDate != "")) {
@@ -1224,14 +1211,14 @@ module.exports = {
             }
             if (searchDate && Object.keys(searchDate).length > 0) {
                 criteria.$or = [{
-                        "homeService.weeklyDates.dayWiseDates": searchDate
-                    },
-                    {
-                        "homeService.everyDayOrCustom": searchDate
-                    },
-                    {
-                        "scheduledService.date": searchDate
-                    }
+                    "homeService.weeklyDates.dayWiseDates": searchDate
+                },
+                {
+                    "homeService.everyDayOrCustom": searchDate
+                },
+                {
+                    "scheduledService.date": searchDate
+                }
                 ]
             }
 
@@ -1258,87 +1245,87 @@ module.exports = {
 
             .exec();*/
             let aggregate = [{
-                    $match: criteria
-                },
-                {
-                    "$lookup": {
-                        from: "users",
-                        foreignField: "_id",
-                        localField: "user",
-                        as: 'user'
-                    }
-                },
-                {
-                    "$unwind": {
-                        "path": "$user",
-                        "preserveNullAndEmptyArrays": true
-                    }
-                },
-                {
-                    "$lookup": {
-                        from: "apointmentfeedbacks",
-                        foreignField: "appointmentId",
-                        localField: "_id",
-                        as: 'rating'
-                    }
-                },
-                {
-                    "$unwind": {
-                        "path": "$rating",
-                        "preserveNullAndEmptyArrays": true
-                    }
-                },
+                $match: criteria
+            },
+            {
+                "$lookup": {
+                    from: "users",
+                    foreignField: "_id",
+                    localField: "user",
+                    as: 'user'
+                }
+            },
+            {
+                "$unwind": {
+                    "path": "$user",
+                    "preserveNullAndEmptyArrays": true
+                }
+            },
+            {
+                "$lookup": {
+                    from: "apointmentfeedbacks",
+                    foreignField: "appointmentId",
+                    localField: "_id",
+                    as: 'rating'
+                }
+            },
+            {
+                "$unwind": {
+                    "path": "$rating",
+                    "preserveNullAndEmptyArrays": true
+                }
+            },
 
-                {
-                    $project: {
+            {
+                $project: {
+                    _id: 1,
+                    scheduledService: 1,
+                    homeService: 1,
+                    selfAppointment: 1,
+                    type: 1,
+                    slots: 1,
+                    status: 1,
+                    createdAt: 1,
+                    fileId: 1,
+                    appointmentNumber: 1,
+                    consultationType: 1,
+                    user: {
                         _id: 1,
-                        scheduledService: 1,
-                        homeService: 1,
-                        selfAppointment: 1,
-                        type: 1,
-                        slots: 1,
-                        status: 1,
-                        createdAt: 1,
-                        fileId: 1,
-                        appointmentNumber: 1,
-                        consultationType: 1,
+                        profilePic: 1,
+                        coverPic: 1,
+                        name: 1,
                         user: {
-                            _id: 1,
-                            profilePic: 1,
-                            coverPic: 1,
-                            name: 1,
-                            user: {
-                                dob: 1
-                            }
+                            dob: 1
+                        }
+                    },
+                    rating: {
+                        "isRating": {
+                            $cond: [{
+                                $not: "$rating.rating"
+                            }, false, true]
                         },
                         rating: {
-                            "isRating": {
-                                $cond: [{
-                                    $not: "$rating.rating"
-                                }, false, true]
-                            },
-                            rating: {
-                                $cond: [{
-                                    $not: "$rating.rating"
-                                }, 0, "$rating.rating"]
-                            },
-                            feedback: {
-                                $cond: [{
-                                    $not: "$rating.feedback"
-                                }, "", "$rating.feedback"]
-                            },
+                            $cond: [{
+                                $not: "$rating.rating"
+                            }, 0, "$rating.rating"]
+                        },
+                        feedback: {
+                            $cond: [{
+                                $not: "$rating.feedback"
+                            }, "", "$rating.feedback"]
+                        },
 
-                        }
                     }
-                },
-                {
-                    $sort: {
-                        _id: -1
-                    }
-                },
-                {
-                    $limit: query.count
                 }
+            },
+            {
+                $sort: {
+                    _id: -1
+                }
+            },
+            {
+                $limit: query.count
+            }
             ];
             let appntments = await Models.Appointment.aggregate(aggregate);
             /*return res.status(200).json({
@@ -1549,16 +1536,16 @@ module.exports = {
                 lean: true
             }).distinct('doctor');
             let professionals = await Models.Users.find({
-                    '_id': {
-                        $in: doctors
-                    }
-                }, {
-                    _id: 1,
-                    profilePic: 1,
-                    coverPic: 1,
-                    name: 1,
-                    "professional.professionalSpeciality": 1,
-                })
+                '_id': {
+                    $in: doctors
+                }
+            }, {
+                _id: 1,
+                profilePic: 1,
+                coverPic: 1,
+                name: 1,
+                "professional.professionalSpeciality": 1,
+            })
                 .populate({
                     path: 'professional.professionalSpeciality',
                     select: 'specialityName'
@@ -1622,103 +1609,103 @@ module.exports = {
             //criteria.level = { $in: [professionalType] };
 
             let aggregateForOnline = [{
-                    $match: criteria
-                },
-                {
-                    $unwind: "$title"
-                },
-                {
-                    $unwind: "$currency"
-                },
-                {
-                    "$match": {
-                        "title.type": language,
-                        "currency.type": language
-                    }
-                },
-                {
-                    $group: {
-                        _id: {
-                            "type": '$consult'
-                        },
-                        consultData: {
-                            $push: {
-                                "_id": "$_id",
-                                "name": "$title.name",
-                                "consult": "consult",
-                                "price": "$price",
-                                "minute": "$minute",
-                                "currency": "$currency.name",
-                                //"currency": "$currency"
-                            }
+                $match: criteria
+            },
+            {
+                $unwind: "$title"
+            },
+            {
+                $unwind: "$currency"
+            },
+            {
+                "$match": {
+                    "title.type": language,
+                    "currency.type": language
+                }
+            },
+            {
+                $group: {
+                    _id: {
+                        "type": '$consult'
+                    },
+                    consultData: {
+                        $push: {
+                            "_id": "$_id",
+                            "name": "$title.name",
+                            "consult": "consult",
+                            "price": "$price",
+                            "minute": "$minute",
+                            "currency": "$currency.name",
+                            //"currency": "$currency"
                         }
                     }
-                },
-                {
-                    $project: {
-                        _id: 0,
-                        "type": "$_id.type",
-                        "consultData": "$consultData"
-                    }
-                },
-                {
-                    "$sort": {
-                        "createdAt": -1
-                    }
                 }
+            },
+            {
+                $project: {
+                    _id: 0,
+                    "type": "$_id.type",
+                    "consultData": "$consultData"
+                }
+            },
+            {
+                "$sort": {
+                    "createdAt": -1
+                }
+            }
             ];
             console.log("aggregateForOnline---------", JSON.stringify(aggregateForOnline))
 
             let getOffSiteAndHome = [{
-                    $match: {
-                        consultType: {
-                            $in: [APP_CONSTANTS.DATABASE.CONSULT_TYPES.OFFSITE, APP_CONSTANTS.DATABASE.CONSULT_TYPES.HOME]
-                        },
-                        "isActive": true,
-                        //level: { $in: [professionalType] }
-                        type: role,
-                        speciality: ObjectId(doctorData.professional.professionalSpeciality),
-                        level: ObjectId(doctorData.professional.professionalType)
+                $match: {
+                    consultType: {
+                        $in: [APP_CONSTANTS.DATABASE.CONSULT_TYPES.OFFSITE, APP_CONSTANTS.DATABASE.CONSULT_TYPES.HOME]
+                    },
+                    "isActive": true,
+                    //level: { $in: [professionalType] }
+                    type: role,
+                    speciality: ObjectId(doctorData.professional.professionalSpeciality),
+                    level: ObjectId(doctorData.professional.professionalType)
 
-                    }
-                },
-                {
-                    $unwind: "$title"
-                },
-                {
-                    "$match": {
-                        "title.type": language
-                    }
-                },
-                {
-                    $group: {
-                        _id: {
-                            "type": '$consultType'
-                        },
-                        consultData: {
-                            $push: {
-                                "_id": "$_id",
-                                "name": "$title.name",
-                                "consult": "consult",
-                                "price": "$price",
-                                "minute": "$minute",
-                                "currency": "$currency"
-                            }
+                }
+            },
+            {
+                $unwind: "$title"
+            },
+            {
+                "$match": {
+                    "title.type": language
+                }
+            },
+            {
+                $group: {
+                    _id: {
+                        "type": '$consultType'
+                    },
+                    consultData: {
+                        $push: {
+                            "_id": "$_id",
+                            "name": "$title.name",
+                            "consult": "consult",
+                            "price": "$price",
+                            "minute": "$minute",
+                            "currency": "$currency"
                         }
                     }
-                },
-                {
-                    $project: {
-                        _id: 0,
-                        "type": "$_id.type",
-                        "consultData": "$consultData"
-                    }
-                },
-                {
-                    "$sort": {
-                        "createdAt": -1
-                    }
                 }
+            },
+            {
+                $project: {
+                    _id: 0,
+                    "type": "$_id.type",
+                    "consultData": "$consultData"
+                }
+            },
+            {
+                "$sort": {
+                    "createdAt": -1
+                }
+            }
             ];
 
             console.log("getOffSiteAndHome---------", JSON.stringify(getOffSiteAndHome))
@@ -1886,28 +1873,28 @@ module.exports = {
             }
 
             let aggregate = [{
-                    $match: criteria
-                },
-                {
-                    $unwind: "$title"
-                },
-                {
-                    "$match": {
-                        "title.type": req.headers.language || 'en'
-                    }
-                },
-                {
-                    $project: {
-                        _id: 1,
-                        "type": "$title.type",
-                        "name": "$title.name"
-                    }
-                },
-                {
-                    "$sort": {
-                        "_id": -1
-                    }
+                $match: criteria
+            },
+            {
+                $unwind: "$title"
+            },
+            {
+                "$match": {
+                    "title.type": req.headers.language || 'en'
                 }
+            },
+            {
+                $project: {
+                    _id: 1,
+                    "type": "$title.type",
+                    "name": "$title.name"
+                }
+            },
+            {
+                "$sort": {
+                    "_id": -1
+                }
+            }
             ];
 
             if (payload.limit) {
@@ -1924,9 +1911,9 @@ module.exports = {
             ]);
 
             return sendResponse.sendSuccessData({
-                    commonData,
-                    count
-                }, APP_CONSTANTS.STATUSCODE.SUCCESS,
+                commonData,
+                count
+            }, APP_CONSTANTS.STATUSCODE.SUCCESS,
                 req.headers.language, RESPONSE_MESSAGES.STATUS_MSG.SUCCESS.DEFAULT, res);
 
         } catch (err) {
@@ -1979,8 +1966,8 @@ module.exports = {
             let saveData = await Dao.saveData(Models.PatientAppointmentReport, payload);
 
             return sendResponse.sendSuccessData({
-                    "reportId": saveData._id
-                }, APP_CONSTANTS.STATUSCODE.SUCCESS,
+                "reportId": saveData._id
+            }, APP_CONSTANTS.STATUSCODE.SUCCESS,
                 req.headers.language, RESPONSE_MESSAGES.STATUS_MSG.SUCCESS.DEFAULT, res);
 
         } catch (err) {
@@ -2340,8 +2327,8 @@ module.exports = {
             )*/
 
             return sendResponse.sendSuccessData({
-                    appointmentData
-                }, APP_CONSTANTS.STATUSCODE.SUCCESS,
+                appointmentData
+            }, APP_CONSTANTS.STATUSCODE.SUCCESS,
                 req.headers.language, RESPONSE_MESSAGES.STATUS_MSG.SUCCESS.DEFAULT, res);
         } catch (err) {
             console.log(err);
@@ -2614,8 +2601,8 @@ module.exports = {
                 await decryptDBData(appointmentData.appointments, decryptColumns);
             }
             return sendResponse.sendSuccessData({
-                    appointmentData
-                }, APP_CONSTANTS.STATUSCODE.SUCCESS,
+                appointmentData
+            }, APP_CONSTANTS.STATUSCODE.SUCCESS,
                 req.headers.language, RESPONSE_MESSAGES.STATUS_MSG.SUCCESS.DEFAULT, res, decryptColumns2);
 
         } catch (err) {
@@ -2681,62 +2668,62 @@ module.exports = {
                     $ne: ObjectId(userData._id)
                 };
                 aggregate = [{
-                        $match: criteria
-                    },
-                    {
-                        $lookup: {
-                            from: "professionalspecialities",
-                            foreignField: "_id",
-                            localField: "professional.professionalSpeciality",
-                            as: 'professional.professionalSpeciality'
-                        }
-                    },
-                    {
-                        "$unwind": {
-                            "path": "$professional.professionalSpeciality",
-                            "preserveNullAndEmptyArrays": true
-                        }
-                    },
-                    {
-                        $project: {
-                            _id: 1,
-                            "profilePic": 1,
-                            name: 1,
-                            professional: {
-                                professionalSpeciality: {
-                                    specialityName: "$professional.professionalSpeciality.specialityName." + req.headers.language,
-                                    specialist: "$professional.professionalSpeciality.specialist." + req.headers.language
-                                    /*specialityName: 1,
-                                    specialist: 1*/
-                                }
+                    $match: criteria
+                },
+                {
+                    $lookup: {
+                        from: "professionalspecialities",
+                        foreignField: "_id",
+                        localField: "professional.professionalSpeciality",
+                        as: 'professional.professionalSpeciality'
+                    }
+                },
+                {
+                    "$unwind": {
+                        "path": "$professional.professionalSpeciality",
+                        "preserveNullAndEmptyArrays": true
+                    }
+                },
+                {
+                    $project: {
+                        _id: 1,
+                        "profilePic": 1,
+                        name: 1,
+                        professional: {
+                            professionalSpeciality: {
+                                specialityName: "$professional.professionalSpeciality.specialityName." + req.headers.language,
+                                specialist: "$professional.professionalSpeciality.specialist." + req.headers.language
+                                /*specialityName: 1,
+                                specialist: 1*/
                             }
                         }
-                    },
-                    {
-                        "$sort": {
-                            "_id": -1
-                        }
                     }
+                },
+                {
+                    "$sort": {
+                        "_id": -1
+                    }
+                }
                 ];
             } else if (payload.type === APP_CONSTANTS.DATABASE.USER_ROLES.FACILITY) {
                 aggregate = [{
-                        $match: criteria
-                    },
-                    {
-                        $project: {
-                            _id: 1,
-                            "profilePic": 1,
-                            name: 1,
-                            "specialityName": "$professionalData.specialityName." + req.headers.language,
-                            address: 1
-                            //specialityName:"$professional.professionalSpeciality.specialityName."+language,
-                        }
-                    },
-                    {
-                        "$sort": {
-                            "_id": -1
-                        }
+                    $match: criteria
+                },
+                {
+                    $project: {
+                        _id: 1,
+                        "profilePic": 1,
+                        name: 1,
+                        "specialityName": "$professionalData.specialityName." + req.headers.language,
+                        address: 1
+                        //specialityName:"$professional.professionalSpeciality.specialityName."+language,
                     }
+                },
+                {
+                    "$sort": {
+                        "_id": -1
+                    }
+                }
                 ];
             } else if (payload.type === APP_CONSTANTS.DATABASE.USER_ROLES.TEAM) {
 
@@ -2852,9 +2839,9 @@ module.exports = {
                 ]);
                 commonData1 = commonData1.length;
                 return sendResponse.sendSuccessData({
-                        commonData,
-                        commonData1
-                    }, APP_CONSTANTS.STATUSCODE.SUCCESS,
+                    commonData,
+                    commonData1
+                }, APP_CONSTANTS.STATUSCODE.SUCCESS,
                     req.headers.language, RESPONSE_MESSAGES.STATUS_MSG.SUCCESS.DEFAULT, res);
             } else if (payload.type === APP_CONSTANTS.DATABASE.USER_ROLES.TEAM_HIRE) {
                 criteria = {
@@ -2948,9 +2935,9 @@ module.exports = {
                 count = count.length;
 
                 return sendResponse.sendSuccessData({
-                        commonData,
-                        count
-                    }, APP_CONSTANTS.STATUSCODE.SUCCESS,
+                    commonData,
+                    count
+                }, APP_CONSTANTS.STATUSCODE.SUCCESS,
                     req.headers.language, RESPONSE_MESSAGES.STATUS_MSG.SUCCESS.DEFAULT, res);
             } else if (payload.type === APP_CONSTANTS.DATABASE.USER_ROLES.TEAM_HIRE_BY) {
                 criteria = {
@@ -3045,9 +3032,9 @@ module.exports = {
                 count = count.length;
 
                 return sendResponse.sendSuccessData({
-                        commonData,
-                        count
-                    }, APP_CONSTANTS.STATUSCODE.SUCCESS,
+                    commonData,
+                    count
+                }, APP_CONSTANTS.STATUSCODE.SUCCESS,
                     req.headers.language, RESPONSE_MESSAGES.STATUS_MSG.SUCCESS.DEFAULT, res);
             } else if (payload.type === APP_CONSTANTS.DATABASE.USER_ROLES.PATIENT) {
                 criteria = {
@@ -3124,9 +3111,9 @@ module.exports = {
                 count = count.length;
 
                 return sendResponse.sendSuccessData({
-                        commonData,
-                        count
-                    }, APP_CONSTANTS.STATUSCODE.SUCCESS,
+                    commonData,
+                    count
+                }, APP_CONSTANTS.STATUSCODE.SUCCESS,
                     req.headers.language, RESPONSE_MESSAGES.STATUS_MSG.SUCCESS.DEFAULT, res);
             }
 
@@ -3144,9 +3131,9 @@ module.exports = {
             ]);
 
             return sendResponse.sendSuccessData({
-                    commonData,
-                    count
-                }, APP_CONSTANTS.STATUSCODE.SUCCESS,
+                commonData,
+                count
+            }, APP_CONSTANTS.STATUSCODE.SUCCESS,
                 req.headers.language, RESPONSE_MESSAGES.STATUS_MSG.SUCCESS.DEFAULT, res);
 
         } catch (err) {
@@ -3257,7 +3244,7 @@ module.exports = {
                 appointmentId: Joi.string().optional().length(24),
                 reportId: Joi.string().optional().length(24),
             });
-            var decryptColumns = ['fileId', 'appointmentNumber' /*,'houseNumber','addressName'*/ ];
+            var decryptColumns = ['fileId', 'appointmentNumber' /*,'houseNumber','addressName'*/];
             var decryptColumns2 = ['allergies', 'technic', 'results', 'conclusion', 'attachmentType'];
             let payload = await UniversalFunctions.validateSchema(req.query, schema, {
                 presence: "required"
@@ -3432,8 +3419,8 @@ module.exports = {
             }
 
             return sendResponse.sendSuccessData({
-                    appointmentData
-                }, APP_CONSTANTS.STATUSCODE.SUCCESS,
+                appointmentData
+            }, APP_CONSTANTS.STATUSCODE.SUCCESS,
                 req.headers.language, RESPONSE_MESSAGES.STATUS_MSG.SUCCESS.DEFAULT, res, decryptColumns2);
 
         } catch (err) {
@@ -3461,32 +3448,32 @@ module.exports = {
         }
         diagnosisList = diagnosisList.filter((item, pos) => diagnosisList.indexOf(item) === pos)
         let aggregate = [{
-                $match: {
-                    "type": "diagnosis",
-                    "_id": {
-                        $in: diagnosisList
-                    }
-                }
-            },
-            {
-                $unwind: "$title"
-            },
-            {
-                "$match": {
-                    "title.type": req.headers.language || 'en'
-                }
-            },
-            {
-                $project: {
-                    _id: 1,
-                    "name": "$title.name"
-                }
-            },
-            {
-                "$sort": {
-                    "_id": -1
+            $match: {
+                "type": "diagnosis",
+                "_id": {
+                    $in: diagnosisList
                 }
             }
+        },
+        {
+            $unwind: "$title"
+        },
+        {
+            "$match": {
+                "title.type": req.headers.language || 'en'
+            }
+        },
+        {
+            $project: {
+                _id: 1,
+                "name": "$title.name"
+            }
+        },
+        {
+            "$sort": {
+                "_id": -1
+            }
+        }
         ];
         Models.CommonServiceType.aggregate(aggregate, (err, result) => {
             if (err) {
@@ -4196,9 +4183,9 @@ module.exports = {
 
             // console.log(data, count);
             return sendResponse.sendSuccessData({
-                    data,
-                    count
-                }, APP_CONSTANTS.STATUSCODE.SUCCESS,
+                data,
+                count
+            }, APP_CONSTANTS.STATUSCODE.SUCCESS,
                 req.headers.language, RESPONSE_MESSAGES.STATUS_MSG.SUCCESS.DEFAULT, res);
 
         } catch (err) {
@@ -4225,7 +4212,7 @@ module.exports = {
                 /*search: Joi.string().optional(),
                 dependentId: Joi.string().optional().length(24)*/
             });
-            var decryptColumns = ['fileId', 'appointmentNumber' /*,'houseNumber','addressName'*/ ];
+            var decryptColumns = ['fileId', 'appointmentNumber' /*,'houseNumber','addressName'*/];
             let payload = await UniversalFunctions.validateSchema(req.query, schema, {
                 presence: "required"
             });
@@ -4261,36 +4248,36 @@ module.exports = {
 
             //console.log("22222222222222222",criteria)
             aggregate.push({
-                    $match: criteria
-                }, {
-                    "$lookup": {
-                        from: "users",
-                        foreignField: "_id",
-                        localField: "professionalId",
-                        as: 'professionalData'
-                    }
-                }, {
-                    "$lookup": {
-                        from: "appointments",
-                        foreignField: "_id",
-                        localField: "appointmentId",
-                        as: 'appointments'
-                    }
-                }, {
-                    "$lookup": {
-                        from: "commonservicetypes",
-                        foreignField: "_id",
-                        localField: "diagnostics",
-                        as: 'diagnosticsData'
-                    }
-                }, {
-                    "$lookup": {
-                        from: "commonservicetypes",
-                        foreignField: "_id",
-                        localField: "tests",
-                        as: 'testData'
-                    }
-                },
+                $match: criteria
+            }, {
+                "$lookup": {
+                    from: "users",
+                    foreignField: "_id",
+                    localField: "professionalId",
+                    as: 'professionalData'
+                }
+            }, {
+                "$lookup": {
+                    from: "appointments",
+                    foreignField: "_id",
+                    localField: "appointmentId",
+                    as: 'appointments'
+                }
+            }, {
+                "$lookup": {
+                    from: "commonservicetypes",
+                    foreignField: "_id",
+                    localField: "diagnostics",
+                    as: 'diagnosticsData'
+                }
+            }, {
+                "$lookup": {
+                    from: "commonservicetypes",
+                    foreignField: "_id",
+                    localField: "tests",
+                    as: 'testData'
+                }
+            },
                 /* {
                                                 "$match": {
                                                     "diagnosticsData.title.type": req.headers.language || 'en'
@@ -4302,83 +4289,83 @@ module.exports = {
                         "preserveNullAndEmptyArrays": true
                     }
                 }, {
-                    "$lookup": {
-                        from: "professionalspecialities",
-                        foreignField: "_id",
-                        localField: "professionalData.professional.professionalSpeciality",
-                        as: 'professionalData.professional.professionalSpeciality'
-                    }
-                }, {
-                    "$lookup": {
-                        from: "users",
-                        foreignField: "_id",
-                        localField: "userId",
-                        as: 'userData'
-                    }
-                }, {
-                    "$unwind": {
-                        "path": "$appointments",
-                        "preserveNullAndEmptyArrays": true
-                    }
-                }, {
-                    "$unwind": {
-                        "path": "$userData",
-                        "preserveNullAndEmptyArrays": true
-                    }
-                }, {
-                    "$unwind": {
-                        "path": "$professionalData.professional.professionalSpeciality",
-                        "preserveNullAndEmptyArrays": true
-                    }
-                }, {
-                    $project: {
-                        professionalData: {
-                            _id: 1,
-                            profilePic: 1,
-                            coverPic: 1,
-                            name: 1,
-                            professional: {
-                                professionalSpeciality: {
-                                    /*specialityName: 1,
-                                    specialist: 1*/
-                                    specialityName: "$professional.professionalSpeciality.specialityName." + req.headers.language,
-                                    specialist: "$professional.professionalSpeciality.specialist." + req.headers.language
-                                }
-                            }
-                        },
-                        diagnosticsData: 1,
-                        medications: 1,
-                        appointmentId: 1,
-                        testData: 1,
-                        chiefComplaint: 1,
-                        createdAt: 1,
-                        userData: {
-                            _id: 1,
-                            profilePic: 1,
-                            coverPic: 1,
-                            name: 1,
-                            user: {
-                                dob: 1,
-                                dependents: 1
-                            }
-                        },
-                        appointments: {
-                            _id: 1,
-                            appointmentNumber: 1,
-                            type: 1,
-                            status: 1,
-                            scheduledService: 1,
-                            reportType: 1,
-                            fileId: 1
-                        }
-                    }
-                }, {
-                    $sort: {
-                        _id: -1
-                    }
-                }, {
-                    $limit: payload.limit
+                "$lookup": {
+                    from: "professionalspecialities",
+                    foreignField: "_id",
+                    localField: "professionalData.professional.professionalSpeciality",
+                    as: 'professionalData.professional.professionalSpeciality'
                 }
+            }, {
+                "$lookup": {
+                    from: "users",
+                    foreignField: "_id",
+                    localField: "userId",
+                    as: 'userData'
+                }
+            }, {
+                "$unwind": {
+                    "path": "$appointments",
+                    "preserveNullAndEmptyArrays": true
+                }
+            }, {
+                "$unwind": {
+                    "path": "$userData",
+                    "preserveNullAndEmptyArrays": true
+                }
+            }, {
+                "$unwind": {
+                    "path": "$professionalData.professional.professionalSpeciality",
+                    "preserveNullAndEmptyArrays": true
+                }
+            }, {
+                $project: {
+                    professionalData: {
+                        _id: 1,
+                        profilePic: 1,
+                        coverPic: 1,
+                        name: 1,
+                        professional: {
+                            professionalSpeciality: {
+                                /*specialityName: 1,
+                                specialist: 1*/
+                                specialityName: "$professional.professionalSpeciality.specialityName." + req.headers.language,
+                                specialist: "$professional.professionalSpeciality.specialist." + req.headers.language
+                            }
+                        }
+                    },
+                    diagnosticsData: 1,
+                    medications: 1,
+                    appointmentId: 1,
+                    testData: 1,
+                    chiefComplaint: 1,
+                    createdAt: 1,
+                    userData: {
+                        _id: 1,
+                        profilePic: 1,
+                        coverPic: 1,
+                        name: 1,
+                        user: {
+                            dob: 1,
+                            dependents: 1
+                        }
+                    },
+                    appointments: {
+                        _id: 1,
+                        appointmentNumber: 1,
+                        type: 1,
+                        status: 1,
+                        scheduledService: 1,
+                        reportType: 1,
+                        fileId: 1
+                    }
+                }
+            }, {
+                $sort: {
+                    _id: -1
+                }
+            }, {
+                $limit: payload.limit
+            }
             );
             //console.log("aggregate --- ",JSON.stringify(aggregate))
 
@@ -4563,8 +4550,8 @@ module.exports = {
             } //FOR PAGINATION
 
             let appntments = await Models.ApointmentFeedback.find(criteria, {}, {
-                    lean: true
-                })
+                lean: true
+            })
                 .populate({
                     path: 'beneficiaryId',
                     select: '_id profilePic coverPic name'
@@ -4916,7 +4903,7 @@ module.exports = {
                 }, dataToSet);
                 console.log("paymentDetails ---- ", paymentDetails)
 
-                if (paymentDetails && /*(*/ Number(payload.duration) != 0 /* || payload.action=="1")*/ ) {
+                if (paymentDetails && /*(*/ Number(payload.duration) != 0 /* || payload.action=="1")*/) {
                     let paymentData = await savePaymentDetails({}, payload, responseMessage.message.en, responseMessage, 0);
                 }
             } else {
@@ -4987,24 +4974,24 @@ module.exports = {
             }
 
             var aggregate = [{
-                    $match: criteria
-                },
-                {
-                    "$addFields": addToField
-                },
-                {
-                    $group: {
-                        _id: '',
-                        amountNew: {
-                            $sum: "$amountNew"
-                        },
-                    }
-                },
-                {
-                    $project: {
-                        totalAmount: "$amountNew"
-                    }
+                $match: criteria
+            },
+            {
+                "$addFields": addToField
+            },
+            {
+                $group: {
+                    _id: '',
+                    amountNew: {
+                        $sum: "$amountNew"
+                    },
                 }
+            },
+            {
+                $project: {
+                    totalAmount: "$amountNew"
+                }
+            }
             ];
             var totalAmount = await Models.Payments.aggregate(aggregate)
             console.log("totalAmount ==== ", totalAmount)
@@ -5022,122 +5009,122 @@ module.exports = {
             } //FOR PAGINATION
 
             Models.Payments.aggregate([{
-                    $match: criteria
-                },
-                {
-                    "$addFields": addToField
-                },
-                {
-                    $lookup: {
-                        from: "users",
-                        foreignField: "_id",
-                        localField: "userId",
-                        as: 'userId'
-                    }
-                },
-                {
-                    "$unwind": {
-                        "path": "$userId",
-                        "preserveNullAndEmptyArrays": true
-                    }
-                },
-
-                {
-                    $lookup: {
-                        from: "appointments",
-                        foreignField: "_id",
-                        localField: "appointmentId",
-                        as: 'appointmentId'
-                    }
-                },
-                {
-                    "$unwind": {
-                        "path": "$appointmentId",
-                        "preserveNullAndEmptyArrays": true
-                    }
-                },
-
-                {
-                    $lookup: {
-                        from: "courses",
-                        foreignField: "_id",
-                        localField: "courseId",
-                        as: 'courseId'
-                    }
-                },
-                {
-                    "$unwind": {
-                        "path": "$courseId",
-                        "preserveNullAndEmptyArrays": true
-                    }
-                },
-
-
-                {
-                    $lookup: {
-                        from: "users",
-                        foreignField: "_id",
-                        localField: "professionalId",
-                        as: 'professionalId'
-                    }
-                },
-                {
-                    "$unwind": {
-                        "path": "$professionalId",
-                        "preserveNullAndEmptyArrays": true
-                    }
-                },
-
-                {
-                    $project: {
-                        _id: 1,
-                        message: "$message." + req.headers.language,
-                        type: 1,
-                        consultType: 1,
-                        userId: {
-                            name: 1,
-                            profilePic: 1,
-                            coverPic: 1,
-                            defaultLoginRole: 1
-                        },
-                        paymentMode: 1,
-                        paymentStatus: 1,
-                        paymentStatusMsg: 1,
-                        amount: 1,
-                        transactionId: 1,
-                        registrationId: 1,
-                        action: 1,
-                        createdAt: 1,
-                        courseId: 1,
-                        //professionalAmount:1,
-                        professionalAmount: {
-                            "$cond": {
-                                if: {
-                                    "$gte": ["$professionalAmount", 0]
-                                },
-                                then: "$professionalAmount",
-                                else: "0"
-                            }
-                        },
-                        appointmentId: {
-                            type: 1
-                        },
-                        professionalId: {
-                            name: 1,
-                            profilePic: 1,
-                            coverPic: 1,
-                            defaultLoginRole: 1
-                        },
-                    }
-                },
-                {
-                    $sort: {
-                        _id: -1
-                    }
-                },
-                {
-                    $limit: obj.count
+                $match: criteria
+            },
+            {
+                "$addFields": addToField
+            },
+            {
+                $lookup: {
+                    from: "users",
+                    foreignField: "_id",
+                    localField: "userId",
+                    as: 'userId'
                 }
+            },
+            {
+                "$unwind": {
+                    "path": "$userId",
+                    "preserveNullAndEmptyArrays": true
+                }
+            },
+
+            {
+                $lookup: {
+                    from: "appointments",
+                    foreignField: "_id",
+                    localField: "appointmentId",
+                    as: 'appointmentId'
+                }
+            },
+            {
+                "$unwind": {
+                    "path": "$appointmentId",
+                    "preserveNullAndEmptyArrays": true
+                }
+            },
+
+            {
+                $lookup: {
+                    from: "courses",
+                    foreignField: "_id",
+                    localField: "courseId",
+                    as: 'courseId'
+                }
+            },
+            {
+                "$unwind": {
+                    "path": "$courseId",
+                    "preserveNullAndEmptyArrays": true
+                }
+            },
+
+
+            {
+                $lookup: {
+                    from: "users",
+                    foreignField: "_id",
+                    localField: "professionalId",
+                    as: 'professionalId'
+                }
+            },
+            {
+                "$unwind": {
+                    "path": "$professionalId",
+                    "preserveNullAndEmptyArrays": true
+                }
+            },
+
+            {
+                $project: {
+                    _id: 1,
+                    message: "$message." + req.headers.language,
+                    type: 1,
+                    consultType: 1,
+                    userId: {
+                        name: 1,
+                        profilePic: 1,
+                        coverPic: 1,
+                        defaultLoginRole: 1
+                    },
+                    paymentMode: 1,
+                    paymentStatus: 1,
+                    paymentStatusMsg: 1,
+                    amount: 1,
+                    transactionId: 1,
+                    registrationId: 1,
+                    action: 1,
+                    createdAt: 1,
+                    courseId: 1,
+                    //professionalAmount:1,
+                    professionalAmount: {
+                        "$cond": {
+                            if: {
+                                "$gte": ["$professionalAmount", 0]
+                            },
+                            then: "$professionalAmount",
+                            else: "0"
+                        }
+                    },
+                    appointmentId: {
+                        type: 1
+                    },
+                    professionalId: {
+                        name: 1,
+                        profilePic: 1,
+                        coverPic: 1,
+                        defaultLoginRole: 1
+                    },
+                }
+            },
+            {
+                $sort: {
+                    _id: -1
+                }
+            },
+            {
+                $limit: obj.count
+            }
             ], function (err, result) {
                 //console.log(result)
                 if (err) {
@@ -5196,109 +5183,109 @@ module.exports = {
                 }
             }
             Models.Payments.aggregate([{
-                    $match: criteria
-                },
-                {
-                    $lookup: {
-                        from: "users",
-                        foreignField: "_id",
-                        localField: "userId",
-                        as: 'userId'
-                    }
-                },
-                {
-                    "$unwind": {
-                        "path": "$userId",
-                        "preserveNullAndEmptyArrays": true
-                    }
-                },
-
-                {
-                    $lookup: {
-                        from: "appointments",
-                        foreignField: "_id",
-                        localField: "appointmentId",
-                        as: 'appointmentId'
-                    }
-                },
-                {
-                    "$unwind": {
-                        "path": "$appointmentId",
-                        "preserveNullAndEmptyArrays": true
-                    }
-                },
-
-                {
-                    $lookup: {
-                        from: "courses",
-                        foreignField: "_id",
-                        localField: "courseId",
-                        as: 'courseId'
-                    }
-                },
-                {
-                    "$unwind": {
-                        "path": "$courseId",
-                        "preserveNullAndEmptyArrays": true
-                    }
-                },
-
-
-                {
-                    $lookup: {
-                        from: "users",
-                        foreignField: "_id",
-                        localField: "professionalId",
-                        as: 'professionalId'
-                    }
-                },
-                {
-                    "$unwind": {
-                        "path": "$professionalId",
-                        "preserveNullAndEmptyArrays": true
-                    }
-                },
-
-                {
-                    $project: {
-                        _id: 1,
-                        message: "$message." + req.headers.language,
-                        type: 1,
-                        consultType: 1,
-                        userId: {
-                            name: 1,
-                            profilePic: 1,
-                            coverPic: 1,
-                            defaultLoginRole: 1
-                        },
-                        paymentMode: 1,
-                        paymentStatus: 1,
-                        paymentStatusMsg: 1,
-                        amount: 1,
-                        transactionId: 1,
-                        registrationId: 1,
-                        action: 1,
-                        createdAt: 1,
-                        courseId: 1,
-                        appointmentId: {
-                            type: 1
-                        },
-                        professionalId: {
-                            name: 1,
-                            profilePic: 1,
-                            coverPic: 1,
-                            defaultLoginRole: 1
-                        },
-                    }
-                },
-                {
-                    $sort: {
-                        _id: -1
-                    }
-                },
-                {
-                    $limit: obj.count
+                $match: criteria
+            },
+            {
+                $lookup: {
+                    from: "users",
+                    foreignField: "_id",
+                    localField: "userId",
+                    as: 'userId'
                 }
+            },
+            {
+                "$unwind": {
+                    "path": "$userId",
+                    "preserveNullAndEmptyArrays": true
+                }
+            },
+
+            {
+                $lookup: {
+                    from: "appointments",
+                    foreignField: "_id",
+                    localField: "appointmentId",
+                    as: 'appointmentId'
+                }
+            },
+            {
+                "$unwind": {
+                    "path": "$appointmentId",
+                    "preserveNullAndEmptyArrays": true
+                }
+            },
+
+            {
+                $lookup: {
+                    from: "courses",
+                    foreignField: "_id",
+                    localField: "courseId",
+                    as: 'courseId'
+                }
+            },
+            {
+                "$unwind": {
+                    "path": "$courseId",
+                    "preserveNullAndEmptyArrays": true
+                }
+            },
+
+
+            {
+                $lookup: {
+                    from: "users",
+                    foreignField: "_id",
+                    localField: "professionalId",
+                    as: 'professionalId'
+                }
+            },
+            {
+                "$unwind": {
+                    "path": "$professionalId",
+                    "preserveNullAndEmptyArrays": true
+                }
+            },
+
+            {
+                $project: {
+                    _id: 1,
+                    message: "$message." + req.headers.language,
+                    type: 1,
+                    consultType: 1,
+                    userId: {
+                        name: 1,
+                        profilePic: 1,
+                        coverPic: 1,
+                        defaultLoginRole: 1
+                    },
+                    paymentMode: 1,
+                    paymentStatus: 1,
+                    paymentStatusMsg: 1,
+                    amount: 1,
+                    transactionId: 1,
+                    registrationId: 1,
+                    action: 1,
+                    createdAt: 1,
+                    courseId: 1,
+                    appointmentId: {
+                        type: 1
+                    },
+                    professionalId: {
+                        name: 1,
+                        profilePic: 1,
+                        coverPic: 1,
+                        defaultLoginRole: 1
+                    },
+                }
+            },
+            {
+                $sort: {
+                    _id: -1
+                }
+            },
+            {
+                $limit: obj.count
+            }
             ], function (err, result) {
                 //console.log(result)
                 if (err) {
@@ -5327,71 +5314,71 @@ module.exports = {
                 }
             }
             var aggregate = [{
-                    $match: criteria
-                },
-                {
-                    "$addFields": {
-                        "amountNew": {
-                            "$toDouble": "$professionalAmount"
-                        }
-                    }
-                },
-                {
-                    $group: {
-                        _id: '',
-                        amountNew: {
-                            $sum: "$amountNew"
-                        },
-                    }
-                },
-                {
-                    $project: {
-                        totalAmount: "$amountNew"
+                $match: criteria
+            },
+            {
+                "$addFields": {
+                    "amountNew": {
+                        "$toDouble": "$professionalAmount"
                     }
                 }
+            },
+            {
+                $group: {
+                    _id: '',
+                    amountNew: {
+                        $sum: "$amountNew"
+                    },
+                }
+            },
+            {
+                $project: {
+                    totalAmount: "$amountNew"
+                }
+            }
             ];
             var totalAmount = await Models.Payments.aggregate(aggregate)
 
             Models.Payments.aggregate([{
-                    $match: criteria
-                },
-                {
-                    "$addFields": {
-                        "amountNew": {
-                            "$toDouble": "$professionalAmount"
-                        }
-                    }
-                },
-                {
-                    $group: {
-                        _id: {
-                            $substr: ['$createdAt', 5, 2]
-                        },
-                        numberofTransactions: {
-                            $sum: 1
-                        },
-                        amountNew: {
-                            $sum: "$amountNew"
-                        },
-                        createdAtDate: {
-                            $first: "$createdAt"
-                        }
-
-                    }
-                },
-                {
-                    $project: {
-                        numberOfTransactions: "$numberofTransactions",
-                        totalAmount: "$amountNew",
-                        createdAtDate: "$createdAtDate",
-
-                    }
-                },
-                {
-                    $sort: {
-                        createdAtDate: 1
+                $match: criteria
+            },
+            {
+                "$addFields": {
+                    "amountNew": {
+                        "$toDouble": "$professionalAmount"
                     }
                 }
+            },
+            {
+                $group: {
+                    _id: {
+                        $substr: ['$createdAt', 5, 2]
+                    },
+                    numberofTransactions: {
+                        $sum: 1
+                    },
+                    amountNew: {
+                        $sum: "$amountNew"
+                    },
+                    createdAtDate: {
+                        $first: "$createdAt"
+                    }
+
+                }
+            },
+            {
+                $project: {
+                    numberOfTransactions: "$numberofTransactions",
+                    totalAmount: "$amountNew",
+                    createdAtDate: "$createdAtDate",
+
+                }
+            },
+            {
+                $sort: {
+                    createdAtDate: 1
+                }
+            }
             ], function (err, result) {
                 //console.log(result)
                 if (err) {
@@ -5941,27 +5928,27 @@ async function getAppointmentList(query, type, req) {
         },
         createdByRole: userData.defaultLoginRole
     };
-    var decryptColumns = ['fileId', 'appointmentNumber' /*,'houseNumber','addressName'*/ ];
+    var decryptColumns = ['fileId', 'appointmentNumber' /*,'houseNumber','addressName'*/];
     var decryptColumns2 = ['feedback'];
     if (type == "1") {
         criteria.$and = [{
-                status: {
-                    $ne: APP_CONSTANTS.DATABASE.APPOINTMENT_STATUS.COMPLETED
-                }
-            },
-            {
-                status: {
-                    $ne: APP_CONSTANTS.DATABASE.APPOINTMENT_STATUS.CANCELLED
-                }
+            status: {
+                $ne: APP_CONSTANTS.DATABASE.APPOINTMENT_STATUS.COMPLETED
             }
+        },
+        {
+            status: {
+                $ne: APP_CONSTANTS.DATABASE.APPOINTMENT_STATUS.CANCELLED
+            }
+        }
         ]
     } else {
         criteria.$or = [{
-                status: APP_CONSTANTS.DATABASE.APPOINTMENT_STATUS.COMPLETED
-            },
-            {
-                status: APP_CONSTANTS.DATABASE.APPOINTMENT_STATUS.CANCELLED
-            }
+            status: APP_CONSTANTS.DATABASE.APPOINTMENT_STATUS.COMPLETED
+        },
+        {
+            status: APP_CONSTANTS.DATABASE.APPOINTMENT_STATUS.CANCELLED
+        }
         ]
     }
     if (query.appointmentType && query.appointmentType != "") {
@@ -5990,18 +5977,18 @@ async function getAppointmentList(query, type, req) {
     }
     if (searchDate && Object.keys(searchDate).length > 0) {
         criteria.$or = [{
-                "homeService.weeklyDates.dayWiseDates": {
-                    $elemMatch: searchDate
-                }
-            },
-            {
-                "homeService.everyDayOrCustom": {
-                    $elemMatch: searchDate
-                }
-            },
-            {
-                "scheduledService.date": searchDate
+            "homeService.weeklyDates.dayWiseDates": {
+                $elemMatch: searchDate
             }
+        },
+        {
+            "homeService.everyDayOrCustom": {
+                $elemMatch: searchDate
+            }
+        },
+        {
+            "scheduledService.date": searchDate
+        }
         ]
     }
 
@@ -6019,134 +6006,134 @@ async function getAppointmentList(query, type, req) {
     } //FOR PAGINATION
 
     let aggregate = [{
-            $match: criteria
-        },
-        {
-            "$lookup": {
-                from: "users",
-                foreignField: "_id",
-                localField: "doctor",
-                as: 'doctor'
-            }
-        },
-        {
-            "$unwind": {
-                "path": "$doctor",
-                "preserveNullAndEmptyArrays": true
-            }
-        },
-        {
-            "$lookup": {
-                from: "professionalspecialities",
-                foreignField: "_id",
-                localField: "doctor.professional.professionalSpeciality",
-                as: 'doctor.professional.professionalSpeciality'
-            }
-        }, {
-            "$unwind": {
-                "path": "$doctor.professional.professionalSpeciality",
-                "preserveNullAndEmptyArrays": true
-            }
-        },
+        $match: criteria
+    },
+    {
+        "$lookup": {
+            from: "users",
+            foreignField: "_id",
+            localField: "doctor",
+            as: 'doctor'
+        }
+    },
+    {
+        "$unwind": {
+            "path": "$doctor",
+            "preserveNullAndEmptyArrays": true
+        }
+    },
+    {
+        "$lookup": {
+            from: "professionalspecialities",
+            foreignField: "_id",
+            localField: "doctor.professional.professionalSpeciality",
+            as: 'doctor.professional.professionalSpeciality'
+        }
+    }, {
+        "$unwind": {
+            "path": "$doctor.professional.professionalSpeciality",
+            "preserveNullAndEmptyArrays": true
+        }
+    },
 
-        {
-            "$lookup": {
-                from: "apointmentfeedbacks",
-                foreignField: "appointmentId",
-                localField: "_id",
-                as: 'rating'
-            }
-        },
-        {
-            "$unwind": {
-                "path": "$rating",
-                "preserveNullAndEmptyArrays": true
-            }
-        },
-        {
-            "$lookup": {
-                from: "apointmentfeedbacks",
-                foreignField: "userId",
-                localField: "doctor._id",
-                as: 'doctorRating'
-            }
-        },
-        //RATING
+    {
+        "$lookup": {
+            from: "apointmentfeedbacks",
+            foreignField: "appointmentId",
+            localField: "_id",
+            as: 'rating'
+        }
+    },
+    {
+        "$unwind": {
+            "path": "$rating",
+            "preserveNullAndEmptyArrays": true
+        }
+    },
+    {
+        "$lookup": {
+            from: "apointmentfeedbacks",
+            foreignField: "userId",
+            localField: "doctor._id",
+            as: 'doctorRating'
+        }
+    },
+    //RATING
 
-        {
-            $project: {
+    {
+        $project: {
+            _id: 1,
+            scheduledService: 1,
+            homeService: 1,
+            selfAppointment: 1,
+            type: 1,
+            slots: 1,
+            status: 1,
+            createdAt: 1,
+            fileId: 1,
+            createdByRole: 1,
+            appointmentNumber: 1,
+            consultationType: 1,
+            doctor: {
                 _id: 1,
-                scheduledService: 1,
-                homeService: 1,
-                selfAppointment: 1,
-                type: 1,
-                slots: 1,
-                status: 1,
-                createdAt: 1,
-                fileId: 1,
-                createdByRole: 1,
-                appointmentNumber: 1,
-                consultationType: 1,
-                doctor: {
-                    _id: 1,
-                    profilePic: 1,
-                    coverPic: 1,
-                    name: 1,
-                    professional: {
-                        professionalSpeciality: {
-                            specialityName: "$doctor.professional.professionalSpeciality.specialityName." + req.headers.language,
-                            specialist: "$doctor.professional.professionalSpeciality.specialist." + req.headers.language
-                        }
+                profilePic: 1,
+                coverPic: 1,
+                name: 1,
+                professional: {
+                    professionalSpeciality: {
+                        specialityName: "$doctor.professional.professionalSpeciality.specialityName." + req.headers.language,
+                        specialist: "$doctor.professional.professionalSpeciality.specialist." + req.headers.language
+                    }
 
-                    },
-                    "feedbackRating": {
-                        "$cond": {
-                            if: {
-                                "$gte": [{
-                                    $size: "$doctorRating.rating"
-                                }, 1]
+                },
+                "feedbackRating": {
+                    "$cond": {
+                        if: {
+                            "$gte": [{
+                                $size: "$doctorRating.rating"
+                            }, 1]
+                        },
+                        then: {
+                            "$divide": [{
+                                $sum: "$doctorRating.rating"
                             },
-                            then: {
-                                "$divide": [{
-                                        $sum: "$doctorRating.rating"
-                                    },
-                                    {
-                                        $size: "$doctorRating.rating"
-                                    }
-                                ]
-                            },
-                            else: 0
-                        }
-                    },
+                            {
+                                $size: "$doctorRating.rating"
+                            }
+                            ]
+                        },
+                        else: 0
+                    }
+                },
+            },
+            rating: {
+                "isRating": {
+                    $cond: [{
+                        $not: "$rating.rating"
+                    }, false, true]
                 },
                 rating: {
-                    "isRating": {
-                        $cond: [{
-                            $not: "$rating.rating"
-                        }, false, true]
-                    },
-                    rating: {
-                        $cond: [{
-                            $not: "$rating.rating"
-                        }, 0, "$rating.rating"]
-                    },
-                    feedback: {
-                        $cond: [{
-                            $not: "$rating.feedback"
-                        }, "", "$rating.feedback"]
-                    },
+                    $cond: [{
+                        $not: "$rating.rating"
+                    }, 0, "$rating.rating"]
+                },
+                feedback: {
+                    $cond: [{
+                        $not: "$rating.feedback"
+                    }, "", "$rating.feedback"]
+                },
 
-                }
             }
-        },
-        {
-            $sort: {
-                _id: -1
-            }
-        },
-        {
-            $limit: query.count
         }
+    },
+    {
+        $sort: {
+            _id: -1
+        }
+    },
+    {
+        $limit: query.count
+    }
     ];
     let result = await Models.Appointment.aggregate(aggregate);
     if (process.env.ENABLE_DB_ENCRYPTION == "1" && result.length > 0) {
@@ -6161,7 +6148,6 @@ async function getAppointmentList(query, type, req) {
     }
     return dataToReturn;
 }
-
 async function createUserFolders(type, data) {
     let result = await Models.Folder.find({
         "userId": ObjectId(userData._id)
@@ -6341,7 +6327,7 @@ function folderNames(folderNames) {
 }
 
 async function getReportData(reportId, req) {
-    var decryptColumns = ['fileId', 'appointmentNumber' /*,'houseNumber','addressName'*/ ];
+    var decryptColumns = ['fileId', 'appointmentNumber' /*,'houseNumber','addressName'*/];
     var decryptColumns2 = ['allergies', 'chiefComplaint', 'history', 'examinationDiagnosticsResult', 'managementPlanRecommendation'];
     let aggregateData = [{
         $match: {
