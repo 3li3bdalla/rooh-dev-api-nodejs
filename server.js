@@ -32,6 +32,10 @@ var api = require('./routes/api');
 var auth_api = require('./routes/auth_api');
 let commonController = require('./utils/commonController');
 
+
+process.on('UnhandledPromiseRejectionWarning',function(){
+    console.log('erer');
+})
 // require all routes and de structure the array
 const [user_api, professional_facility_api, common_api, admin_api, team_api, course_api, pharmacy_api] = require('./src').routes;
 

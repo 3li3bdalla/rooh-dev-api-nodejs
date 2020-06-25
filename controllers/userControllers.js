@@ -434,7 +434,7 @@ module.exports = {
                     },
                 }, ];
 
-            console.log("obj ------------ ", obj);
+            // console.log("obj ------------ ", obj);
 
             let err = [];
             if (is.undefined(obj.phone) || is.empty(obj.phone)) {
@@ -509,6 +509,7 @@ module.exports = {
                         error,
                         response
                     ) {
+                        // res.send("it's works intil here");
                         if (response == true) {
                             let payload = {
                                 phone: phoneCheck.phone,
@@ -516,6 +517,7 @@ module.exports = {
                                 countryCode: phoneCheck.countryCode,
                                 _id: phoneCheck._id,
                             };
+                            // let token = "sometoken"
                             let token = jwt.sign(
                                 payload,
                                 gRouter.get(Constants.SERVER.JWT_SECRET_KEY).toString(), {

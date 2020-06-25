@@ -1,12 +1,13 @@
 'use strict';
 //18.184.113.27
-let mongoURI = "mongodb://localhost:27017/csfHealthcare"; //localhost
+// let mongoURI = "mongodb://localhost:27017/csfHealthcare"; //localhost
+let  mongoURI = `mongodb://roohprodDbUser:addxsUkrauDEVAPabhdFGF6j@185.230.211.32:27017/roohprodDB`;
 
-if (process.env.NODE_ENV === "test") { // 18.184.113.27 ip
-    mongoURI = `mongodb://${process.env.mongo_test_user}:${process.env.mongo_test_password}@$localhost:27017/${process.env.mongo_test_db}`;
-} else if (process.env.NODE_ENV === "dev") {
-    mongoURI = `mongodb://${process.env.mongo_dev_user}:${process.env.mongo_dev_password}@localhost:27017/${process.env.mongo_dev_db}`;
-}
+// if (process.env.NODE_ENV === "test") { // 18.184.113.27 ip
+//     mongoURI = `mongodb://${process.env.mongo_test_user}:${process.env.mongo_test_password}@$localhost:27017/${process.env.mongo_test_db}`;
+// } else if (process.env.NODE_ENV === "dev") {
+//     mongoURI = `mongodb://${process.env.mongo_dev_user}:${process.env.mongo_dev_password}@localhost:27017/${process.env.mongo_dev_db}`;
+// }
 // console.log('dev', process.env.NODE_ENV);
 // mongoURI = "mongodb://localhost:27017/csfHealthcare"; //localhost
 
