@@ -529,11 +529,11 @@ module.exports = {
                                 phoneCheck.mirrorflyPassword &&
                                 phoneCheck.mirrorflyPassword != ""
                             ) {
-                                // mirrorflyData = await mirrorFlyAPI.login({
-                                //     password: phoneCheck.mirrorflyPassword,
-                                //     username: phoneCheck._id,
-                                //     type: "1",
-                                // });
+                                mirrorflyData = await mirrorFlyAPI.login({
+                                    password: phoneCheck.mirrorflyPassword,
+                                    username: phoneCheck._id,
+                                    type: "1",
+                                });
                                 //console.log("mirrorflyData --------- ",mirrorflyData)
                             }
 
