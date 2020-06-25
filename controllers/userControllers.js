@@ -711,7 +711,7 @@ module.exports = {
                                     });
                                 })
                                 .catch((err) => {
-                                    console.log("33333333333333", err);
+                                    // console.log("33333333333333", err);
                                     return sendResponse.sendErrorMessageData(
                                         400,
                                         req.headers.language,
@@ -740,7 +740,7 @@ module.exports = {
                             //     }
                             // });
                         } else {
-                            console.log("11111111111111111111111");
+                            // console.log("11111111111111111111111");
                             return sendResponse.sendErrorMessageData(
                                 400,
                                 req.headers.language,
