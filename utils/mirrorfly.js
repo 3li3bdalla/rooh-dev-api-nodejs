@@ -21,7 +21,6 @@ module.exports = {
                 json: true };
 
            let data1 = await doRequest(options); 
-        //    console.log("mirrorfly login ----- ",data)
            return data1;
         }
         catch (e) {
