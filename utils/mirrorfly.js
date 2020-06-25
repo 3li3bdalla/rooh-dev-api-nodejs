@@ -5,7 +5,9 @@ module.exports = {
 
     login: async (data) => {
         
-        return {};
+        return new Promise((resolve,reject) => {
+            resolve({token:""});
+        });
         // try {
         //     console.log("mirrorfly data --------- ",data)
 

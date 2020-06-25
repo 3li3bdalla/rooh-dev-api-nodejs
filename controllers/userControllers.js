@@ -544,7 +544,7 @@ module.exports = {
                                     deviceToken: obj.deviceToken ? obj.deviceToken : "",
                                     accessToken: token,
                                     mirrorFlyAccessToken: mirrorflyData && mirrorflyData.token ?
-                                        mirrorflyData.token : "2C807E30D9BB684C162717EB34FE876299F216891749FC9334B366DDB9D7A9DB",
+                                        mirrorflyData.token : "",
                                     lastLogin: Date.now(),
                                 },
                             };
