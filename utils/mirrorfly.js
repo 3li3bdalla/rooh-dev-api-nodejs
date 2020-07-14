@@ -4,32 +4,29 @@ const request = require('request');
 module.exports = {
 
     login: async (data) => {
-        
-        return new Promise((resolve,reject) => {
-            resolve({token:""});
-        });
-        // try {
-        //     console.log("mirrorfly data --------- ",data)
+    
+        try {
+            console.log("mirrorfly data --------- ",data)
+            let options = { method: 'POST',
+                url: process.env.MIRRIORFLY_URL + process.env.MIRRIORFLY_LOGIN,
+                headers:
+                    { 'Postman-Token': 'bb8a79ce-24c2-4497-949d-f683eca94156',
+                        'cache-control': 'no-cache',
+                        'Content-Type': 'application/json' },
+                body: { 
+                    password: data.password, 
+                    type: data.type, 
+                    username: data.username 
+                },
+                json: true };
 
-        //     let options = { method: 'POST',
-        //         url: process.env.MIRRIORFLY_URL + process.env.MIRRIORFLY_LOGIN,
-        //         headers:
-        //             { 'Postman-Token': 'bb8a79ce-24c2-4497-949d-f683eca94156',
-        //                 'cache-control': 'no-cache',
-        //                 'Content-Type': 'application/json' },
-        //         body: { 
-        //             password: data.password, 
-        //             type: data.type, 
-        //             username: data.username 
-        //         },
-        //         json: true };
-
-        //    let data1 = await doRequest(options); 
-        //    return data1;
-        // }
-        // catch (e) {
-        //     throw e;
-        // }
+           let data1 = await doRequest(options); 
+           console.log(`api mirrorfly ${data1}`);
+           return data1;
+        }
+        catch (e) {
+            throw e;
+        }
     },
     /*updateDevice: async (data) => {
         try {

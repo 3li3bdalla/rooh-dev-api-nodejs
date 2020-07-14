@@ -53,6 +53,7 @@ module.exports = {
 
             let randomValue = new Date(new Date().getTime() + 60000).getTime();
             var otpval = Math.floor(10000 + Math.random() * 90000);
+            console.log(otpval)
             let criteria = {
                 phone: obj.phone,
                 countryCode: obj.countryCode,
@@ -524,6 +525,7 @@ module.exports = {
                                     expiresIn: Constants.SERVER.TOKEN_EXPIRATION,
                                 }
                             );
+                            // console.log('some issues');
                             var mirrorflyData = {};
                             if (
                                 phoneCheck.mirrorflyPassword &&
@@ -534,7 +536,7 @@ module.exports = {
                                     username: phoneCheck._id,
                                     type: "1",
                                 });
-                                //console.log("mirrorflyData --------- ",mirrorflyData)
+                                console.log("mirrorflyData --------- ",mirrorflyData)
                             }
 
                             let dataToSet = {
